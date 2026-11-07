@@ -326,6 +326,50 @@ details.story-fold[open] summary { margin-bottom: 6px; }
 .note { font-size: var(--s-1); color: var(--cream-dim); text-align: center; }
 .small-print { font-size: var(--s-1); color: var(--ink-soft); }
 
+/* ---------- Computer jurors: the jury-room transcript and what you can say ---------- */
+.talk { background: rgba(20,11,6,.55); border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(236,210,139,.22); display: flex; flex-direction: column; }
+.talk-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding: 10px 14px 6px; border-bottom: 1px solid rgba(236,210,139,.14); }
+.talk-head .field-label { margin: 0; }
+.talk-lines { height: clamp(220px, 40vh, 440px); overflow-y: auto; padding: 10px 14px; display: flex; flex-direction: column; gap: 8px; overscroll-behavior: contain; scroll-behavior: smooth; }
+.line { display: flex; align-items: flex-end; gap: 8px; margin: 0; max-width: 92%; }
+.line.me { flex-direction: row-reverse; align-self: flex-end; }
+.line .av, .seat-av .av { flex: 0 0 auto; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-family: var(--f-display); font-weight: 700; font-size: .78rem;
+  color: #fff7e6; background: hsl(var(--h) 45% 32%); box-shadow: inset 0 0 0 2px hsl(var(--h) 55% 58%), 0 2px 4px rgba(0,0,0,.4); }
+.bub { position: relative; background: var(--parchment); color: var(--ink); border-radius: 16px 16px 16px 4px; padding: 8px 12px 9px; line-height: 1.42; overflow-wrap: anywhere;
+  box-shadow: 0 2px 0 rgba(0,0,0,.25), inset 0 0 0 1px rgba(90,60,30,.25); }
+.bub::before { content: ""; position: absolute; left: -7px; bottom: 6px; border: 7px solid transparent; border-right-color: var(--parchment); border-left: 0; }
+.line.me .bub { background: #cfe8d6; border-radius: 16px 16px 4px 16px; }
+.line.me .bub::before { left: auto; right: -7px; border-right: 0; border-left: 7px solid #cfe8d6; }
+.bub .who-n { display: block; font-family: var(--f-display); font-weight: 700; font-size: var(--s-1); letter-spacing: .04em; color: hsl(var(--h, 30) 45% 28%); margin-bottom: 1px; }
+.line.me .bub .who-n { color: #1f5a3c; }
+.bub .ai-tag { color: var(--ink-soft); box-shadow: inset 0 0 0 1px rgba(90,60,30,.4); }
+.line.ai.k-accuse .bub, .line.ai.k-object .bub, .line.ai.k-pile .bub { background: #f6d4c6; }
+.line.ai.k-accuse .bub::before, .line.ai.k-object .bub::before, .line.ai.k-pile .bub::before { border-right-color: #f6d4c6; }
+.line.k-claim .txt { font-family: var(--f-type); font-size: .92em; }
+.line.pop { animation: bubblePop .38s cubic-bezier(.2, 1.5, .4, 1) both; transform-origin: left bottom; }
+.line.me.pop { transform-origin: right bottom; }
+.line.sys { display: block; align-self: center; color: var(--cream-dim); font-style: italic; text-align: center; font-size: var(--s-1); max-width: 100%; }
+.jbox { display: flex; gap: 10px; overflow-x: auto; padding: 10px 14px 4px; scrollbar-width: none; }
+.seat-av { display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 46px; transition: transform .2s ease; }
+.seat-av .nm { font-size: .68rem; color: var(--cream-dim); max-width: 60px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.seat-av.talking { transform: translateY(-3px) scale(1.12); }
+.seat-av.talking .av { box-shadow: 0 0 0 3px var(--brass-300), 0 0 14px rgba(236,210,139,.7); }
+.seat-av.talking .nm { color: var(--brass-300); }
+@keyframes bubblePop { 0% { opacity: 0; transform: scale(.55); } 100% { opacity: 1; transform: scale(1); } }
+.talk-empty { margin: auto; color: var(--cream-dim); text-align: center; font-size: var(--s-1); max-width: 30ch; }
+.ai-tag { display: inline-block; font-family: var(--f-type); font-size: .62rem; letter-spacing: .08em; padding: 1px 5px; border-radius: 3px; margin-left: 5px; vertical-align: 2px;
+  color: var(--brass-300); box-shadow: inset 0 0 0 1px rgba(236,210,139,.4); font-weight: 400; text-transform: uppercase; }
+.say { padding: 10px 14px 14px; border-top: 1px solid rgba(236,210,139,.14); display: grid; gap: 10px; }
+.say-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.say-row .btn { flex: 1 1 130px; }
+.pill { min-height: 44px; padding: 6px 14px; border-radius: 22px; cursor: pointer; font: inherit; color: var(--cream); background: rgba(60,38,22,.65); border: 1px solid rgba(236,210,139,.3); }
+.pill:hover { background: rgba(90,58,32,.8); }
+.pill[aria-pressed="true"] { background: linear-gradient(180deg, var(--brass-300), var(--brass-500)); color: #2b1a08; border-color: transparent; font-weight: 700; }
+.pill[disabled] { opacity: .4; cursor: default; }
+.say-sub { display: grid; gap: 8px; padding: 10px; border-radius: 6px; background: rgba(0,0,0,.25); }
+.say-sub .muted { font-size: var(--s-1); }
+.bots-line { font-size: var(--s-1); color: var(--cream-dim); }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0s !important; transition-duration: .01ms !important; }
   .gavel { transform: rotate(0deg); }
@@ -577,9 +621,521 @@ details.story-fold[open] summary { margin-bottom: 6px; }
 })(typeof self !== 'undefined' ? self : this);
 </script>
 <script>window.JURY_CASES=[{"id":"purloined-pad-thai","tone":"absurd","title":"The Case of the Purloined Pad Thai","charge":"Who has been eating Gary Pell's labeled lunch out of the break-room fridge every week?","story":"For six straight weeks, someone has eaten Gary Pell's lunch from the third-floor fridge, despite a label reading GARY'S. DO NOT. I MEAN IT. Gary has filed four complaints, and the office now buys him a sympathy pizza every Friday. The suspects: Marco, the permanently hungry intern; Denise from HR, who purges the fridge on a schedule only she understands; regional manager Bev Stroud, who 'just grabs whatever'; and, quietly, Gary himself.","verdicts":[{"label":"Marco the intern","detail":"Broke, 22, and visibly hungry from 10 a.m. onward."},{"label":"Denise from HR","detail":"Throws out 'unclaimed' food and may have a very loose definition of it."},{"label":"Gary himself","detail":"Eats his own lunch early, then plays the victim for pizza."},{"label":"Bev the regional manager","detail":"Believes everything in the building technically belongs to her."}],"truth":2,"public":["Exhibit A: The empty containers are always found rinsed and stacked in the dish rack. Whoever does this was raised right.","Exhibit B: In Week 3, Marco was seen eating a suspiciously homemade-looking meatloaf sandwich.","Exhibit C: Gary's wife packs his lunch every morning. Last month she put him on a strict 1,400-calorie plan."],"sealed":[{"rules_out":0,"text":"Badge log: on four of the six theft days, Marco was doing inventory at the off-site warehouse, 40 miles away, from 9 a.m. to 5 p.m."},{"rules_out":1,"text":"HR calendar: Denise was on vacation for all of Weeks 4 and 5. Gary's lunch vanished both weeks anyway."},{"rules_out":3,"text":"Room booking log: on every theft day, Bev was locked in the quarterly budget review from 11 a.m. to 2 p.m., with lunch catered in."}],"planted":[{"rules_out":2,"text":"Fridge cam still, Week 6, 11:47 a.m.: the fridge door is open while Gary sits at his desk on a call. IT verified the timestamp."},{"points_to":0,"text":"Text from Marco to a friend, Week 2: 'free lunch again lol. accounting guy cooks better than my mom.'"}],"ruling":"Gary ate his own lunch at 10:15 every morning, rinsed the container like a gentleman, and reported it stolen by noon. Starving on his wife's diet plan, he'd discovered that victims get free pizza. The only thing stolen here was the pizza fund."},{"id":"missing-lemon-tier","tone":"absurd","title":"The Case of the Missing Lemon Tier","charge":"Who removed the top tier of Tessa and Jake's wedding cake an hour before the reception?","story":"At 4 p.m., an hour before the reception at the Hollister family barn, the coordinator found the five-tier wedding cake down to four. The top tier, lemon-poppyseed, requested by the groom's mother, was simply gone. The cake table sat unguarded during the groom's-side photos. The suspects: Lorraine, the bride's mother, who calls lemon cake 'a cry for help'; Duncan, the best man, nursing a heroic hangover; Biscuit, the couple's food-obsessed Labrador; and Aunt Philippa, a home baker still stung that she wasn't hired.","verdicts":[{"label":"Lorraine, the bride's mother","detail":"Despised the lemon tier and wanted her own chocolate fudge up top."},{"label":"Duncan, the best man","detail":"Hungover, unsupervised, and powerfully drawn to sugar."},{"label":"Biscuit, the Labrador","detail":"Tall enough on hind legs, and has eaten a whole ham before."},{"label":"Aunt Philippa","detail":"Wanted the cake to fail so everyone would wish they'd hired her."}],"truth":0,"public":["Exhibit A: The cake topper, two tiny porcelain swans, was found set neatly on the gift table. Not a crumb on them.","Exhibit B: At 3:50 p.m., Duncan was found asleep in the groomsmen's tent with a plastic fork in his breast pocket.","Exhibit C: A smear of lemon buttercream on the cake table's lace cloth, about knee height, on the side facing the barn doors."],"sealed":[{"rules_out":1,"text":"Groomsman's phone video, 3:05 to 3:48 p.m.: Duncan asleep in the tent, snoring, the entire time the cake table was unguarded."},{"rules_out":2,"text":"Kennel check-in slip and GPS collar log: Biscuit was at a boarding kennel across town from 9 a.m. to 7 p.m. on the wedding day."},{"rules_out":3,"text":"Photographer's timestamped shots: Aunt Philippa is front row in every groom's-side group photo from 3:10 to 3:50 p.m."}],"planted":[{"rules_out":0,"text":"Bridal suite door camera: Lorraine goes in at 3:02 p.m. and does not come out until 4:05 p.m., after the cake was found."},{"points_to":2,"text":"Text from the dog sitter, 3:31 p.m.: 'Biscuit got loose near the barn. Got him back, he's fine, just weirdly sticky??'"}],"ruling":"Lorraine slipped out of the bridal suite at 3:15, set the porcelain swans on the gift table, and carried the lemon tier to her trunk, brushing the tablecloth on the way out. She planned to replace it with her own chocolate fudge before anyone noticed. Mothers of the bride don't steal cake. They curate it."},{"id":"indecent-gnomes","tone":"absurd","title":"The Case of the Indecent Gnomes","charge":"Who rearranged Wendell Fogarty's prize gnome collection into a scandalous formation overnight?","story":"For eleven years, Wendell Fogarty's 47 blue-ribbon garden gnomes have stood in tasteful rows on Larkspur Lane. On Tuesday morning they had been rearranged into a formation that, viewed from the street, made the mail carrier drop her coffee. The suspects: Pickles, the neighbor's beagle and a known gnome-dragger; his owner, Lyle Pruitt, two years into a feud with Wendell over 'lawn deposits'; Delphine Crane, Wendell's rival at the garden club; and Marjorie Fogarty, Wendell's wife of 34 years.","verdicts":[{"label":"Pickles the beagle","detail":"Drags gnomes for fun. The 'formation' could be one awful coincidence."},{"label":"Lyle Pruitt, Pickles' owner","detail":"Revenge for the lawn-deposit complaints, done under cover of a dog walk."},{"label":"Delphine Crane, the rival","detail":"Wants Wendell disqualified before the garden club judging."},{"label":"Marjorie Fogarty, his wife","detail":"Has dusted 47 gnomes for 34 years and may have reached her limit."}],"truth":3,"public":["Exhibit A: Three gnomes have tooth marks on their pointed hats. The other 44 are unmarked.","Exhibit B: The garden club's 'Best Yard' judging was set for Wednesday morning. Wendell has won four years running.","Exhibit C: Each gnome was placed on its own flagstone and turned to face the street. Whoever did this took their time."],"sealed":[{"rules_out":0,"text":"Vet discharge sheet, Monday: Pickles is in a cone after surgery. He weighs 19 pounds; each gnome weighs 11. He moved nothing."},{"rules_out":1,"text":"ER wristband and hospital bill: Lyle Pruitt was at County General with a kidney stone from 10 p.m. Monday to 8 a.m. Tuesday."},{"rules_out":2,"text":"Hotel folio: Delphine checked into a lakeside inn 200 miles away Monday at 6:12 p.m. Room service logged at 11:58 p.m."}],"planted":[{"rules_out":3,"text":"Pharmacy label: Marjorie took a prescription sleep aid at 9 p.m. Monday. Wendell swears she 'snored like a leaf blower' till dawn."},{"points_to":1,"text":"Text from Lyle to his brother, Monday 9:52 p.m.: 'Gonna give old Fogarty's little elves a makeover tonight. You'll see.'"}],"ruling":"Marjorie Fogarty waited until Wendell was snoring, then rearranged all 47 gnomes herself, knowing the garden club would declare the display 'unsuitable for a family street.' The tooth marks were Pickles' work from last spring. The gnomes now live in the garage, and Marjorie finally has a patio."},{"id":"royal-eggplant-door","tone":"absurd","title":"The Case of the Royal Eggplant Door","charge":"Who painted the Saddlebrook Pointe clubhouse door a forbidden shade of purple?","story":"The Saddlebrook Pointe clubhouse door was due to be repainted Heritage Taupe, the only door color the HOA covenants allow. On Saturday morning it was a glossy, defiant purple called Royal Eggplant. The suspects: Gordon Teague, who lost his appeal to paint his own door purple; HOA president Carol Bixby, who has fined eleven residents over purple; Rudy, the handyman, who swears he used the can he was given; and Ines Navarro, a new resident and self-described color consultant.","verdicts":[{"label":"Gordon Teague, the appellant","detail":"Lost his purple-door appeal and swore the board 'would see purple.'"},{"label":"Carol Bixby, HOA president","detail":"Make the clubhouse hideous and Thursday's vote to lift the ban dies."},{"label":"Rudy the handyman","detail":"An honest mistake with a mis-tinted can, or a joke he won't admit."},{"label":"Ines Navarro, the newcomer","detail":"Thinks taupe is 'a beige surrender' and has opinions about doors."}],"truth":1,"public":["Exhibit A: A vote to lift the purple ban is set for next Thursday. Gordon Teague gathered 31 signatures to force it.","Exhibit B: The empty can in the clubhouse dumpster is labeled 'Heritage Taupe' in marker. The paint dried on the rim is purple.","Exhibit C: The door got two even coats with a fine brush, and the brass knocker was carefully taped off first."],"sealed":[{"rules_out":0,"text":"Cruise boarding record: Gordon sailed Thursday on a five-night cruise. His wife posted a Friday-night photo captioned 'Gordo vs. the buffet.'"},{"rules_out":2,"text":"Rudy's phone photo, Saturday 6:58 a.m.: the door already purple and dry to the touch before he had opened a single tool bag."},{"rules_out":3,"text":"Airline receipts: Ines flew out Friday at 1 p.m. for her niece's wedding and landed back Sunday night."}],"planted":[{"rules_out":1,"text":"Signed HOA minutes: Carol chaired an emergency budget meeting Friday from 8 p.m. to midnight, then left with the treasurer."},{"points_to":2,"text":"Paint store tint slip, Friday 3:41 p.m.: 'Heritage Taupe, re-tinted per handyman's request. Customer wanted more pop.'"}],"ruling":"Carol Bixby bought the Royal Eggplant herself, wrote 'Heritage Taupe' on the can, and painted the door after midnight with surgical care. She figured one week of staring at a purple clubhouse would crush Thursday's vote. The ban was lifted 34 to 2, and Carol is now fining herself."},{"id":"vanishing-champions-belt","tone":"absurd","title":"The Case of the Vanishing Champion's Belt","charge":"Who took the league's championship belt from the commissioner's basement before the draft party?","story":"The Gridiron Grudge League's trophy is nine pounds of gold-plated belt with a rhinestone eagle. Commissioner Terry Okafor saw it in his basement display case at 8 a.m. on draft day; by 11 it was gone. The suspects: Sal Ferrante, last year's champ, who vowed to keep it 'till they pry it off my waist'; Kevin Dunleavy, nine straight seasons in last place; Marcy Lin, a two-time champion who has griped about the engraving for years; and Rhonda Okafor, Terry's wife, who calls the belt 'the ugliest thing I married into.'","verdicts":[{"label":"Sal Ferrante, last year's champ","detail":"Refuses to hand it back at the draft and has said so loudly."},{"label":"Kevin Dunleavy, last place","detail":"Nine seasons of humiliation. Destroy the belt, end the mockery."},{"label":"Marcy Lin, two-time champ","detail":"Has a grudge against the engraving and knows where the key hangs."},{"label":"Rhonda Okafor, Terry's wife","detail":"Wants it out of her basement, permanently, and lives there."}],"truth":2,"public":["Exhibit A: The display case was opened with its key, not forced. Terry keeps the key on a hook labeled KEY in giant letters.","Exhibit B: A neighbor saw Sal Ferrante's truck parked on Terry's street Friday night 'for no reason at all.'","Exhibit C: The belt's engraved plate lists every champion since the league began. One name is spelled three different ways."],"sealed":[{"rules_out":0,"text":"Sal's girlfriend lives two doors from Terry. Her doorbell camera shows Sal inside from 9 p.m. Friday to 11:30 a.m. Saturday."},{"rules_out":1,"text":"Flight confirmation and a gate selfie: Kevin landed from a work trip at 12:40 p.m. Saturday, after the belt was already gone."},{"rules_out":3,"text":"Spin studio sign-in and a friend's photos: Rhonda was across town from 7:30 to 11:30 a.m. Saturday, then at brunch."}],"planted":[{"rules_out":2,"text":"Gym check-in and a selfie captioned 'Leg day!!' posted 8:14 a.m. Saturday, 25 minutes away, then a 10:30 smoothie receipt."},{"points_to":1,"text":"Pawn shop intake slip, Saturday 11:52 a.m.: 'one belt, gold-tone, eagle, very ugly.' Seller signed K. Dunleavy."}],"ruling":"Marcy Lin dropped by at 9 'with chips,' used the key on the hook labeled KEY, and drove the belt to an engraver, who finally spelled her name right. She meant to have it back by kickoff and nearly did. Never stand between a two-time champion and correct spelling."},{"id":"silent-microphone","tone":"absurd","title":"The Case of the Silent Microphone","charge":"Who sabotaged Dolores Pike's microphone during the karaoke finals at the Salty Flamingo?","story":"At the Salty Flamingo's annual karaoke finals, five-time champion Dolores 'The Velvet Hammer' Pike hit the key change of her signature power ballad, and her microphone went dead. The challenger won by one point. By house rules, the champion drinks free for a year. The suspects: Brandon Kask, the smirking challenger; Vic Santangelo, the owner who pays for those free drinks; Ziggy, the karaoke host at the soundboard; and Lacey Duran, Dolores's estranged former duet partner.","verdicts":[{"label":"Brandon Kask, the challenger","detail":"The only way to beat the Velvet Hammer is to silence her."},{"label":"Vic Santangelo, the owner","detail":"A sixth title means another year of her free top-shelf drinks."},{"label":"Ziggy, the karaoke host","detail":"Has heard that power ballad 300 times and controls every mic."},{"label":"Lacey Duran, ex-duet partner","detail":"Still bitter that Dolores went solo and took the stage name with her."}],"truth":1,"public":["Exhibit A: The wireless mic's battery compartment was found empty. The batteries later turned up in the tip jar on the bar.","Exhibit B: At 9 p.m., Ziggy was overheard saying, 'If she sings that ballad one more time, I'm unplugging the building.'","Exhibit C: Dolores's free bar tab as reigning champion last year: $4,212, almost entirely top-shelf margaritas."],"sealed":[{"rules_out":0,"text":"Judges' sign-in sheet and bar camera: Brandon sat at the judges' table, in plain view, from 9:30 p.m. until Dolores took the stage."},{"rules_out":2,"text":"Camera footage: Ziggy never left the soundboard booth after 9 p.m. The mics were kept behind the bar, 40 feet away."},{"rules_out":3,"text":"Card receipt: Lacey closed her tab and left at 9:12 p.m. Every mic passed the 9:45 p.m. sound check."}],"planted":[{"rules_out":1,"text":"Delivery slip signed by Vic: he was in the alley unloading a beer truck from 9:40 to 10:20 p.m. The driver confirms it."},{"points_to":3,"text":"Text from Lacey to a friend, 9:58 p.m.: 'Done. She's gonna hit that high note and hear nothing but crickets.'"}],"ruling":"Vic Santangelo popped the batteries out behind the bar during the 9:50 rush and dropped them in the tip jar, figuring nobody ever counts that thing. A sixth title would have cost him another $4,000 in margaritas. Some owners protect their margins. Vic unplugged a legend."},{"id":"counterfeit-tide","tone":"serious","title":"The Case of the Counterfeit Tide","charge":"Who replaced Agnes Whitlow's painting 'Low Tide at Brennock' with a forgery?","story":"Agnes Whitlow's 'Low Tide at Brennock' hung in her family's home for 40 years before her nephew loaned it to the Halvorsen Gallery. It went out for cleaning, then onto the gallery wall. On opening night, a visiting conservator shone a UV torch on the signature and went pale: modern pigment. The $2.1 million painting is a fake. The suspects: owner Simon Halvorsen; art handler Teo Marsh, who hung it alone; Gil Whitlow, the nephew; and Imogen Pryce, the restorer who cleaned it.","verdicts":[{"label":"Simon Halvorsen, the owner","detail":"Drowning in debt; sell the original quietly, blame the restorer."},{"label":"Teo Marsh, the art handler","detail":"Alone with the crate at install, with a duplicate ready to hang."},{"label":"Gil Whitlow, the nephew","detail":"Sold the real one years ago and loaned the gallery a copy."},{"label":"Imogen Pryce, the restorer","detail":"Had the painting alone in her studio for six weeks."}],"truth":3,"public":["Exhibit A: Court filings show Halvorsen Gallery is $380,000 behind on rent, and two artists are suing over unpaid sales.","Exhibit B: The forgery's canvas is genuinely old, roughly 1970s. Only the paint is new. Someone had access to period materials.","Exhibit C: A 1982 family photo shows a small chip in the frame's lower left corner. The frame on the gallery wall has the same chip."],"sealed":[{"rules_out":0,"text":"Passport stamps: Simon was at a Lisbon art fair from loan day until opening morning. The alarm log shows nobody touched the painting after install."},{"rules_out":1,"text":"Install camera, 4:02 to 4:31 p.m.: Teo unpacks the crate and hangs the painting in one continuous shot. No second canvas enters."},{"rules_out":2,"text":"Pryce's own intake report, July 9, with UV photos: signature clean, period pigment. The painting Gil loaned was genuine."}],"planted":[{"rules_out":3,"text":"Pryce's outgoing UV photos, Aug. 20, notarized: signature clean, period pigment, matching intake. It left her studio genuine."},{"points_to":1,"text":"Bank record: Teo Marsh deposited $40,000 in cash on Aug. 23, two days after the install. Memo line: 'side job.'"}],"ruling":"Imogen Pryce painted the copy on a 1970s canvas from her own storeroom, fitted it into the original frame, and sealed the crate herself. The real painting now hangs in a private collector's villa, paid for in cash. She cleaned it, all right: right out of the frame."},{"id":"poisoned-sweet-tea","tone":"serious","title":"The Case of the Poisoned Sweet Tea","charge":"Who drugged Hattie Lund's sweet tea at the Pell County Fair pie contest?","story":"Hattie Lund has won the Pell County Fair pie contest eight years running. This year, minutes after the judges tasted her bourbon pecan, she slumped at her booth and spent two nights in the hospital. The lab found a crushed prescription sedative in her thermos of sweet tea. She is recovering, but someone meant it. The suspects: Wade Lund, her ex-husband and landlord; June Albright, eight-time runner-up; Corey Vance, the assistant baker she fired last month; and Darla Knox, her best friend at the next booth.","verdicts":[{"label":"Wade Lund, ex-husband","detail":"Owns her bakery building and has a developer circling it."},{"label":"June Albright, the rival","detail":"Eight years of second place. With Hattie down, the ribbon is hers."},{"label":"Corey Vance, fired assistant","detail":"Fired in front of customers and told everyone she'd 'regret it.'"},{"label":"Darla Knox, best friend","detail":"Right next door, knew the thermos, and nobody watches a best friend."}],"truth":0,"public":["Exhibit A: With Hattie in an ambulance, June Albright took the blue ribbon at last. She cried. Witnesses disagree about which kind.","Exhibit B: Hattie's thermos sat unattended on her booth's back counter from about 1:30 to 2:15 p.m. while she plated for the judges.","Exhibit C: Hattie's calendar for that evening shows one 6 p.m. entry: 'W - sign. DON'T BE LATE.'"],"sealed":[{"rules_out":1,"text":"Tent security camera, 1:15 to 2:30 p.m.: June never leaves her own booth, 60 feet across the tent. Two customers confirm it."},{"rules_out":2,"text":"Time clock records: Corey started a new job two counties over that week and was clocked in from 7 a.m. to 3:30 p.m. on fair day."},{"rules_out":3,"text":"Judges' photos, 1:30 to 2:15 p.m.: Darla stands beside Hattie at the judging table in every shot. She never went back to the booth."}],"planted":[{"rules_out":0,"text":"Fairgrounds gate log: Wade Lund's truck entered the lot at 2:38 p.m., twenty minutes after Hattie took her last sip of tea."},{"points_to":1,"text":"Pharmacy record: June Albright filled a prescription for that exact sedative eight days before the fair. Ninety tablets."}],"ruling":"Wade Lund slipped through the tent's back flap at 1:50 and crushed his own sleeping pills into Hattie's tea. If she missed the 6 p.m. signing, her lease lapsed at midnight and a developer's $1.2 million offer was his. Hattie signed the renewal from her hospital bed, with a nurse as witness: twenty years, locked in."},{"id":"prodigal-trucker","tone":"serious","title":"The Case of the Prodigal Trucker","charge":"Is the man claiming Ambrose Kettering's fortune his lost son Daniel, and if not, who is he?","story":"Shipping magnate Ambrose Kettering died at 91, leaving $14 million 'to my son Daniel, should he ever come home.' Daniel vanished at age four in 1979, when his mother drove off one night and was never seen again. Three months after the funeral, a soft-spoken trucker named Dale Hartley walks into the estate lawyer's office knowing the name of Daniel's stuffed rabbit. Ambrose's longtime nurse, Colette Ames, is not pleased. Is Dale the lost boy, another son entirely, or a very good liar?","verdicts":[{"label":"The real Daniel Kettering","detail":"Taken west as a boy, raised under another name, finally home."},{"label":"Ambrose's other, secret son","detail":"Ambrose's blood, but not Daniel: a child nobody was told about."},{"label":"A con coached by the nurse","detail":"Colette knew the family secrets and fed them to a stranger."},{"label":"A professional con artist","detail":"Worked alone, did his homework, and picked a rich dead man."}],"truth":1,"public":["Exhibit A: Dale knew Daniel's stuffed rabbit was named Captain Buttons. That name was never published anywhere.","Exhibit B: Nurse Colette Ames gets $50,000 under the will, and she was the first to call the lawyer about 'a man asking questions.'","Exhibit C: The Ketterings' live-in housekeeper quit abruptly in late 1975 and moved west. Old staff say she 'left in a family way.'"],"sealed":[{"rules_out":0,"text":"Hospital birth record: Daniel Kettering was born with type O blood. Dale Hartley's blood donor card says type AB."},{"rules_out":2,"text":"Colette Ames started work in 2020. Captain Buttons was lost in 1979, and no photo, letter or record of him survives in the house."},{"rules_out":3,"text":"Background check: Dale has used one name, one address and one trucking job for 33 years. No aliases, no arrests, no prior claims."}],"planted":[{"rules_out":1,"text":"County records: the former housekeeper's only child was stillborn in 1976. Whoever Dale is, he is not her son."},{"points_to":2,"text":"Bank records: Colette Ames wired $9,500 to Dale Hartley two weeks before he first contacted the estate lawyer."}],"ruling":"Dale is Ambrose Kettering's son, just not Daniel: his mother was the housekeeper who left in 1975, and she raised him on stories of the big house, Captain Buttons included. He honestly assumed he was the lost boy. The will names Daniel, so Dale inherits nothing but a father, a missing half-brother, and a very good story."},{"id":"second-wind-grounding","tone":"serious","title":"The Case of the Second Wind Grounding","charge":"Why did the sailboat Second Wind run aground on Cutter's Shoal, and who is to blame?","story":"At 2:10 a.m. on a hazy September night, the 42-foot sloop Second Wind ran hard onto Cutter's Shoal, a sandbar marked on every chart. Owner Grant Ellery and his first mate, Kip Dorsey, were rescued unhurt. The boat was not. Four days later, Grant filed a $380,000 total-loss claim. The insurer wants to know: an honest accident, sabotage by Grant's bitter ex-partner Mitch Corrado, Kip drunk at the helm, or Grant wrecking his own boat?","verdicts":[{"label":"An honest accident","detail":"Haze, a 2 a.m. watch and a depth sounder that glitched all season."},{"label":"Sabotage by Mitch Corrado","detail":"Grant's ex-partner lost a lawsuit to him and once had a boat key."},{"label":"Insurance fraud by Grant","detail":"Second Wind was worth less than his loan. A total loss pays it off."},{"label":"Kip drunk at the helm","detail":"Grant's old friend nodded off, and Grant is covering for him."}],"truth":2,"public":["Exhibit A: The depth sounder went to the repair shop twice that summer. Work order: 'intermittent fault, could not replicate.'","Exhibit B: Rescuers found three empty wine bottles in the cockpit. Kip says they were from dinner. Grant says 'ballast.'","Exhibit C: Second Wind's loan balance was $410,000. A broker had valued her at about $300,000 in the spring."],"sealed":[{"rules_out":0,"text":"Chartplotter memory: autopilot steering to a waypoint dead on Cutter's Shoal, typed in by hand at 11:48 p.m. Shoal alarm switched off at 11:49."},{"rules_out":1,"text":"Mitch's phone location and wedding photos: he was 300 miles inland at his daughter's wedding all weekend. His key was returned in March."},{"rules_out":3,"text":"Coast Guard breath test, 3:05 a.m.: Kip 0.00. Kip says Grant sent him below to sleep at midnight; the cabin camera agrees."}],"planted":[{"rules_out":2,"text":"Kip's sworn statement: 'Grant was asleep below from 11 p.m. I had the helm and I nodded off. It's on me.'"},{"points_to":1,"text":"Marina camera, Thursday 9:14 p.m.: a man matching Mitch Corrado's build boards Second Wind with a toolbox and leaves 20 minutes later."}],"ruling":"Grant Ellery set a waypoint on Cutter's Shoal at 11:48 p.m., sent Kip below to sleep, and let the autopilot do the rest, with a glitchy depth sounder as his alibi. The boat was worth $110,000 less than he owed. The insurer paid nothing, and Grant now owes the bank for a sandbar."},{"id":"gala-shortfall","tone":"serious","title":"The Case of the Gala Shortfall","charge":"Who took the $40,000 missing from the Harbor Lights Literacy Fund's gala account?","story":"The Harbor Lights Literacy Fund's spring gala raised a record $212,000. Six weeks later, the auditor found $40,000 missing from the gala account, sent out in four wires of $10,000 each. The suspects: treasurer Nadine Okoro, 66, a retired schoolteacher who signs every check; executive director Phil Banning, who just bought a fishing boat; gala planner Trish Gale, who handled every vendor; or no insider at all, but a scammer who spoofed the caterer's email.","verdicts":[{"label":"Nadine Okoro, the treasurer","detail":"Holds the bank token and signs everything. Nobody checks her."},{"label":"Phil Banning, the director","detail":"A sudden boat on a nonprofit salary, and access to the books."},{"label":"Trish Gale, the gala planner","detail":"Ran every vendor invoice and could pad or fake a few."},{"label":"An outside email scam","detail":"A fake 'new bank details' email, and the money wired to a crook."}],"truth":0,"public":["Exhibit A: Phil Banning's 'new' boat is a 1998 fishing skiff he named 'Grant Money.' He insists the name is a joke.","Exhibit B: All four wires went to the same overseas bank account. Each was sent on a Tuesday at about 10:15 p.m.","Exhibit C: Colleagues say Nadine has seemed 'happier than in years' since spring, and she keeps her phone face-down at meetings."],"sealed":[{"rules_out":1,"text":"Bank access audit: Phil's login has never opened the gala account. Every wire session came from a device that isn't his."},{"rules_out":2,"text":"Trish's firm was paid one check of $18,400, matching her contract to the penny. The bank confirms she had no portal access."},{"rules_out":3,"text":"The caterer's real invoice was paid by paper check on March 3 and cashed. No wire ever went to any caterer, real or fake."}],"planted":[{"rules_out":0,"text":"Cruise line records: Nadine was at sea with no internet on two of the four Tuesday nights the wires went out. The ship's log confirms it."},{"points_to":3,"text":"Email from 'the caterer,' Feb. 27: 'Please note our NEW banking details for the balance due,' sent from a domain one letter off."}],"ruling":"Nadine Okoro sent all four wires herself, every Tuesday night, to a man she met online who said he was a surgeon stranded overseas. She meant to repay it from her pension before anyone noticed; he never existed. The happiest she'd been in years cost the literacy fund $40,000."},{"id":"letter-in-the-wall","tone":"serious","title":"The Case of the Letter in the Wall","charge":"Who wrote the letter found in the wall, and what really happened to Lorna Vail in 1987?","story":"In 1987, nineteen-year-old Lorna Vail walked out of the Harvest Dance and was never seen again. This spring, house-flippers Dev and Kara Brandt opened a bedroom wall in her childhood home on Alder Street and found a yellowed letter: 'I'm the reason Lorna never came home. I'll carry it to my grave. - R.' Was it Ray Dufresne, the boyfriend she fought with that night, her stepfather Carl Roland Vail, a hoax by flippers who film everything, or her little sister, Rosie?","verdicts":[{"label":"Ray Dufresne, the boyfriend","detail":"Signed 'R'; they fought at the dance; he left town that November."},{"label":"Carl Vail, the stepfather","detail":"Middle name Roland, a known temper, and it was his house."},{"label":"A hoax by the flippers","detail":"Planted a 'confession' to make their renovation videos go viral."},{"label":"Rosie helped her run away","detail":"Lorna left alive. Her sister, 16, helped and kept the secret."}],"truth":3,"public":["Exhibit A: Witnesses at the 1987 dance saw Lorna and Ray arguing by the punch bowl. Ray left town for good that November.","Exhibit B: The letter is in purple felt-tip on lined notebook paper. The handwriting is round and careful, with circles over the i's.","Exhibit C: The Brandts' renovation videos average 4,000 views. The episode about the letter has 2.3 million."],"sealed":[{"rules_out":0,"text":"State crime lab: the letter's handwriting does not match Ray's 1986 school papers or his recent letters. Not even close."},{"rules_out":1,"text":"Hospital records and X-rays: Carl Vail was laid up with two broken legs from a roofing fall from August to December 1987."},{"rules_out":2,"text":"Lab report: paper and ink date to the late 1980s. The plaster sealing it is from a 1988 patch, unbroken until the Brandts' saw."}],"planted":[{"rules_out":3,"text":"State crime lab: the letter's handwriting does not match Rosie Vail's 1987 school essays. Different slant, different letterforms."},{"points_to":0,"text":"A 1987 gas station receipt found in Ray's old truck: two tanks of gas and a shovel, dated the night after the dance."}],"ruling":"Lorna wasn't harmed: she was pregnant, terrified of her stepfather's temper, and sixteen-year-old Rosie walked her to the midnight bus, then hid her guilty confession in the wall during the 1988 re-plastering. Lorna is 58 and lives three states away. She called Rosie the night the video went viral."},{"id":"unbeatable-widower-bingo","tone":"absurd","title":"The Case of the Unbeatable Widower","charge":"Who rigged Tuesday bingo so that Walter Pruitt wins every single week?","story":"Every Tuesday for eleven weeks running, widower Walter Pruitt, 84, has yelled BINGO at Magnolia Gardens Retirement Village before the decaf gets cold, and the canasta ladies want blood. Walter says he just has a lucky card. Caller Doris Fenwick has called numbers for nine years and blushes when he waves. Activities director Glen Okafor needs Walter's five-star review to keep his job. And Walter's son Rodney drops by every Tuesday 'to help set up.'","verdicts":[{"label":"Walter cheats on his own","detail":"Pre-marked cards, a sneaky dauber and eleven weeks of practice."},{"label":"Doris, the smitten caller","detail":"She calls the numbers. She also calls Walter 'a tall drink of water.'"},{"label":"Glen, the activities director","detail":"A happy Walter means a five-star review and a director who keeps his job."},{"label":"Rodney, the helpful son","detail":"Shows up early 'to set up' and has full access to the ball cage."}],"truth":1,"public":["Exhibit A: Walter plays the same faded card, #117, every week and will not let anyone else touch it. 'It knows me,' he says.","Exhibit B: Doris has worn a fresh corsage to every Tuesday bingo since September. No one has seen who sends them.","Exhibit C: The ball cage was bought secondhand from a church raffle in 2009. It squeaks on B-4 and nobody knows why."],"sealed":[{"rules_out":0,"text":"Card audit: #117 is laminated, unmarked and matches the printer's master. Walter's dauber was confiscated in week 9. He won anyway."},{"rules_out":2,"text":"Glen's timesheet and gate log: every Tuesday since August he's been at a 6 p.m. budget meeting across town. Bingo starts at 6:15."},{"rules_out":3,"text":"Lobby camera: Rodney stacks chairs, eats four sugar cookies and leaves at 6:05 every week, before the cage is ever spun."}],"planted":[{"rules_out":1,"text":"Hallway camera: Doris draws every ball with her sleeves rolled up, holds it up to the front row, then drops it in the rack. Clean."},{"points_to":2,"text":"Sticky note found in Glen's desk drawer: 'Keep Walter winning through review season. Five stars = my raise.'"}],"ruling":"Doris never called a single ball. She palmed each one, glanced at card #117, the card she'd memorized over nine years of flirting, and read out Walter's numbers in a lovely, steady voice. Walter had no idea. He thought he was just lucky. In love, he was."},{"id":"mother-in-law-tattoo","tone":"absurd","title":"The Case of the Mother-in-Law Tattoo","charge":"Who arranged the portrait of the groom's mother now permanently on the bride's shoulder?","story":"At a rented lake house, bride-to-be Kelsey Marsh woke Sunday with a palm-sized tattoo on her shoulder: a smiling portrait of her future mother-in-law, Barbara, in pearls. Nobody admits arranging it; maid of honor Tasha booked Saturday's 'mystery entertainment,' and groom's sister Brianna has never warmed to Kelsey. Zeke, the hired 'henna artist,' left before breakfast with a fat cash tip. And Kelsey remembers nothing after the fourth round of something blue.","verdicts":[{"label":"Tasha, the maid of honor","detail":"She booked the 'mystery entertainment' and has a famously dark sense of humor."},{"label":"Brianna, the groom's sister","detail":"Adores her mom, tolerates Kelsey, and would call it 'a sweet tribute.'"},{"label":"Kelsey arranged it herself","detail":"Tequila plus a deep need to win over her future mother-in-law."},{"label":"Zeke the artist went rogue","detail":"Booked for henna, went permanent, pocketed the cash and drove off."}],"truth":2,"public":["Exhibit A: A cocktail napkin from Saturday night, bearing a sketch of a woman in pearls drawn in eyeliner. Artist unknown.","Exhibit B: Brianna's phone lock screen is a photo of her mother wearing those exact pearls.","Exhibit C: Zeke's flyer: 'Henna, glitter and body art. Permanent upgrades available on request.'"],"sealed":[{"rules_out":0,"text":"Tasha's booking with Zeke: 'Two hours, HENNA ONLY, nothing permanent, the bride wears strapless in June.' Paid $180 by card."},{"rules_out":1,"text":"Ride-share receipt: Brianna left the lake house at 9:40 p.m. for a motel 12 miles away. Zeke didn't arrive until 10:30."},{"rules_out":3,"text":"Zeke's shop rules, posted and enforced: no permanent work without a $300 upgrade fee paid by the client. Saturday's fee was paid in full."}],"planted":[{"rules_out":2,"text":"Kelsey's phone: battery hit 1% at 10:02 p.m. and it was dead until morning. Her friends say she was asleep on the couch by 10:15."},{"points_to":0,"text":"Group chat, 11:48 p.m., from Tasha: 'Phase two is a go. Barbara will LOVE it. Delete this.'"}],"ruling":"Kelsey paid the $300 upgrade herself, in cash from her own garter, after a tearful speech about finally winning Barbara over. She sketched the design on a napkin in eyeliner and told Zeke to 'make it last forever.' Barbara has seen it. She wept. She now wants one of Kelsey."},{"id":"boxed-wine-vintage","tone":"absurd","title":"The Case of the Counterfeit Cabernet","charge":"Who swapped Gordon's $2,000 vintage for boxed wine before the wine club tasting?","story":"For six years Gordon Ashby has bragged about his 1971 Chateau Belvoir-Lamarre, a bottle he values at $2,000. Saturday he finally uncorked it for the Cedar Hollow Wine Society, and neighbor Stan Danvers pronounced it 'fruit-forward, with notes of cardboard,' just before a crushed wine box turned up in the recycling. Gordon's wife Marlene rolls her eyes whenever he mentions the bottle. Stan was alone in the den before the guests arrived. And caterer Inez Ruiz handled every bottle that night.","verdicts":[{"label":"Marlene, the weary wife","detail":"Sick of 'the bottle speech'; a collector once offered her $900 for it."},{"label":"Stan, the know-it-all neighbor","detail":"Arrived 40 minutes early and was alone with the wine rack."},{"label":"Inez, the caterer","detail":"Had the corkscrew, the pour, and a cooler full of 'supplies.'"},{"label":"Gordon swapped it himself","detail":"Drank it in secret, refilled the bottle, and hoped nobody could tell."}],"truth":3,"public":["Exhibit A: An empty 5-liter box of 'Porch Swing Red,' crushed flat, found in the Ashbys' recycling bin.","Exhibit B: Stan arrived 40 minutes early 'to let it breathe' and was seen alone in the den beside the wine rack.","Exhibit C: The cork slid out whole, with no crumbling at all. Remarkably fresh for a 55-year-old cork."],"sealed":[{"rules_out":0,"text":"Club photo, Oct 4: foil and tax strip intact. Marlene left on a river cruise Oct 5 and walked in at 7:50 p.m. party night, into a room full of guests."},{"rules_out":1,"text":"Den nanny-cam, 6:20 to 7:00 p.m.: Stan sniffs the bottle, photographs the label and puts it back. He never touches the foil."},{"rules_out":2,"text":"Driveway camera: Inez unloads trays and stays in the kitchen. She never enters the den until Gordon carries the bottle out at 8:05."}],"planted":[{"rules_out":3,"text":"Liquor store loyalty log: no boxed wine ever sold to the Ashby household. Clerk's note on Gordon's account: 'Refuses anything with a spout.'"},{"points_to":1,"text":"Stan's phone, found in the den couch: a search at 6:41 p.m. for 'how to reseal a wine cork so nobody notices.'"}],"ruling":"The night Marlene left on her cruise, Gordon opened the Belvoir-Lamarre alone, drank it with a block of cheddar, and found it tasted mostly like dust. He refilled it from a box, recorked it, and planned to blame the vintage. He forgot that a 55-year-old cork doesn't come out looking brand new."},{"id":"captain-belly-flop","tone":"absurd","title":"The Case of the Captain's Belly-Flop","charge":"Who signed the dignified Captain Merriweather up for the ship's belly-flop contest?","story":"On day four aboard the cruise ship Azure Meridian, the sign-up sheet for the Sunset Belly-Flop Classic gained a new name: Captain Augustin Merriweather, 61, a man who irons his socks. Ship tradition says anyone listed must compete or lose 'the respect of the sea.' First mate Renata Cole has been passed over for promotion twice, and the captain's ex-wife Vivian is aboard 'by pure coincidence.' Entertainment director Dex Lowry's ratings are sinking. And the captain swears he is mortified.","verdicts":[{"label":"The captain signed up himself","detail":"A former college diving champ itching for one last roar from the crowd."},{"label":"Renata, the first mate","detail":"Passed over twice; a viral flop could finally sink his career."},{"label":"Vivian, his ex-wife","detail":"Booked the same cruise 'by coincidence' and has waited years for this."},{"label":"Dex, the entertainment director","detail":"Ratings are down; a captain belly-flop would pack the pool deck."}],"truth":0,"public":["Exhibit A: The entry is written in neat block capitals with a fountain pen, the kind issued to bridge officers.","Exhibit B: Vivian, overheard in the buffet line: 'I hope he hits the water like a dropped piano.'","Exhibit C: Dex's pool-deck shows averaged 14 guests last week. The belly-flop contest drew 600."],"sealed":[{"rules_out":1,"text":"Bridge log: Renata stood watch noon to 8 p.m. without a break. Guest photos show the sheet blank at 2 p.m. and signed by 3."},{"rules_out":2,"text":"Spa receipt: Vivian's 2:00 to 4:00 p.m. 'Total Serenity' mud wrap. She was sealed in seaweed and could not hold a pen."},{"rules_out":3,"text":"Dex's memo to head office, day two: 'Under no circumstances may officers enter guest contests. Insurance will kill us.' Signed."}],"planted":[{"rules_out":0,"text":"Ship's doctor note: Captain Merriweather holds a medical waiver barring all pool activities since a 1998 shoulder surgery."},{"points_to":2,"text":"Activities desk attendant: 'A woman in a huge sun hat asked me how to spell Merriweather. Said it was for an old flame.'"}],"ruling":"The captain signed himself up between 2 and 3 p.m. with his own bridge pen. He had been a college diving champion and quietly missed the roar of a crowd. He feigned horror, 'reluctantly' competed, and scored a perfect ten. The photo now hangs on the bridge."},{"id":"thanksgiving-turkey-vanishes","tone":"absurd","title":"The Case of the Vanishing Turkey","charge":"Who made the 22-pound Thanksgiving turkey disappear twenty minutes before dinner?","story":"At 4:40 p.m., twenty minutes before dinner, the Kowalski family's 22-pound turkey vanished from the kitchen counter, leaving only a greasy pan and a meat thermometer. Uncle Murray had just 'gone for ice.' Cousin Dana, a vegan, has called the bird 'the victim' all day. Next-door neighbor Beverly is locked in a bitter HOA feud with the family over leaf-blowing. And host Linda's husband Mark, assigned to rest the turkey, keeps saying, 'Let's not point fingers.'","verdicts":[{"label":"Uncle Murray took it","detail":"Left 'for ice' with an empty cooler, came back with a very heavy one."},{"label":"Cousin Dana's protest","detail":"A vegan who has been calling the turkey 'the victim' since noon."},{"label":"Mark, the host's husband","detail":"He was in charge of the bird and is awfully eager to move on."},{"label":"Beverly, the feuding neighbor","detail":"HOA revenge: you blow leaves on my lawn, I take your turkey."}],"truth":2,"public":["Exhibit A: A greasy trail runs from the kitchen counter toward the side door and stops at the doormat.","Exhibit B: Uncle Murray's cooler, back from 'getting ice,' is suddenly too heavy for him to lift alone.","Exhibit C: Beverly's note left on the family's windshield Wednesday: 'Blow your leaves on my lawn again and see what happens.'"],"sealed":[{"rules_out":0,"text":"Murray's cooler, opened by Linda at 4:55: forty pounds of ice and nineteen beers labeled 'NOT FOR SHARING.' No turkey. Not even a wing."},{"rules_out":1,"text":"Dana's fitness app: a 4:15 to 5:05 p.m. 'gratitude walk' around the reservoir two miles away, with timestamped photos throughout."},{"rules_out":3,"text":"Her daughter's doorbell camera: Beverly arrives at 2:10 p.m. carrying a pie and doesn't leave until after 7. She was never home."}],"planted":[{"rules_out":2,"text":"Mark's smartwatch, 4:30 to 4:50 p.m.: 31 steps and a resting heart rate of 58. He was asleep in the recliner during the game."},{"points_to":0,"text":"Gas station receipt from Murray's coat, 4:47 p.m.: 'Ice, 2 bags. Jumbo aluminum foil. Carving knife.'"}],"ruling":"Mark carried the bird out the side door to rest it in the cool garage, tripped over the leaf blower, and watched 22 pounds of turkey skate across the concrete. He hid it in the garage freezer and quietly ordered four rotisserie chickens. The leaf blower has been blamed for everything."},{"id":"yacht-and-cats-profile","tone":"absurd","title":"The Case of the Imaginary Yacht","charge":"Who edited Doug's dating profile to claim he owns a yacht and loves cats?","story":"Recently divorced Doug Pemberton, 54, joined the dating app Swoonly with an honest bio: accountant, owns a kayak, allergic to cats. By Friday it read 'Yacht owner. Cat dad. Seeking my first mate,' and he had 212 matches, four proposals, and neither a yacht nor a cat. His ex-wife Sheila still knows all his passwords, and his daughter Megan built the profile 'to help.' His golf buddy Ray dared him to join. And Swoonly just launched 'Spark Assist,' which punches up bios automatically.","verdicts":[{"label":"Sheila, the ex-wife","detail":"Knows every password he has and enjoys watching him squirm."},{"label":"Megan, the helpful daughter","detail":"Built the profile and thinks her dad needs 'more sparkle.'"},{"label":"Ray, the golf buddy","detail":"Dared him to join and has been laughing about it ever since."},{"label":"The app's Spark Assist bot","detail":"An automatic 'bio booster' that may have gotten creative on its own."}],"truth":1,"public":["Exhibit A: Swoonly's records show the edit was made Thursday at 11:52 p.m., from a device logged in as Doug.","Exhibit B: Spark Assist's launch email promises bios that are 'up to 300 percent more boat-forward.'","Exhibit C: Sheila's own new Swoonly profile reads: 'Seeking a man who is honest about his boat.'"],"sealed":[{"rules_out":0,"text":"Airline record: at 11:52 p.m. Thursday Sheila was on a red-eye to Denver in seat 31B, phone in airplane mode, next to a man eating tuna."},{"rules_out":2,"text":"Ray's wife confiscated his phone at 9 p.m. Thursday after 'a fantasy football incident' and locked it in her car overnight. She'll testify."},{"rules_out":3,"text":"Swoonly engineering ticket: Spark Assist is switched off for all users over 50 until December, after it told a retiree to 'lead with the yacht.'"}],"planted":[{"rules_out":1,"text":"Megan's text to Doug, Friday 8 a.m.: 'Dad I swear on Grandma's meatloaf I haven't touched your profile since Tuesday.' No logins from her phone."},{"points_to":0,"text":"Swoonly password-reset email, Thursday 11:40 p.m., sent to the old joint email account Doug and Sheila shared while married."}],"ruling":"Megan logged in from the family tablet at 11:52 p.m. and 'improved' her father, reasoning that a man with a kayak is technically a man with a boat. The cats were aspirational. Doug has since met a lovely woman with two cats and a sailboat. He is taking allergy pills and swimming lessons."},{"id":"missing-mahogany-runabout","tone":"serious","title":"The Case of the Missing Mahogany Boat","charge":"Why is a $60,000 boat titled to a bankruptcy debtor missing from his sworn list of assets?","story":"When Leland Briggs filed Chapter 7 bankruptcy, he listed a pickup, a recliner and $212 in checking. A Chapter 7 trustee sells a debtor's assets to pay creditors, so trustee Patricia Hale went digging and found a marina photo of Leland grinning aboard Miss Behavin’, a restored 1962 mahogany runabout worth about $60,000, still titled in his name. It's not on his sworn schedules. His brother Dale just bought a new boat trailer. And a marina one county over has a mahogany runabout under a tarp in a back slip.","verdicts":[{"label":"Leland hid it from creditors","detail":"Tarped in a back slip one county over, waiting out the bankruptcy."},{"label":"He 'gave' it to brother Dale","detail":"A pre-filing transfer to family, which a trustee can undo."},{"label":"He sold it fair and square","detail":"A real sale at market price, the money spent on bills months ago."},{"label":"It's his ex-wife's boat","detail":"Awarded to her in the divorce; the title was simply never updated."}],"truth":3,"public":["Exhibit A: State title record, printed last week: owner of the vessel Miss Behavin’, 'Leland R. Briggs.' No liens.","Exhibit B: Dale bought a new double-axle boat trailer six weeks before Leland filed for bankruptcy.","Exhibit C: Leland's paperwork mentions a 2024 divorce from Joanne Briggs but lists no details of the property settlement."],"sealed":[{"rules_out":0,"text":"Back-slip rental contract: the tarped runabout belongs to a dentist named Ochoa. It's a 1964, and its hull number doesn't match."},{"rules_out":1,"text":"Dale's new trailer is registered to his own bass boat, photographed sitting on it today. Miss Behavin’ isn't at his home, dock or storage unit."},{"rules_out":2,"text":"Four years of Leland's bank records: no deposit over $3,000, no bill of sale, no buyer. Nobody ever paid Leland for a boat."}],"planted":[{"rules_out":3,"text":"Divorce decree, page 14: 'Husband retains all watercraft, including the vessel Miss Behavin’.' Signed by both parties and the judge."},{"points_to":1,"text":"Text from Leland to Dale, two months before filing: 'Keep her under wraps till this is over. Nobody needs to know she's at your place.'"}],"ruling":"The 2024 divorce decree awarded Miss Behavin’ to Joanne, but nobody filed the title paperwork, so the state still showed Leland. Joanne has kept it at her lake house for two years and renamed it, in fresh gold letters, Alimony. Leland amended his schedules to disclose it, and the trustee let it sail. The only thing he'd hidden was his heartbreak."},{"id":"larkspur-duplex-fire","tone":"serious","title":"The Case of the Larkspur Lane Fire","charge":"How did the vacant half of Victor Hensley's duplex catch fire at 3:10 a.m.?","story":"At 3:10 a.m. on a Sunday, fire gutted the vacant left side of Victor Hensley's duplex on Larkspur Lane; no one was hurt, but the insurer won't pay a dime until it knows whether this was arson. Victor is three months behind on his mortgage and raised his coverage in March. Right-side tenant Corinne Pratt had just been served an eviction notice. Her ex, Kyle Dorsey, is banned from the property but was seen nearby that night. And the city flagged the duplex's 1950s wiring two years ago.","verdicts":[{"label":"Landlord Victor, for the payout","detail":"Behind on his loan, and he raised his fire coverage in March."},{"label":"Corinne, the evicted tenant","detail":"Served an eviction notice days earlier, and she sent a threat."},{"label":"Kyle, the banned ex","detail":"Barred from the property, angry at everyone, and seen nearby."},{"label":"An accident: the old wiring","detail":"1950s wiring the city warned about two years ago finally gave out."}],"truth":0,"public":["Exhibit A: Fire marshal's preliminary report: point of origin is the vacant unit's kitchen, beside a wall outlet.","Exhibit B: Corinne's text to Victor the Tuesday before: 'You'll regret this. Ask around about me.'","Exhibit C: A neighbor's dashcam caught a dark vehicle idling on Larkspur Lane at 2:40 a.m. The plate is unreadable."],"sealed":[{"rules_out":1,"text":"Hospital badge log: Corinne clocked in for a night nursing shift at 7 p.m. Saturday and badged through ward doors every hour until 7 a.m."},{"rules_out":2,"text":"Toll and gas station records: Kyle's car left the state at 1:55 a.m. A pump camera shows him 90 miles away at 3:02 a.m."},{"rules_out":3,"text":"Lab result: gasoline soaked into the kitchen subfloor. The outlet's circuit breaker was switched OFF before the fire started."}],"planted":[{"rules_out":0,"text":"Casino hotel folio: Victor checked in 200 miles away at 9 p.m. Saturday and signed for room service at 2:51 a.m. Receipt attached."},{"points_to":2,"text":"Neighbor's statement: 'Around 2:45 I saw Kyle walking up the back alley with a red gas can. I'd know that ponytail anywhere.'"}],"ruling":"Victor parked his dark sedan around the corner at 2:40, let himself into the vacant unit with his own key, and poured gasoline by the outlet. He flipped the breaker off first so nothing would spark early, never realizing the marshal would check it. The city's wiring warning was supposed to be his alibi. It became his indictment."},{"id":"two-million-dollar-ticket","tone":"serious","title":"The Case of the $2 Million Ticket","charge":"Who really bought the $2 million lottery ticket found in the office pool envelope?","story":"Every Friday, the four-person lottery pool at Tri-County Plumbing Supply chips in $5 apiece, and office manager Dolores Webb buys twenty tickets. This week a ticket in the pool envelope hit for $2 million, and the knives came out. Benny Alvarez says it's his personal ticket, tucked in the envelope 'for luck,' while Priya Shah says it's hers and vanished off her desk. Dolores insists it's a pool ticket, split four ways. And Marcus Bell, who never says anything, has hired a lawyer.","verdicts":[{"label":"A pool ticket Dolores bought","detail":"Twenty tickets, same store, every Friday. Split it four ways."},{"label":"Benny's own personal ticket","detail":"He paid for it alone and tucked it in the envelope for luck."},{"label":"Priya's ticket, swiped","detail":"She says it disappeared from her desk drawer on Thursday."},{"label":"Marcus's own ticket","detail":"The quiet one. Why else would he lawyer up so fast?"}],"truth":1,"public":["Exhibit A: The pool envelope held 21 tickets this week, not the usual 20. Nobody will admit to counting before the drawing.","Exhibit B: Priya filed a note with HR on Thursday: 'Missing: one lottery ticket, my desk, top drawer.'","Exhibit C: Marcus's lawyer's letter is two sentences long and ends, 'My client reserves all rights.'"],"sealed":[{"rules_out":0,"text":"Dolores's receipt: 20 quick-picks, Corner Mart, Fri 7:45 a.m. The winner printed at 6:12 a.m. at a Route 9 gas station, during her spin class."},{"rules_out":2,"text":"Priya's 'missing ticket' turned up Monday in her coat pocket: a $2 scratch-off for a different game. She scratched it at the hearing. A loser."},{"rules_out":3,"text":"Boarding pass: at 6:12 a.m. Friday Marcus was on a flight home from his sister's wedding. He lawyered up because his mother told him to."}],"planted":[{"rules_out":1,"text":"Benny's timecard: clocked in at the warehouse at 5:30 a.m. Friday, 22 miles from Route 9, and didn't clock out until 2 p.m."},{"points_to":2,"text":"Photo on Priya's phone, Thursday 4:58 p.m.: a lottery ticket on her desk. The visible serial digits match the winner's."}],"ruling":"Benny bought the ticket with his own debit card at the Route 9 gas station at 6:12 a.m. on his way to work, then slipped it into the pool envelope for luck, exactly as he said. Legally, it's his. Dolores now has a laminated sign: 'Personal tickets stay personal.' Benny bought everyone lunch. One lunch."},{"id":"willow-bend-hit-and-run","tone":"serious","title":"The Case of the 1 A.M. Hit-and-Run","charge":"Whose car flattened a mailbox and dented a parked SUV on Willow Bend Court at 1:04 a.m.?","story":"At 1:04 a.m., something crunched Nadine Foster's mailbox on Willow Bend Court, left a basketball-sized dent in her parked SUV, and drove off; no one was hurt, but Nadine wants a name. Neighbor Trent Kowal got home from the Tipsy Heron around one. Widow Edna Albright still drives at night despite her doctor's advice, and a delivery driver was spotted making a late run on the street. And Nadine's husband Craig came home from a 'work dinner' at 1:20 and went straight to bed.","verdicts":[{"label":"Trent, home from the bar","detail":"Closing time, a lifted pickup and a very wide turn into the cul-de-sac."},{"label":"Edna, who shouldn't drive at night","detail":"Her silver sedan has a fresh scuff on the front bumper."},{"label":"The late-night delivery driver","detail":"Rushing a 1 a.m. wing order down a dark cul-de-sac."},{"label":"Craig, Nadine's own husband","detail":"Clipped his wife's car on the way in and decided to say nothing."}],"truth":3,"public":["Exhibit A: Paint transfer on the mailbox post is dark blue. The lab can't yet say what make of car it came from.","Exhibit B: Edna's silver sedan has a fresh scuff on its front bumper. She says, 'It was a shopping cart, dear.'","Exhibit C: Neighborhood group chat, 1:07 a.m.: 'Who is revving out there?? Some of us have pickleball at 7.'"],"sealed":[{"rules_out":0,"text":"Bar tab and ride-share receipt: Trent left his truck at the Tipsy Heron and was driven home at 12:51 a.m. The truck is still in their lot."},{"rules_out":1,"text":"Body shop estimate dated last Tuesday: Edna's bumper scuff, 'consistent with shopping cart,' was on file a week before the crash."},{"rules_out":2,"text":"Delivery app log: the only late order on Willow Bend was dropped off at 12:38 a.m. The driver's GPS puts her across town by 12:55."}],"planted":[{"rules_out":3,"text":"Restaurant valet ticket: Craig's car sat in valet until 1:09 a.m., five minutes after the crash, nine miles from Willow Bend."},{"points_to":0,"text":"Doorbell camera across the street, 1:04 a.m.: a lifted pickup, headlights off, backing away from the mailbox. Partial plate: TRK-4."}],"ruling":"Craig left his 'work dinner,' which was poker, and turned onto Willow Bend at 1:04 a.m. feeling very relaxed. He flattened the mailbox, kissed his wife's bumper with his navy sedan, parked around the corner and tiptoed in at 1:20. At breakfast he offered to help find the monster who did this."},{"id":"secret-sauce-leak","tone":"serious","title":"The Case of the Stolen Secret Sauce","charge":"How did Big Earl's 31-year-old secret sauce end up at the rival across the street?","story":"For 31 years, Big Earl's Smokehouse has guarded its Number Nine sauce: tangy, smoky, a little dangerous. Last week Smoke and Mirrors BBQ, directly across Main Street, debuted 'Lucky Seven Sauce,' and blind tasters can't tell the two apart. Line cook Javi Morales quit Earl's in March and now runs the rival's smoker, and bartender Wendy Tran is dating the rival owner's son. Earl's nephew Dmitri owes a bookie $4,000. And both kitchens buy their spices from the same family supplier.","verdicts":[{"label":"Javi, the cook who defected","detail":"Quit in March and now works the rival's smoker across the street."},{"label":"Wendy, the bartender","detail":"Dating the rival owner's son and knows the back office door code."},{"label":"A spice-house mix-up","detail":"Same supplier; a clerk could have shipped Earl's private blend across Main."},{"label":"Dmitri, the nephew in debt","detail":"Owes a bookie $4,000; a rival might pay well for a recipe."}],"truth":2,"public":["Exhibit A: Dmitri's car was booted for unpaid tickets Monday. On Tuesday he paid them off in cash: $1,100.","Exhibit B: The recipe exists in one place only, a laminated card in Earl's office safe. The card is still there.","Exhibit C: The rival's label lists the same 14 ingredients as Earl's, in the very same order."],"sealed":[{"rules_out":0,"text":"Javi's personnel file: fry station only, never taught the sauce. Earl makes it alone on Sundays, door locked. Javi signed a nondisclosure deal."},{"rules_out":1,"text":"Office keypad log, 14 months: Wendy's code has never once opened the office door. She says she only ever wanted the Wi-Fi password."},{"rules_out":3,"text":"Bill of sale and buyer's texts: Dmitri's $1,100 came from selling his jet ski. The rival's books show no payment to Dmitri. He still owes the bookie."}],"planted":[{"rules_out":2,"text":"Spice house invoice: Smoke and Mirrors ordered generic 'Texas Blend #3' and was billed for it. Earl's custom blend ships only to Earl's address."},{"points_to":0,"text":"Text from Javi to the rival owner, Feb 28: 'I got it. Every ingredient. Write me a check and Number Nine is yours.'"}],"ruling":"The rival's new cook phoned the spice house and ordered 'whatever the barbecue place on Main gets.' A new clerk shipped Formula 17, Earl's private blend and the backbone of Number Nine. Add ketchup, vinegar and brown sugar, and you have 'Lucky Seven.' Earl now has a nondisclosure contract with his spice house. The rival can't reorder."},{"id":"country-club-ballot-box","tone":"serious","title":"The Case of the One-Vote Election","charge":"Who cut the seal on the ballot box after a country club election decided by one vote?","story":"Heron Point Country Club's board election ended 112 to 111, keeping president Harold Vance in power for a ninth term. By Monday, challenger Celeste Ambrose had found the ballot box's tamper seal sliced clean through and demanded a new election. Harold's golf buddies ran the sign-in table. Club manager Neil Fairbanks just got a raise from Harold. And a bartender swears a member dropped her car keys through the ballot slot at Saturday's mixer, and somebody opened the box to fish them out.","verdicts":[{"label":"Celeste staged it for a revote","detail":"Lost by one vote; a 'tampered' box could mean a do-over."},{"label":"Harold's camp stuffed the box","detail":"The incumbent kept his seat by exactly one ballot. Convenient."},{"label":"Manager Neil rigged the count","detail":"Harold just renewed his contract and gave him a raise."},{"label":"Innocent: fishing out car keys","detail":"A dropped key ring, a helpful staffer and no fraud at all."}],"truth":0,"public":["Exhibit A: The seal was cut with a single straight slice, like a box cutter or a very sharp letter opener.","Exhibit B: Harold's campaign manager was photographed beside the ballot table at 9:40 p.m., after voting closed at 9.","Exhibit C: Lost-and-found log, Saturday, 11:15 p.m.: 'Car keys, silver fob, owner unknown.'"],"sealed":[{"rules_out":1,"text":"Ballot audit: all 223 ballots match the 223 signatures on the sign-in sheet. Serial numbers run unbroken. Not one extra ballot."},{"rules_out":2,"text":"Count video, 9:00 to 9:50 p.m.: three member tellers count every ballot aloud on camera. Neil never touches a ballot and leaves at 9:05."},{"rules_out":3,"text":"Coat-check attendant's note: the silver key fob was dropped at the coat check, not the ballot box. The ballot slot is a quarter-inch wide."}],"planted":[{"rules_out":0,"text":"Gate log: Celeste's car left Heron Point at 9:58 p.m. Saturday and didn't return until she arrived with her attorney Monday at 10 a.m."},{"points_to":1,"text":"Text from Harold's campaign manager, 9:41 p.m. Saturday: 'Box is handled. Don't ask. Delete this.'"}],"ruling":"Celeste slipped into the board room Sunday night with a vintage letter opener and sliced the seal, betting a 'tampered' box would force a revote. But the tellers had counted on camera, and every ballot matched a signature. Harold keeps his ninth term. Celeste keeps the letter opener, for now."},{"id":"smart-home-birdseed","tone":"absurd","title":"The Case of the 400 Pounds of Birdseed","charge":"Who placed the 3:12 a.m. order for 400 pounds of birdseed through the Pells' kitchen speaker?","story":"Doug and Darlene Pell woke to a delivery truck and 400 pounds of premium wild-bird mix stacked on their driveway. The order went through their kitchen voice assistant at 3:12 a.m. Doug talks in his sleep. Darlene feeds every pigeon on the cul-de-sac. Next door, Glen Huckaby has filed four HOA complaints about their bird feeder and owns a suspicious number of laptops. And in the kitchen sits Admiral, a 22-year-old gray parrot who does a flawless Darlene.","verdicts":[{"label":"Doug, talking in his sleep","detail":"He sleep-talks nightly, and the speaker hears everything."},{"label":"Darlene, feeding her pigeons","detail":"She's the bird lady of the cul-de-sac and the account's main voice."},{"label":"Admiral the parrot","detail":"He mimics Darlene perfectly and has heard 'reorder birdseed' a hundred times."},{"label":"Glen next door, hacking in","detail":"An HOA feud, four complaints, and a lot of laptops."}],"truth":2,"public":["Exhibit A: Order log, 3:12 a.m.: voice matched to profile 'Darlene' at 71% confidence. Item: Wild Bird Feast, 50 lb. Quantity: 8.","Exhibit B: Doug's sleep-clinic file: 'Frequent nocturnal speech, mostly about lawn care.'","Exhibit C: Glen's fourth HOA complaint: 'Their feeder attracts riffraff. I will be taking steps.'"],"sealed":[{"rules_out":0,"text":"CPAP machine log: Doug's mask on and sealed from 1:40 to 5:05 a.m., zero mouth leak. Nobody orders birdseed through a CPAP mask."},{"rules_out":1,"text":"Wi-Fi log: Darlene's phone sat on her sister Bev's home network, 40 miles away, from 8:52 p.m. to 7:30 a.m. She slept at Bev's."},{"rules_out":3,"text":"Glen's doorbell camera: he leaves with a tackle box at 1:05 a.m. and returns at 11:40 a.m. The Pells' router shows no unknown devices."}],"planted":[{"rules_out":2,"text":"Boarding receipt, Feathered Friends Aviary: 'Admiral, gray parrot. Checked in Nov 2, picked up Nov 5.' The order was placed Nov 4."},{"points_to":3,"text":"Router log: device 'GLEN-LAPTOP-3' joined the Pells' Wi-Fi at 3:09 a.m. and dropped off at 3:14 a.m."}],"ruling":"With Darlene at her sister's and Doug sealed under his CPAP, Admiral had the kitchen to himself. He has heard Darlene say 'reorder birdseed' roughly 900 times, and at 3:12 a.m. he said it eight times. The speaker was 71% sure. Admiral was 100% sure. He now says 'Order confirmed' whenever the doorbell rings."},{"id":"bnb-left-socks","tone":"absurd","title":"The Case of the Left-Sock Ghost","charge":"Who, or what, is stealing only left socks from Room 4 of the Larkspur Inn?","story":"For seven months, guests in Room 4 of the Larkspur Inn have woken up one sock short, always the left. Innkeeper Prudence Hale insists it's Captain Ezra Pike, the inn's resident ghost, and bookings have never been better. Handyman Dale Voss sells sock puppets at the Saturday craft fair. And Noodle, the inn's ferret, has a well-known taste for laundry and a nest under the back porch. Somebody is building a collection, one left foot at a time.","verdicts":[{"label":"Captain Pike's ghost","detail":"Legend says he lost his right leg at sea and craves warmth for the left."},{"label":"Prudence, staging a haunting","detail":"A good ghost story fills rooms, and she has the master key."},{"label":"Dale, for his sock puppets","detail":"His puppets need raw material, and he's always fixing Room 4's radiator."},{"label":"Noodle the ferret","detail":"Ferrets hoard socks, and Room 4's closet door has a gap at the floor."}],"truth":1,"public":["Exhibit A: Room 4 guestbook: eleven entries since April report a missing left sock. Right socks reported missing: zero.","Exhibit B: Hallway placard: 'Captain Pike lost his right leg to a shark in 1871. He walks these halls still.'","Exhibit C: Dale's craft-fair price sign: 'Single Sock Puppets, $8. Every one an orphan.'"],"sealed":[{"rules_out":0,"text":"Ship surgeon's log, 1871, county historical society: Captain Pike lost his LEFT leg. A ghost with no left foot has no use for left socks."},{"rules_out":2,"text":"Cruise line manifest: Dale was at sea Aug 3 to 17. The guestbook shows three left socks vanished from Room 4 in those two weeks."},{"rules_out":3,"text":"Noodle's porch nest, dug out Tuesday: two dish towels, an oven mitt, one dog biscuit. Socks: zero. Closet gap measured: half an inch."}],"planted":[{"rules_out":1,"text":"Lock audit: the master key was not used on Room 4 between April and October. Only guests' own keycards opened that door."},{"points_to":2,"text":"Craft-fair photo, June 14: a Dale puppet sewn from an argyle sock monogrammed 'R.T.', matching a Room 4 guest's missing one."}],"ruling":"Prudence Hale is the ghost. At every turndown she took one left sock, because a haunting needs a pattern and a pattern needs discipline. The socks fill a cedar chest labeled 'The Captain's Collection,' and bookings are up 60 percent. She even wrote the hallway placard herself. She just got the leg wrong."},{"id":"garden-show-pumpkin","tone":"absurd","title":"The Case of the Carved Champion","charge":"Who carved the favorite's 1,600-pound pumpkin into the head judge's face the night before judging?","story":"Harlan Fisk's pumpkin, Big Bertha, weighed 1,600 pounds and was a lock for Best in Show at the county garden show. At dawn she was found expertly carved into the face of head judge Myrna Plotz, which got Bertha disqualified. Rival grower Elwood Dunmore has lost to Harlan three years running. Myrna's ex-husband, Ronnie, is a chainsaw sculptor. Night watchman Gus Arbogast took two semesters of art school and won't stop mentioning it. And some say Harlan knew Bertha had a soft spot.","verdicts":[{"label":"Elwood, the bitter rival","detail":"Three straight second places, and a carved pumpkin can't be judged."},{"label":"Harlan, hiding a flaw","detail":"A hidden rot spot means disqualification; sabotage means sympathy."},{"label":"Ronnie, Myrna's ex-husband","detail":"A chainsaw sculptor with unfinished business with the judge."},{"label":"Gus, the night watchman","detail":"He was alone with Bertha all night and has artistic ambitions."}],"truth":2,"public":["Exhibit A: Photos of the carving: detailed and flattering, down to Myrna's beauty mark. She is wearing a small tiara.","Exhibit B: Elwood, overheard at the weigh-in: 'Somebody ought to take a knife to that thing.'","Exhibit C: The barn's security camera was unplugged at 11:58 p.m. Its cord was found tied in a neat bow."],"sealed":[{"rules_out":0,"text":"Hospital discharge papers: Elwood admitted at 10:40 p.m. with a hernia from lifting his own pumpkin. Released 7:15 a.m. Never left the ward."},{"rules_out":1,"text":"Inspector's 6 p.m. report: Bertha 'sound, no soft spots.' Motel lobby video: Harlan singing karaoke from 11 p.m. to 3:50 a.m."},{"rules_out":3,"text":"Gus's watch-clock key: punched at the far gate every 20 minutes, midnight to 6 a.m. The carving took three-plus hours of steady work."}],"planted":[{"rules_out":2,"text":"Tool-rental slip: Ronnie returned his only carving saw Friday at 6 p.m. The rental shop was closed until Monday morning."},{"points_to":0,"text":"Seed analysis: pumpkin pulp found in Elwood's truck bed matches Big Bertha's rare 'Atlantic Titan' strain."}],"ruling":"Ronnie Plotz unplugged the camera, tied the cord in his trademark bow, and spent four hours carving his ex-wife at her most radiant, tiara included. Inside the lid he carved: 'Myrna, take me back.' Harlan is disqualified. Elwood is in traction. Myrna has not said no."},{"id":"chili-ghost-peppers","tone":"absurd","title":"The Case of the Ghost Pepper Chili","charge":"Who spiked the defending champion's chili with ghost peppers before judging?","story":"Earlene Tibbs has won the Fairview Chili Cook-Off four years straight with a recipe her husband Vern calls 'pleasantly medium.' This year three of the four judges took one bite and are still sweating. Rival cook Dwayne Coker has finished second to Earlene every single year. Judge Bernadette Abernathy, the only judge not in distress, has a nephew in the contest. At the shared spice table, a shaker labeled 'Smoked Paprika' was oddly half empty by noon. And Vern has been begging Earlene to retire.","verdicts":[{"label":"Dwayne, the eternal runner-up","detail":"Four second places in a row will do things to a man."},{"label":"Vern, her husband","detail":"He wants her retired, and he had full access to her pot."},{"label":"Judge Bernadette, for her nephew","detail":"The one judge who didn't suffer, with family in the contest."},{"label":"A spice-table accident","detail":"A mislabeled shared shaker, and Earlene grabbed the wrong one."}],"truth":1,"public":["Exhibit A: Lab report: Earlene's pot held about 40 ghost peppers' worth of powder, stirred in thoroughly, not sprinkled on top.","Exhibit B: Judging notes: Bernadette Abernathy 'took a polite half-spoon and set it aside.'","Exhibit C: The shared spice table's 'Smoked Paprika' shaker: full at 9 a.m., half empty by noon."],"sealed":[{"rules_out":0,"text":"Booth camera: Dwayne never leaves his own pot from 9 a.m. to judging at 1 p.m. He made his brother fetch his beer and his lunch."},{"rules_out":2,"text":"Ride-share receipt: Bernadette dropped at the fairgrounds at 12:52 p.m. All pots were lidded and tagged under guard at 12:00 sharp."},{"rules_out":3,"text":"The 'Smoked Paprika' shaker tested as plain paprika. Earlene's handwritten recipe card, underlined twice: 'NO paprika. Ever.'"}],"planted":[{"rules_out":1,"text":"Parking-lot camera: Vern sits in his truck listening to the ballgame from 10 a.m. until the judging bell. He never goes near the tent."},{"points_to":0,"text":"Store receipt found in Dwayne's apron pocket: 'Ghost pepper powder, 8 oz, $14.99,' dated the day before the cook-off."}],"ruling":"Vern Tibbs had booked a nonrefundable cruise leaving the morning after the cook-off, and Earlene had refused to go until she lost. At 11:30, while she waited in the restroom line, he stirred in 40 ghost peppers' worth of powder. She lost. He sails Monday. Earlene says enjoy the cabin, Vern. Alone."},{"id":"golf-hole-in-one","tone":"absurd","title":"The Case of the Disputed Hole-in-One","charge":"Was Reg Thorne's hole-in-one on the 14th genuine, or did the ball get some help?","story":"Reginald 'Reg' Thorne, the most insufferable member of Briar Hollow Country Club, claims an ace on the blind 14th hole: 168 yards, uphill, over a ridge. Nobody saw it drop; his foursome only heard a clunk. His caddie, Benny Lusk, got a $500 tip and bought the bar a round. The groundskeeper has been at war with a gopher on that very green. And Reg's playing partner, Fletcher Doyle, says Reg has 'the best foot wedge in the county.' The plaque committee meets Friday.","verdicts":[{"label":"A genuine ace","detail":"Lucky bounces happen, even to people who don't deserve them."},{"label":"Caddie Benny dropped it in","detail":"He could reach the green first, and Reg tips $500 for an ace."},{"label":"The gopher's handiwork","detail":"Reg's ball went down a gopher hole; an old ball sat in the cup."},{"label":"Reg palmed it himself","detail":"A known cheat, a spare ball in his pocket, and a blind green."}],"truth":0,"public":["Exhibit A: Course map: the 14th green sits below a ridge, invisible from the tee. Witnesses heard only 'a clunk, then Reg screaming.'","Exhibit B: Bar tab, 3:10 p.m.: Benny Lusk, 'a round for the house,' paid in crisp $100 bills.","Exhibit C: Groundskeeper's log: 'Gopher activity, 14th green. Three fresh holes. He is mocking me.'"],"sealed":[{"rules_out":1,"text":"Cart GPS: Benny's cart was stuck at the 13th ball washer until 2:41 p.m. Fletcher pulled the ball from the cup at 2:37."},{"rules_out":2,"text":"The ball in the cup is stamped 'REG #7' from a sleeve opened on the 14th tee. The hole was recut at 6 a.m.; no old ball was in it."},{"rules_out":3,"text":"Fletcher Doyle, under oath, who openly loathes Reg: 'I walked ahead and pulled it out myself. He never reached the green before me.'"}],"planted":[{"rules_out":0,"text":"Launch-monitor data: Reg's longest 7-iron this season is 141 yards. He hit a 7-iron to a 168-yard uphill hole."},{"points_to":1,"text":"Text from Benny to his girlfriend, 2:31 p.m.: 'Running ahead to 14. Big payday incoming.'"}],"ruling":"It was real. Reg thinned a 7-iron, it skipped off the cart path, caromed off a sprinkler head and trickled in. Benny was stuck at a ball washer, the gopher is innocent, and Fletcher had to testify on Reg's behalf. Reg has ordered a plaque. Two plaques."},{"id":"escape-room-bachelor","tone":"absurd","title":"The Case of the Four-Minute Escape","charge":"How did Brent's bachelor party escape the Vault of Doom in four minutes, when the record is 31?","story":"Brent Kowalczyk's bachelor party, six men already two bars in, escaped the Vault of Doom in four minutes and two seconds. The house record was 31 minutes. Best man Travis spent the week bragging he 'had an angle.' Uncle Sal, a retired locksmith, brought a small kit 'for sentimental reasons.' Cousin Howard, a quiet actuary, says he simply saw the pattern. Game master Nico, two weeks on the job, says he gave 'one normal hint.' The bride, Brooke, is just glad they had fun.","verdicts":[{"label":"Travis found the answers online","detail":"A spoiler post for the room had been circulating for weeks."},{"label":"Brooke bribed the game master","detail":"A quick game means an early night for the groom."},{"label":"Uncle Sal picked the locks","detail":"Forty years as a locksmith, and he brought his tools."},{"label":"Cousin Howard is a genius","detail":"Actuaries see patterns. Maybe he really is that good."}],"truth":1,"public":["Exhibit A: Game log: every code entered correctly on the first try. Final vault opened at 4:02. House record: 31:15.","Exhibit B: Uncle Sal's coat-check ticket: 'one leather roll, tools, sentimental.'","Exhibit C: An anonymous forum post, 'Vault of Doom: Full Answers,' logged 300 views in October."],"sealed":[{"rules_out":0,"text":"Owner's work order: every lock code in the Vault was changed Nov 1 after the forum leak. The posted answers fail on all six locks."},{"rules_out":2,"text":"Lock forensics: all six padlocks opened with their own combinations, no scratches. Sal's tool roll never left the coat check."},{"rules_out":3,"text":"Room camera: Howard spends three of the four minutes trying to open a drawer that is painted on the wall."}],"planted":[{"rules_out":1,"text":"Nico's phone records: no calls, texts or payments from Brooke, ever. His only text that night, to his mom: 'Slow shift.'"},{"points_to":2,"text":"Lock forensics: fresh tension-wrench marks on the final vault lock, consistent with a professional pick set."}],"ruling":"Brooke paid Nico $80 to 'help a little' so the bachelor party would end before bar number three. Nico's 'one normal hint' was every code, shown on the hint screen in order. Howard was busy with the painted drawer. Brent was home by 9:15. Brooke calls it the prenup."},{"id":"motel-five-stars","tone":"absurd","title":"The Case of the Five-Star Flophouse","charge":"Who is writing hundreds of glowing anonymous reviews for the worst motel in Gull Harbor?","story":"The Sandpiper Motor Lodge is, by unanimous local opinion, the worst motel in Gull Harbor: the ice machine groans, the carpet has opinions, and the pool is mostly a concept. Yet it has 212 five-star reviews in six months. Owner Merle Gaddis, 74, claims he doesn't know what 'online' is. Tourism director Pam Okafor is mortified. Morning radio host Buzz Fallon keeps reading the reviews on air with a wink. And Merle's daughter Joanie moved across the country nine years ago and hasn't called since.","verdicts":[{"label":"Merle, the owner himself","detail":"Desperate owners write fake reviews every day."},{"label":"Pam, the tourism director","detail":"Boosting the worst motel lifts the whole town's average."},{"label":"Buzz, the radio host","detail":"A running on-air bit needs fresh material every morning."},{"label":"Joanie, the estranged daughter","detail":"Saving Dad's motel from afar, without having to call him."}],"truth":3,"public":["Exhibit A: Sample review: 'The ice machine has a personality. The carpet is honest. Five stars, just like I remember.'","Exhibit B: Timestamps: all 212 reviews were posted between 11 p.m. and 2 a.m., Gull Harbor time.","Exhibit C: Buzz Fallon, on air, Oct 9: 'Who's writing these Sandpiper reviews? Not me, folks.' (Audible wink.)"],"sealed":[{"rules_out":0,"text":"Merle's phone, entered into evidence: a flip phone with no internet. The front-desk computer, from 1998, runs only solitaire and the ledger."},{"rules_out":1,"text":"Pam's emails: two formal requests asking the review site to REMOVE the Sandpiper from Gull Harbor's 'Top Picks.' She wants it buried."},{"rules_out":2,"text":"Buzz's wife, sworn: 'He's asleep by 8:15 for his 4 a.m. show. Snoring. Every night.' Station logs show 4 a.m. sign-ins all year."}],"planted":[{"rules_out":3,"text":"Joanie's text to a friend, March: 'Haven't been on a review site in years. And I'm not doing Dad any favors.'"},{"points_to":0,"text":"Pawn-shop receipt: Merle Gaddis bought a used laptop on April 2, two weeks before the first review appeared."}],"ruling":"Joanie Gaddis, three time zones away, read that the Sandpiper was going under. Every night after her shift she wrote one review from memory of the summers she grew up there, under 212 different names. The ice machine really does have a personality. Merle learned the truth at this hearing and finally called her. Five stars."},{"id":"museum-snuffbox","tone":"serious","title":"The Case of the Vanishing Snuffbox","charge":"Who took the jeweled Ashworth snuffbox during the two-minute blackout at the Hollins House gala?","story":"At 9:14 p.m., during the Hollins House Museum's annual fundraiser, the lights went out. When they came back two minutes later, the 1780 Ashworth snuffbox, gold set with 40 rose-cut diamonds, was gone and the case lid stood open. Curator Dr. Miriam Achebe was about to speak. Board treasurer Philip Rand was standing six feet from the case. A temp server who called himself 'Alex' had joined the caterers that week. And Walt Brennan, the museum's guard for 30 years, retires next month.","verdicts":[{"label":"Dr. Miriam Achebe, the curator","detail":"She holds the case key and knows every inch of the building."},{"label":"Philip Rand, the treasurer","detail":"Steps from the case, and he knows where the breaker room is."},{"label":"'Alex,' the temp server","detail":"New, unknown, and hired under a name nobody can verify."},{"label":"Walt Brennan, the guard","detail":"Thirty years of low pay and one month from a pension."}],"truth":1,"public":["Exhibit A: Building log: power cut at the basement breaker, 9:14 to 9:16 p.m. The basement door normally needs a staff keycard.","Exhibit B: Catering agency file: 'Alex' listed a home address that turned out to be a laundromat.","Exhibit C: Insurer's letter, Oct 30: full appraisal of the Ashworth snuffbox scheduled for the following Tuesday."],"sealed":[{"rules_out":0,"text":"Photographer's flash shot, 9:15:02 p.m.: Miriam frozen on the stage steps, microphone in hand, 60 feet from the case."},{"rules_out":2,"text":"Guest's phone video, 9:14 to 9:17 p.m.: 'Alex' stands motionless by the dish pit, holding a tray of crab cakes, lit by a flashlight."},{"rules_out":3,"text":"Radio log: Walt on channel 2 the entire blackout, at the front doors, ordering 'Nobody leaves.' Three guests place him there."}],"planted":[{"rules_out":1,"text":"Keycard audit: Philip's card was deactivated in August when he left day-to-day duties. It cannot open the basement door."},{"points_to":0,"text":"Text from Miriam's phone at 9:13 p.m. to an unsaved number: 'Now. Kill it now.'"}],"ruling":"Philip Rand quietly sold the real snuffbox to a private buyer last spring and put a paste copy in the case. When the insurer booked an appraisal, he rigged the basement breaker with a $12 timer, waited by the case, and pocketed his own fake in the dark. The museum lost a $400,000 treasure eight months ago. It just found out."},{"id":"missing-hiker","tone":"serious","title":"The Case of the Hiker Who Came Back","charge":"Where was Curtis Lamb really during the three days he was 'lost' in the Ridgeback Wilderness?","story":"Curtis Lamb, 44, set out on a day hike in the Ridgeback Wilderness with his friend Owen Pratt. Owen came out alone. Three days, two helicopters and 60 volunteers later, Curtis limped out at the Fern Gap trailhead with a sprained ankle and a story: he fell, slept in a hollow log, drank from a creek, and was guided out by a stranger in a red jacket. His wife, Donna, wept with relief. The search team noticed he was clean-shaven.","verdicts":[{"label":"Lost, exactly as he says","detail":"People survive worse. The stranger in the red jacket could be real."},{"label":"He staged his own death","detail":"A big insurance policy, cold feet, and a cover story on the way back."},{"label":"Owen left him after a fight","detail":"Curtis is covering for a friend who abandoned him on the trail."},{"label":"Three days with a secret lover","detail":"A wilderness search is the perfect alibi nobody questions."}],"truth":3,"public":["Exhibit A: Ranger's intake note: 'Subject clean-shaven, sunburned on face and forearms only, in surprisingly good spirits.'","Exhibit B: Insurance records: Curtis raised his life policy to $1.2 million in June.","Exhibit C: Owen walked out of the woods at 4 p.m. on day one, but didn't report Curtis missing until 10:15 p.m."],"sealed":[{"rules_out":0,"text":"ER report: fully hydrated, no weight loss, normal blood sugar, a recent hot meal. Doctor's note: 'Not consistent with 3 days lost.'"},{"rules_out":1,"text":"Lender's letter, May 30: the policy increase was required for Curtis's new mortgage. No cash withdrawn, no ID or passport missing."},{"rules_out":2,"text":"Owen's GPS watch and Curtis's text at 10:02 a.m.: 'Go ahead, I'll take the long loop. See you at the car.' They split as planned."}],"planted":[{"rules_out":3,"text":"Curtis's phone records, last 60 days: no calls or texts to anyone but Donna, Owen and his dentist."},{"points_to":1,"text":"Search log, day two: Curtis's wallet and wedding ring found zipped in a bag 200 yards from the Raven Point cliff edge."}],"ruling":"Curtis spent three days in a lakeside cabin with a woman from his Tuesday cooking class, then sprained his ankle stepping off her porch. The log, the creek and the stranger in the red jacket came to him on the drive back to the trailhead. Donna has since filed for divorce. She found her way just fine."},{"id":"stolen-necklace-claim","tone":"serious","title":"The Case of the Harrowgate Diamonds","charge":"Who took Celia Harrowgate's $280,000 diamond necklace from her bedroom safe the night of her party?","story":"Celia Harrowgate's autumn garden party was the event of the season, and her diamond necklace was its centerpiece. At 11:40 p.m. she locked it in the bedroom safe. At 9 a.m. the safe stood open, unforced, and the necklace was gone. Her insurer smells fraud: her boutique is struggling. Her husband, Lionel, slept down the hall. Her stepson Hugo, cut off in March, still has a key to the house. And a charming plus-one named Julian Fenn spent the evening admiring the jewelry.","verdicts":[{"label":"Lionel, her husband","detail":"He knows the safe code and has been oddly quiet about money."},{"label":"Celia, faking it for the payout","detail":"Insured for $280,000, with a boutique on the brink."},{"label":"Julian Fenn, the charming guest","detail":"A plus-one nobody knew, seen near the stairs twice."},{"label":"Hugo, the cut-off stepson","detail":"Cut out of the will in March, and he still has a house key."}],"truth":0,"public":["Exhibit A: Safe-company report: opened with the correct code at an unknown time. No drilling, no prying, no failed attempts logged.","Exhibit B: Two guests, two stories: Julian introduced himself as 'Fenn' to one and 'Fennimore' to the other.","Exhibit C: Bank filing, August: Celia's boutique requested a 90-day extension on a $75,000 loan."],"sealed":[{"rules_out":1,"text":"Broker's letter, Sept 12: Celia turned down a $410,000 cash offer for the necklace. Faking a theft for $280,000 would cost her money."},{"rules_out":2,"text":"Valet ticket and gate camera: Julian's car leaves at 11:05 p.m., 35 minutes before the necklace went into the safe."},{"rules_out":3,"text":"Locksmith invoice: every lock rekeyed in April, so Hugo's key fits nothing. His card shows a hotel check-in 90 miles away at 2:20 a.m."}],"planted":[{"rules_out":0,"text":"Lionel's sleep tracker: asleep from 12:10 to 7:45 a.m., heart rate never above 58, not a single step recorded."},{"points_to":1,"text":"Pawn ticket dated Oct 2, in the name 'C. Harrowgate': one diamond necklace, loan of $60,000. Redeemed the day before the party."}],"ruling":"Lionel Harrowgate owed $190,000 to a man from his Thursday card game, and the safe code was their anniversary. He opened it at 3 a.m., had the stones out of their settings by lunch, and sat beside Celia while she filed the claim. He even helped her spell 'inconsolable.'"},{"id":"tech-merger-leak","tone":"serious","title":"The Case of the Board-Only Leak","charge":"Who leaked Kestrel Logic's confidential merger deck to a reporter days before the deal closed?","story":"Kestrel Logic was ten days from merging with Ardent Data when reporter Nadia Sloane published the entire confidential deal deck, slide by slide. CFO Graham Osei had loudly opposed the merger. Executive assistant Tessa Lund, who formats every deck, gave notice the same week. Former IT contractor Ben Haddad left angry when his contract wasn't renewed. And CEO Marcus Vell, the merger's biggest champion, launched a ruthless internal hunt for the traitor.","verdicts":[{"label":"Graham Osei, the CFO","detail":"He fought the merger openly and stood to lose his job."},{"label":"Tessa Lund, the assistant","detail":"She built the deck and was already on her way out."},{"label":"Marcus Vell, the CEO","detail":"A public leak could flush out a richer second bidder."},{"label":"Ben Haddad, the IT contractor","detail":"Bitter about his contract, and he knew the servers cold."}],"truth":2,"public":["Exhibit A: The leaked file is version 14, watermarked 'BOARD ONLY.' Seven people received version 14.","Exhibit B: Graham's email to the board, Oct 3: 'This merger will gut us. I will not be quiet about it.'","Exhibit C: Two days after the story ran, a second bidder appeared. Kestrel's price rose 22 percent."],"sealed":[{"rules_out":0,"text":"Airline records: Graham was on a 14-hour overseas flight with no Wi-Fi when the reporter received the file at 3:22 p.m."},{"rules_out":1,"text":"HR log: at 3:22 p.m. Tessa was in her exit interview, phone locked in the HR cubby per policy. Two HR staff confirm it."},{"rules_out":3,"text":"IT audit: Ben's access was cut Oct 1 and his badge never used again. Version 14 wasn't created until Oct 20."}],"planted":[{"rules_out":2,"text":"Board minutes, signed by six directors: Marcus chaired a meeting from 3:00 to 4:30 p.m. and never left the room."},{"points_to":0,"text":"Reporter's phone log: a 3:05 p.m. call from a prepaid number that also called Graham's wife twice that week."}],"ruling":"Marcus Vell leaked his own deck from his wife's old tablet to flush out a second bidder, and it worked: 22 percent more. Then he launched a leak investigation and lectured Graham, at length, about loyalty."},{"id":"deathbed-will","tone":"serious","title":"The Case of the Caregiver's Inheritance","charge":"Is Eleanor Whitcombe's last-minute will, leaving everything to her caregiver, genuine and truly hers?","story":"Two days before she died at 91, widow Eleanor Whitcombe signed a new will leaving her house, savings and her late husband's coin collection, about $1.4 million, to her caregiver, Janine Dorsey. The old will left it all to her nephew, Clifford, who is contesting. A notary and a neighbor, Fran Tuttle, witnessed the signing in Eleanor's bedroom. Eleanor was in hospice care and on pain medication. Janine had cared for her for four years and was alone with her most days.","verdicts":[{"label":"Forged by Janine","detail":"She knew the signature better than anyone and had every motive."},{"label":"Signed, but not of sound mind","detail":"Ninety-one, in hospice, medicated. Who was really deciding?"},{"label":"Tricked into signing it","detail":"Slipped into a stack of bills, she thought it was something else."},{"label":"Genuine, and she meant it","detail":"Four years of daily care versus a nephew who stopped visiting."}],"truth":3,"public":["Exhibit A: The new signature is shakier than the one on Eleanor's 2019 will, and it slants downhill.","Exhibit B: Hospice chart, two days before her death: 'Morphine increased for comfort.'","Exhibit C: Clifford, deposed: 'I last visited in 2023, but I could tell on the phone she wasn't herself.'"],"sealed":[{"rules_out":0,"text":"Handwriting lab: signature matches Eleanor's, with a tremor consistent with her Parkinson's. No tracing, no pen lifts, no hesitation marks."},{"rules_out":1,"text":"Hospice nurse, that morning: 'Alert, oriented times three. Beat me at gin rummy. Asked if the will appointment was still at 2.'"},{"rules_out":2,"text":"Notary's statement: 'I read the will aloud, every page. She stopped me twice, once to correct the spelling of Janine's last name.'"}],"planted":[{"rules_out":3,"text":"Fran Tuttle's later affidavit: 'Janine held her wrist the whole time, and Eleanor kept asking where Clifford was.'"},{"points_to":0,"text":"Found in Janine's car: a legal pad with 'Eleanor Whitcombe' written 30 times in blue ink."}],"ruling":"Eleanor meant every word. Clifford hadn't visited in three years; Janine did her hair every Sunday and never once asked for a thing. Eleanor told the notary, 'Clifford gets my opinion of him, in writing,' and the will leaves him exactly that: a one-page letter. It does not include the word 'love.'"},{"id":"racehorse-doped","tone":"serious","title":"The Case of the Sleepy Favorite","charge":"Who sedated Midnight Tariff before dawn on the morning of the Silver Bell Stakes?","story":"Midnight Tariff, favorite in the $2 million Silver Bell Stakes at Cardinal Downs, failed his 5 a.m. pre-race blood test: a fast-acting sedative. The colt was scratched, wobbly but unharmed, and recovered fully within 36 hours. Trainer Roy Kessler has handled him since birth. Rival owner Vivian Laird's filly inherited the favorite's spot. Groom Tomas Reyes was seen last week with a bookmaker. And owner Preston Garland, quietly broke, had the colt insured for $3 million.","verdicts":[{"label":"Roy Kessler, the trainer","detail":"He had keys, syringes, and the colt's complete trust."},{"label":"Vivian Laird, the rival owner","detail":"Her filly became the favorite the moment the colt was scratched."},{"label":"Tomas Reyes, the groom","detail":"A bookmaker's money and an all-night barn shift."},{"label":"Preston Garland, the owner","detail":"Broke, and the colt was insured for $3 million."}],"truth":0,"public":["Exhibit A: Vet report: sedative given between 3 and 4:30 a.m. Colt wobbly but stable; fully recovered in 36 hours.","Exhibit B: Photo, last Thursday: Tomas in a diner booth with Lenny 'Lefty' Moss, a known bookmaker.","Exhibit C: Race result: Vivian Laird's filly, Velvet Ledger, won the Silver Bell by a length."],"sealed":[{"rules_out":1,"text":"Flight records: Vivian landed at 6:40 a.m., after the test. Guard log: none of her staff entered the colt's barn overnight."},{"rules_out":2,"text":"Badge log: Tomas clocked out at 9 p.m.; badge unused until 6 a.m. 'Lefty' Moss is his cousin, per both of their mothers."},{"rules_out":3,"text":"Policy clause 14: no payout if a horse is scratched for a positive drug test. A doped colt earns Preston exactly nothing."}],"planted":[{"rules_out":0,"text":"Guard log: Roy's badge out at 10:15 p.m., back in at 5:30 a.m., after the test. Night guard: 'He went home to sleep.'"},{"points_to":2,"text":"Bank alert: $15,000 cash deposit to Tomas Reyes's account at 8:02 a.m. on race day."}],"ruling":"At midnight Roy Kessler felt heat in the colt's left foreleg, the kind that comes before a breakdown. Preston refused to scratch with $2 million on the line, so at 3:30 a.m. Roy gave a sedative he knew the 5 a.m. test would catch. The colt rested, healed, and is sound today. Roy says he'd do it again. The colt has no comment, only carrots."}];</script>
+<script>/* Hung Jury computer jurors: personas, what they say in deliberation, how they vote.
+   Pure logic, no DOM. State lives in a plain "room" object so a game can be saved and resumed.
+   Runs in the browser (window.JuryBots) and in Node (for tests). */
+(function (root) {
+  'use strict';
+  const E = (typeof module !== 'undefined' && module.exports) ? require('./engine.js') : root.JuryEngine;
+  const L = ['A', 'B', 'C', 'D'];
+
+  const PERSONAS = [
+    { name: 'Mabel', voice: 'f', tag: 'retired schoolteacher',
+      open: ['I taught eighth grade for thirty-one years. I know a fib when I hear one.', 'Phones down, everyone. Let’s do this properly.'],
+      banter: ['Somebody in this room would not have passed my class.', 'I’m grading all of you, by the way.', 'Speak up, dear. Nobody ever got an A for mumbling.'],
+      deny: ['Me? I’ve never told a lie in my life, and I have chaperoned eleven proms.', 'Young man, young lady, whoever you are: check my exhibit and then apologize.'] },
+    { name: 'Vince', voice: 'm', tag: 'used-car salesman',
+      open: ['Folks, folks. Let’s find a verdict that works for everybody.', 'I can tell an honest face in one handshake. This room has three, tops.'],
+      banter: ['Trust me. I mean that. Mostly.', 'You know what this verdict needs? Undercoating.', 'I could sell any one of these verdicts. That’s the problem.'],
+      deny: ['Whoa, whoa. I’m the most honest guy at this table, and I have the warranty to prove it.', 'I sell cars, I don’t fix juries. Different license.'] },
+    { name: 'Hank', voice: 'm', tag: 'retired cop',
+      open: ['Thirty years on the force. Everybody keep your hands where I can see them.', 'Alright. Motive, means, opportunity. Go.'],
+      banter: ['Somebody in here is sweating, and it’s not the coffee.', 'I’ve interviewed better liars than this. Not many.', 'Just the facts, people.'],
+      deny: ['You want to accuse a retired detective? Bold. Wrong, but bold.', 'I’ve been accused by better. My exhibit stands.'] },
+    { name: 'Bernice', voice: 'f', tag: 'HOA president',
+      open: ['I run a homeowners association. I know exactly who is lying about their mailbox.', 'We will keep this orderly. I brought a gavel of my own.'],
+      banter: ['This is worse than the fence-height vote of 2019.', 'I’m writing all of this down. For the minutes.', 'Somebody here has unapproved paint on their house. I can feel it.'],
+      deny: ['I’ve enforced bylaws on harder people than you. My exhibit is clean.', 'Accusing the chair is a violation of section four.'] },
+    { name: 'Ozzie', voice: 'm', tag: 'conspiracy podcaster',
+      open: ['Before we start: who chose these exhibits? Just asking questions.', 'I record a podcast about cover-ups. This room is episode two hundred.'],
+      banter: ['Nobody is asking who benefits. I’m asking who benefits.', 'That’s exactly what they want you to think.', 'Follow the money. Always follow the money.'],
+      deny: ['That’s exactly what the Fixer would want you to say about me.', 'Me? I’m the only one here asking real questions.'] },
+    { name: 'Rosalind', voice: 'f', tag: 'community-theater diva',
+      open: ['I played Lady Macbeth in the church basement. I know a guilty soul when I see one.', 'Darlings. Let’s find the truth, and let us find it beautifully.'],
+      banter: ['The tension in this room is simply delicious.', 'If this were a play, the Fixer would have a soliloquy right about now.', 'I’m giving this deliberation four stars.'],
+      deny: ['How dare you. I was acting concerned, not acting guilty.', 'Accuse me again and I will faint, and it will be convincing.'] },
+    { name: 'Thelma', voice: 'f', tag: 'night-shift nurse',
+      open: ['I’ve been up since yesterday. Let’s be quick and correct.', 'I triage for a living. Most urgent lie first.'],
+      banter: ['I’ve seen people lie about how many beers they had with more conviction than this.', 'Somebody here needs a stronger story or a stronger coffee.', 'Vitals on this jury are not great.'],
+      deny: ['I don’t have the energy to lie to you. Read my exhibit.', 'Honey, I work nights. If I were fixing this, I’d be faster.'] },
+    { name: 'Theo', voice: 'm', tag: 'philosophy grad student',
+      open: ['Can any of us truly know what happened? Yes, actually, if we compare exhibits.', 'I will be applying formal logic, if anyone would like to keep up.'],
+      banter: ['This is a textbook prisoner’s dilemma, except with lying.', 'If a Fixer lies in a jury room and nobody catches it, is it still a mistrial?', 'Technically, all of you are suspects. Including me. Especially me, rhetorically.'],
+      deny: ['Your accusation is logically unsound and also hurtful.', 'I reject the premise of your accusation.'] },
+    { name: 'Wanda', voice: 'f', tag: 'crossword champion',
+      open: ['Four verdicts, three red herrings. I do this every Sunday.', 'Let’s fill in the squares we are sure of first.'],
+      banter: ['Seven letters, means fixer: s-c-o-u-n-d-r-e-l. Eight. Never mind.', 'It’s all about the crossings. Which exhibits cross?', 'I solve these in pen. Just so everyone knows.'],
+      deny: ['I don’t cheat at crosswords and I don’t cheat at juries.', 'Check my answer against the grid. It fits.'] },
+    { name: 'Royce', voice: 'm', tag: 'personal-injury lawyer',
+      open: ['For the record, I’m not your lawyer. Unless you were injured.', 'Let’s keep this to admissible evidence, please.'],
+      banter: ['Objection, counsel is badgering the jury. Counsel is me.', 'If you’ve been hurt by a bad verdict, call 1-800-ROYCE.', 'I bill in six-minute increments, so let us move it along.'],
+      deny: ['That’s slander, and I’d know.', 'I advise you to withdraw that accusation. Free legal advice.'] },
+    { name: 'Clyde', voice: 'm', tag: 'bait-shop owner',
+      open: ['Something in this case smells, and I sell bait.', 'I’ve sat in a boat for nine hours waiting. I can wait out a liar.'],
+      banter: ['That story has more holes than my waders.', 'Somebody’s fishing, and it’s not me.', 'Reel it in, folks. Reel it in.'],
+      deny: ['I’m as honest as a cooler full of crickets.', 'Me? Ask anybody at the marina.'] },
+    { name: 'Opal', voice: 'f', tag: 'psychic, mostly',
+      open: ['I sensed this case before I walked in. The parking was a sign.', 'The cards told me one of you is lying. The cards are rarely wrong.'],
+      banter: ['I’m getting a strong reading off somebody’s aura. It’s beige.', 'Mercury’s in retrograde, which explains the Fixer.', 'I saw this verdict in a dream. It was a weird dream.'],
+      deny: ['I foresaw you would say that. You’re still wrong.', 'My aura is spotless. Look at it.'] },
+  ];
+
+  const T = {
+    claimOut: ['My exhibit: {X} So {L}, {V}, is out.', 'Here’s what I have. {X} That rules out {L}.', 'Sealed exhibit, word for word: {X} Cross off {L}.'],
+    claimPoint: ['Mine’s a doozy. {X} That points straight at {L}, {V}.', 'Read this: {X} If that isn’t {L}, I don’t know what is.'],
+    echo: ['Mine rules out {L}, {V}, same as what we just heard.', 'I have basically the same thing. {L} is out.'],
+    none: ['Mine got tossed. Inadmissible. I have nothing but opinions.', 'Technicality. My envelope was empty, so I’m all ears.'],
+    corroborate: ['Same here, {P}. Mine rules out {L} too. That’s two of us.', 'That matches my exhibit. {L} is done.'],
+    object: ['Hold on, {P}. My exhibit rules out {L}. One of us is lying, and I know it’s not me.', 'Objection. {L} can’t be it, {P}. I have paper that says so.'],
+    insiderDoubt: ['I’d be careful with that one, {P}. It doesn’t square with the rest.', 'Hmm. I’m not sure I buy that, {P}.'],
+    fixerDoubt: ['Convenient, {P}. Nobody else has seen that exhibit.', 'That’s awfully tidy, {P}. Anybody can say anything.'],
+    noted: ['Noted.', 'Hm. Write that down.', 'Okay, that’s one off the board.', 'That changes things.'],
+    leanSure: ['I’m landing on {L}, {V}.', 'It’s {L}. I’d bet my parking spot on it.', 'Everything I have heard says {L}.'],
+    leanTorn: ['I’m torn between {L} and {L2}. Leaning {L}.', 'Could be {L2}, but my gut says {L}.'],
+    leanSoft: ['I keep coming back to {L}, {V}. Hear me out.', 'Call it a hunch, but I think it’s {L}.', 'I don’t trust whatever is being said against {L}. That’s my pick.'],
+    accuse: ['{P}, something about your story doesn’t add up.', 'I’m watching {P}. That exhibit smells planted.', 'My money is on {P} as the Fixer.'],
+    accuseMe: ['{P} just accused me, which tells me plenty about {P}.'],
+    deny: ['Look at my exhibit next to everyone else\u2019s, {P}. It fits.', 'Wrong tree, {P}.'],
+    pileOn: ['I had the same feeling about {P}.', 'Agreed. {P} has been steering us all along.'],
+    agree: ['I’m with {P}. {L} makes sense.', 'Same, {P}. {L}.'],
+    disagree: ['Respectfully, {P}, I don’t see {L}. I like {L2}.', 'Not {L}, {P}. I still think {L2}.'],
+    ask: ['{P}, you’ve been quiet. What’s in your envelope?', 'We haven’t heard from {P}. Share with the class.'],
+    nudge: ['I think we’ve heard everything. Somebody call the vote.', 'My mind is made up. Clock’s running, folks.'],
+    round2: ['Between {L} and {L2}, it’s {L}. Final answer.', 'Second look, same answer: {L}.'],
+    switch: ['Alright, maybe not {L2}. But I still don’t buy {L3}.'],
+  };
+
+  // ---------- helpers ----------
+  function rngOf(room) { room.step = (room.step || 0) + 1; return E.makeRng((room.seed >>> 0) + room.step * 9973); }
+  const pick = (arr, rng) => arr[Math.floor(rng() * arr.length)];
+  function fill(tpl, ctx, o) {
+    return tpl.replace(/\{(\w+)\}/g, (m, k) => {
+      if (k === 'L') return L[o.v];
+      if (k === 'V') return ctx.c.verdicts[o.v].label;
+      if (k === 'L2') return L[o.v2];
+      if (k === 'L3') return L[o.v3];
+      if (k === 'X') return o.x;
+      if (k === 'P') return ctx.names[o.p];
+      return m;
+    });
+  }
+  function say(room, ctx, by, pool, o, rng, kind) {
+    // avoid repeating a template the same speaker used
+    const key = by + ':' + kind;
+    const used = room.used[key] || [];
+    let choices = pool.map((t, i) => i).filter(i => !used.includes(i));
+    if (!choices.length) { choices = pool.map((t, i) => i); room.used[key] = []; }
+    const idx = pick(choices, rng);
+    room.used[key] = (room.used[key] || []).concat(idx);
+    const line = { by, text: fill(pool[idx], ctx, o || {}), kind: kind || 'say' };
+    room.log.push(line);
+    return line;
+  }
+  const persona = (ctx, i) => PERSONAS[ctx.persona[i]];
+  const aiSeats = ctx => ctx.ai.map((a, i) => a ? i : -1).filter(i => i >= 0);
+  const humanSeats = ctx => ctx.ai.map((a, i) => a ? -1 : i).filter(i => i >= 0);
+  const exhibitOf = (ctx, i) => E.describeExhibit(ctx.c, ctx.exhibits[i]);
+
+  // Choose personas for the computer seats, skipping any name a person at the table already has.
+  function pickPersonas(count, takenNames, rng) {
+    const taken = new Set((takenNames || []).map(s => String(s).toLowerCase()));
+    const pool = E.shuffle(PERSONAS.map((p, i) => i).filter(i => !taken.has(PERSONAS[i].name.toLowerCase())), rng);
+    return pool.slice(0, count);
+  }
+
+  function newRoom(seed) {
+    return { seed: seed >>> 0, step: 0, log: [], claims: [], leans: [], accuse: [], doubts: [], queue: [], used: {}, shared: {}, strat: {}, nextAt: null, fixTarget: null, round: 1 };
+  }
+
+  // ---------- reasoning ----------
+  // What player i believes: weights over the four verdicts and suspicion of every other player.
+  // How easily a computer juror is swayed: fixed per seat and case, between 0 and 1.
+  const gullible = (room, i) => E.makeRng((room.seed >>> 0) + 31337 + i * 7)();
+  function assess(room, ctx, i) {
+    const n = ctx.roles.length, role = ctx.roles[i], truth = ctx.c.truth;
+    const g = gullible(room, i);
+    const mine = exhibitOf(ctx, i);
+    const s = new Array(n).fill(0);
+    const myOut = mine.kind === 'true' ? mine.target : null; // a juror's own exhibit is true, and they know it
+    const claims = room.claims.filter(cl => cl.by !== i);
+    for (const cl of claims) {
+      const p = cl.by;
+      if (role === 'insider') {
+        if (cl.kind === 'rules_out' && cl.target === truth) s[p] += 5;
+        if (cl.kind === 'points_to' && cl.target !== truth) s[p] += 5;
+        if (cl.kind === 'rules_out' && cl.target !== truth) s[p] -= 1;
+        continue;
+      }
+      if (cl.kind === 'points_to') { s[p] += 1; if (myOut === cl.target) s[p] += 4; }
+      if (cl.kind === 'rules_out' && myOut === cl.target) s[p] -= 1.5;
+    }
+    // Every verdict ruled out by somebody: the thinnest rule-outs look suspicious.
+    const support = [0, 1, 2, 3].map(v => new Set(room.claims.filter(cl => cl.kind === 'rules_out' && cl.target === v).map(cl => cl.by)));
+    if (myOut != null) support[myOut].add(i);
+    if (role !== 'insider' && support.every(st => st.size > 0)) {
+      const minSize = Math.min(...support.map(st => st.size));
+      support.forEach((st, v) => { if (st.size === minSize && v !== myOut) st.forEach(p => { if (p !== i) s[p] += 1.2 * (1 - 0.85 * g); }); });
+    }
+    const weigh = () => {
+      const trust = p => Math.max(0.05, Math.min(1.3, 1 - 0.28 * s[p]));
+      const w = [1, 1, 1, 1];
+      for (const cl of claims) {
+        const t = trust(cl.by) * (cl.quoted ? 1 : 0.75);
+        if (cl.kind === 'rules_out') w[cl.target] *= (1 - 0.8 * Math.min(1, t));
+        else w[cl.target] *= (1 + 0.7 * t);
+      }
+      for (const ln of room.leans) if (ln.by !== i) w[ln.v] *= (1 + (0.04 + 0.16 * g) * trust(ln.by));
+      // Hunches: every juror reads the room a little differently.
+      const hr = E.makeRng((room.seed >>> 0) + 9091 + i * 13);
+      for (let v = 0; v < 4; v++) w[v] *= Math.exp((hr() * 2 - 1) * (0.35 + 0.9 * g));
+      if (myOut != null) w[myOut] = 0;
+      if (role === 'insider') { w.fill(0.01); w[truth] = 1; }
+      return w;
+    };
+    let w = weigh();
+    if (role !== 'insider') {
+      const top = argmax(w);
+      for (const cl of claims) {
+        if (cl.kind === 'rules_out' && cl.target === top) s[cl.by] += 1;
+        if (cl.kind === 'points_to' && cl.target !== top) s[cl.by] += 0.5;
+      }
+    }
+    const trust = p => Math.max(0.05, Math.min(1.3, 1 - 0.28 * s[p]));
+    for (const a of room.accuse) {
+      if (a.by === i) continue;
+      if (a.who === i) s[a.by] += 1.2;
+      else s[a.who] += (0.3 + 0.6 * g) * trust(a.by);
+    }
+    for (const d of room.doubts) {
+      if (d.by === i) continue;
+      if (d.on === i) s[d.by] += 1;
+      else s[d.on] += (0.2 + 0.6 * g) * trust(d.by);
+    }
+    if (role !== 'insider') w = weigh();
+    s[i] = -Infinity;
+    return { w, s, top: argmax(w) };
+  }
+  function argmax(arr, allowed) {
+    let best = null;
+    (allowed || arr.map((x, k) => k)).forEach(k => { if (best == null || arr[k] > arr[best] + 1e-9) best = k; });
+    return best;
+  }
+
+  // The verdict a Fixer is pushing.
+  function fixerTarget(room, ctx, allowed) {
+    const truth = ctx.c.truth;
+    const opts = (allowed || [0, 1, 2, 3]).filter(v => v !== truth);
+    const pointer = ctx.fixers.map(f => exhibitOf(ctx, f)).find(ex => ex.tag === 'Points to');
+    if (pointer && opts.includes(pointer.target)) return pointer.target;
+    if (room.fixTarget != null && opts.includes(room.fixTarget)) {
+      const outs = new Set(room.claims.filter(cl => cl.kind === 'rules_out' && cl.target === room.fixTarget && !ctx.fixers.includes(cl.by)).map(cl => cl.by));
+      if (outs.size < 2) return room.fixTarget;
+    }
+    let best = opts[0], bestScore = -Infinity;
+    for (const v of opts) {
+      const outs = new Set(room.claims.filter(cl => cl.kind === 'rules_out' && cl.target === v && !ctx.fixers.includes(cl.by)).map(cl => cl.by)).size;
+      const pushes = room.leans.filter(l => l.v === v).length * 0.3;
+      const score = -outs + pushes - v * 0.01;
+      if (score > bestScore) { best = v; bestScore = score; }
+    }
+    room.fixTarget = best;
+    return best;
+  }
+
+  function leanOf(room, ctx, i, allowed) {
+    const role = ctx.roles[i], truth = ctx.c.truth;
+    if (role === 'fixer') return { v: fixerTarget(room, ctx, allowed), sure: true };
+    if (role === 'insider') {
+      if (!allowed || allowed.includes(truth)) return { v: truth, sure: true, soft: true };
+    }
+    const a = assess(room, ctx, i);
+    const opts = allowed || [0, 1, 2, 3];
+    const v = argmax(a.w, opts);
+    const rest = opts.filter(k => k !== v);
+    const v2 = rest.length ? argmax(a.w, rest) : v;
+    const sure = a.w[v] > a.w[v2] * 1.6;
+    return { v, v2, sure };
+  }
+
+  function suspectOf(room, ctx, i, rng) {
+    const n = ctx.roles.length;
+    const others = [...Array(n).keys()].filter(p => p !== i);
+    if (ctx.roles[i] === 'fixer') {
+      const cands = others.filter(p => !ctx.fixers.includes(p));
+      // point at whoever pushes the truth hardest
+      const push = cands.map(p => room.leans.filter(l => l.by === p && l.v === ctx.c.truth).length + rng() * 0.8);
+      return cands[argmax(push)];
+    }
+    const a = assess(room, ctx, i);
+    const sc = others.map(p => a.s[p] + rng() * 0.3);
+    const k = argmax(sc);
+    return others[k];
+  }
+
+  // A computer seat's sealed ballot.
+  function ballot(room, ctx, i, options, seed) {
+    const rng = E.makeRng((room.seed >>> 0) + 7777 + i * 131 + (seed || 0));
+    const lean = leanOf(room, ctx, i, options);
+    let v = lean.v;
+    if (ctx.roles[i] === 'juror' && !lean.sure && lean.v2 != null && rng() < 0.35 * gullible(room, i)) v = lean.v2;
+    return { v, s: suspectOf(room, ctx, i, rng) };
+  }
+
+  // Fixers' guess at the Insider on appeal.
+  function appealGuess(room, ctx) {
+    const rng = E.makeRng((room.seed >>> 0) + 4242);
+    const truth = ctx.c.truth;
+    const cands = [...Array(ctx.roles.length).keys()].filter(p => !ctx.fixers.includes(p));
+    const sc = cands.map(p => {
+      let x = rng() * 1.6;
+      x += room.leans.filter(l => l.by === p && l.v === truth).length * 1.2;
+      x += room.claims.filter(cl => cl.by === p && cl.kind === 'rules_out' && cl.target !== truth).length * 0.4;
+      x += room.accuse.filter(a => a.by === p && ctx.fixers.includes(a.who)).length * 0.8;
+      return x;
+    });
+    return cands[argmax(sc)];
+  }
+
+  // ---------- the conversation ----------
+  function plan(room, ctx, round, rngSeed) {
+    const rng = rngOf(room);
+    const ais = E.shuffle(aiSeats(ctx), rng);
+    const q = [];
+    room.round = round;
+    if (round === 1) {
+      // Each computer Fixer picks a play: quote the planted exhibit, echo an honest one, or keep quiet.
+      const n = ctx.roles.length;
+      ctx.fixers.filter(f => ctx.ai[f]).forEach(f => {
+        const r = rng(), pointer = exhibitOf(ctx, f).tag === 'Points to';
+        if (ctx.fixers.length > 1) room.strat[f] = pointer ? (r < 0.55 ? 'backup' : 'plant') : (r < 0.85 ? 'plant' : 'echo');
+        else room.strat[f] = r < 0.6 ? 'plant' : r < 0.9 ? 'echo' : 'quiet';
+      });
+      if (ais.length) q.push({ k: 'open', by: ais[0] });
+      const echoes = ais.filter(p => room.strat[p] === 'echo' || room.strat[p] === 'backup');
+      for (const p of ais) if (!echoes.includes(p)) q.push({ k: 'claim', by: p });
+      for (const p of echoes) q.push({ k: 'claim', by: p });
+      for (const h of humanSeats(ctx)) q.push({ k: 'ask', to: h });
+      E.shuffle(ais, rng).forEach(p => q.push({ k: 'lean', by: p }));
+      const accusers = E.shuffle(ais, rng).slice(0, Math.min(3, Math.max(1, Math.ceil(ais.length / 2))));
+      accusers.forEach(p => q.push({ k: 'accuse', by: p }));
+      if (ais.length > 1) q.push({ k: 'banter', by: pick(ais, rng) });
+      q.push({ k: 'nudge' });
+    } else {
+      room.log.push({ by: -1, text: 'Second deliberation. Still standing: ' + room.options.map(v => L[v]).join(' and ') + '.', kind: 'sys' });
+      E.shuffle(ais, rng).forEach(p => q.push({ k: 'lean2', by: p }));
+      const accusers = E.shuffle(ais, rng).slice(0, Math.min(2, ais.length));
+      accusers.forEach(p => q.push({ k: 'accuse', by: p }));
+      q.push({ k: 'nudge' });
+    }
+    room.queue = q;
+  }
+
+  // Produce the next line, or null when there is nothing worth saying right now.
+  function next(room, ctx) {
+    for (let guard = 0; guard < 40; guard++) {
+      const it = room.queue.shift();
+      if (!it) return filler(room, ctx);
+      const line = resolve(room, ctx, it);
+      if (line) return line;
+    }
+    return null;
+  }
+
+  function filler(room, ctx) {
+    const rng = rngOf(room);
+    const ais = aiSeats(ctx);
+    if (!ais.length) return null;
+    room.fill = (room.fill || 0) + 1;
+    const p = pick(ais, rng);
+    if (room.fill % 3 === 0) return resolve(room, ctx, { k: room.round === 2 ? 'lean2' : 'lean', by: p });
+    if (room.fill % 3 === 1) return say(room, ctx, p, persona(ctx, p).banter, {}, rng, 'banter');
+    return resolve(room, ctx, { k: 'nudge' });
+  }
+
+  function addClaim(room, ctx, by, ex, quoted) {
+    const cl = { by, kind: ex.tag === 'Points to' ? 'points_to' : 'rules_out', target: ex.target, quoted: !!quoted };
+    room.claims.push(cl);
+    return cl;
+  }
+
+  function resolve(room, ctx, it) {
+    const rng = rngOf(room);
+    const truth = ctx.c.truth;
+    switch (it.k) {
+      case 'open': return say(room, ctx, it.by, persona(ctx, it.by).open, {}, rng, 'open');
+      case 'claim': {
+        const p = it.by;
+        if (room.shared[p]) return null;
+        room.shared[p] = true;
+        const ex = exhibitOf(ctx, p);
+        if (room.strat[p] === 'quiet') return say(room, ctx, p, T.none, {}, rng, 'none');
+        if (room.strat[p] === 'backup' && room.claims.some(cl => ctx.fixers.includes(cl.by) && cl.kind === 'rules_out' && cl.target === truth)) {
+          room.claims.push({ by: p, kind: 'rules_out', target: truth, quoted: false });
+          return say(room, ctx, p, T.echo, { v: truth }, rng, 'claim');
+        }
+        if (room.strat[p] === 'echo' || room.strat[p] === 'backup') {
+          const target = fixerTarget(room, ctx);
+          const outs = room.claims.filter(cl => cl.kind === 'rules_out' && cl.target !== truth && cl.target !== target && !ctx.fixers.includes(cl.by)).map(cl => cl.target);
+          const v = outs.length ? pick(outs, rng) : [0, 1, 2, 3].find(x => x !== truth && x !== target);
+          room.claims.push({ by: p, kind: 'rules_out', target: v, quoted: false });
+          return say(room, ctx, p, T.echo, { v }, rng, 'claim');
+        }
+        if (ex.kind === 'none') return say(room, ctx, p, T.none, {}, rng, 'none');
+        const cl = addClaim(room, ctx, p, ex, true);
+        const line = say(room, ctx, p, cl.kind === 'points_to' ? T.claimPoint : T.claimOut, { v: ex.target, x: ex.text }, rng, 'claim');
+        room.queue.unshift({ k: 'react', claim: room.claims.length - 1 });
+        return line;
+      }
+      case 'react': {
+        const cl = room.claims[it.claim];
+        if (!cl) return null;
+        const others = E.shuffle(aiSeats(ctx).filter(p => p !== cl.by), rng);
+        // someone whose own exhibit contradicts it
+        for (const p of others) {
+          const ex = exhibitOf(ctx, p), role = ctx.roles[p];
+          if (role === 'fixer') continue;
+          if (cl.kind === 'points_to' && ex.kind === 'true' && ex.target === cl.target) {
+            room.doubts.push({ by: p, on: cl.by });
+            return say(room, ctx, p, T.object, { v: cl.target, p: cl.by }, rng, 'object');
+          }
+        }
+        for (const p of others) {
+          const role = ctx.roles[p];
+          if (role === 'insider' && ((cl.kind === 'rules_out' && cl.target === truth) || (cl.kind === 'points_to' && cl.target !== truth)) && rng() < 0.35) {
+            room.doubts.push({ by: p, on: cl.by });
+            return say(room, ctx, p, T.insiderDoubt, { p: cl.by }, rng, 'doubt');
+          }
+          if (role === 'fixer' && !ctx.fixers.includes(cl.by) && cl.kind === 'rules_out' && cl.target === fixerTarget(room, ctx) && rng() < 0.7) {
+            room.doubts.push({ by: p, on: cl.by });
+            return say(room, ctx, p, T.fixerDoubt, { p: cl.by }, rng, 'doubt');
+          }
+        }
+        for (const p of others) {
+          const ex = exhibitOf(ctx, p);
+          if (cl.kind === 'rules_out' && ex.tag === 'Rules out' && ex.target === cl.target && room.shared[p]) {
+            return say(room, ctx, p, T.corroborate, { v: cl.target, p: cl.by }, rng, 'corroborate');
+          }
+        }
+        if (others.length && rng() < 0.35) return say(room, ctx, others[0], T.noted, {}, rng, 'noted');
+        return null;
+      }
+      case 'ask': {
+        const h = it.to;
+        if (room.shared[h]) return null;
+        const ais = aiSeats(ctx);
+        if (!ais.length) return null;
+        return say(room, ctx, pick(ais, rng), T.ask, { p: h }, rng, 'ask');
+      }
+      case 'lean':
+      case 'lean2': {
+        const p = it.by;
+        const allowed = it.k === 'lean2' ? room.options : null;
+        const ln = leanOf(room, ctx, p, allowed);
+        const prev = room.leans.filter(l => l.by === p).pop();
+        if (prev && prev.v === ln.v && it.k === 'lean' && room.fill) {
+          return say(room, ctx, p, persona(ctx, p).banter, {}, rng, 'banter');
+        }
+        room.leans.push({ by: p, v: ln.v });
+        if (it.k === 'lean2') {
+          const other = allowed.filter(v => v !== ln.v);
+          return say(room, ctx, p, T.round2, { v: ln.v, v2: other[0] != null ? other[0] : ln.v }, rng, 'lean2');
+        }
+        if (ln.soft) return say(room, ctx, p, T.leanSoft, { v: ln.v }, rng, 'lean');
+        if (!ln.sure && ln.v2 != null) return say(room, ctx, p, T.leanTorn, { v: ln.v, v2: ln.v2 }, rng, 'lean');
+        return say(room, ctx, p, T.leanSure, { v: ln.v }, rng, 'lean');
+      }
+      case 'accuse': {
+        const p = it.by;
+        const who = suspectOf(room, ctx, p, rng);
+        if (who == null) return null;
+        if (ctx.roles[p] !== 'fixer') {
+          const a = assess(room, ctx, p);
+          if (a.s[who] < 0.5 && rng() < 0.6) return null; // nothing solid to say
+        }
+        if (room.accuse.some(a => a.by === p && a.who === who)) return null;
+        const meFirst = room.accuse.find(a => a.who === p && a.by === who);
+        room.accuse.push({ by: p, who });
+        const line = say(room, ctx, p, meFirst ? T.accuseMe : T.accuse, { p: who }, rng, 'accuse');
+        if (ctx.ai[who]) room.queue.unshift({ k: 'deny', by: who, to: p });
+        return line;
+      }
+      case 'deny': return say(room, ctx, it.by, persona(ctx, it.by).deny.concat(T.deny), { p: it.to }, rng, 'deny');
+      case 'pile': {
+        const p = it.by;
+        const a = ctx.roles[p] === 'fixer' ? null : assess(room, ctx, p);
+        if (a && a.s[it.who] < 0.8) return null;
+        room.accuse.push({ by: p, who: it.who });
+        return say(room, ctx, p, T.pileOn, { p: it.who }, rng, 'pile');
+      }
+      case 'agree': {
+        const p = it.by;
+        const ln = leanOf(room, ctx, p, room.round === 2 ? room.options : null);
+        room.leans.push({ by: p, v: ln.v });
+        if (ln.v === it.v) return say(room, ctx, p, T.agree, { p: it.to, v: it.v }, rng, 'agree');
+        return say(room, ctx, p, T.disagree, { p: it.to, v: it.v, v2: ln.v }, rng, 'disagree');
+      }
+      case 'nudge': {
+        const ais = aiSeats(ctx);
+        if (!ais.length) return null;
+        return say(room, ctx, pick(ais, rng), T.nudge, {}, rng, 'nudge');
+      }
+      default: return null;
+    }
+  }
+
+  // A person at the table did something; record it and queue the room's reaction.
+  // act: { k: 'share' } | { k: 'claim', kind, target } | { k: 'lean', v } | { k: 'suspect', who } | { k: 'poll' }
+  function human(room, ctx, p, act) {
+    const rng = rngOf(room);
+    const nm = ctx.names[p];
+    const ais = E.shuffle(aiSeats(ctx), rng);
+    let line = null;
+    if (act.k === 'share') {
+      const ex = exhibitOf(ctx, p);
+      room.shared[p] = true;
+      if (ex.kind === 'none') line = { by: p, text: 'My exhibit was thrown out. I’ve got nothing.', kind: 'none' };
+      else {
+        addClaim(room, ctx, p, ex, true);
+        line = { by: p, text: `My exhibit: ${ex.text} ${ex.tag === 'Points to' ? 'That points to' : 'That rules out'} ${L[ex.target]}.`, kind: 'claim' };
+        room.queue.unshift({ k: 'react', claim: room.claims.length - 1 });
+      }
+    } else if (act.k === 'claim') {
+      room.shared[p] = true;
+      const cl = { by: p, kind: act.kind, target: act.target, quoted: false };
+      room.claims.push(cl);
+      line = { by: p, text: act.kind === 'points_to' ? `My exhibit points to ${L[act.target]}, ${ctx.c.verdicts[act.target].label}.` : `My exhibit rules out ${L[act.target]}, ${ctx.c.verdicts[act.target].label}.`, kind: 'claim' };
+      room.queue.unshift({ k: 'react', claim: room.claims.length - 1 });
+    } else if (act.k === 'lean') {
+      room.leans.push({ by: p, v: act.v });
+      line = { by: p, text: `I think it’s ${L[act.v]}, ${ctx.c.verdicts[act.v].label}.`, kind: 'lean' };
+      if (ais.length) room.queue.unshift({ k: 'agree', by: ais[0], to: p, v: act.v });
+    } else if (act.k === 'suspect') {
+      room.accuse.push({ by: p, who: act.who });
+      line = { by: p, text: `I think ${ctx.names[act.who]} is the Fixer.`, kind: 'accuse' };
+      const front = [];
+      if (ctx.ai[act.who]) front.push({ k: 'deny', by: act.who, to: p });
+      const piler = ais.find(x => x !== act.who);
+      if (piler != null) front.push({ k: 'pile', by: piler, who: act.who });
+      room.queue.unshift(...front);
+    } else if (act.k === 'poll') {
+      line = { by: p, text: 'Quick poll. Where’s everybody at?', kind: 'say' };
+      room.queue.unshift(...ais.map(x => ({ k: room.round === 2 ? 'lean2' : 'lean', by: x, poll: true })));
+      room.fill = 0;
+    }
+    if (line) { line.text = line.text.replace(/\s+/g, ' ').trim(); room.log.push(line); }
+    void nm;
+    return line;
+  }
+
+  const api = { PERSONAS, pickPersonas, newRoom, plan, next, human, ballot, appealGuess, assess, leanOf };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  else root.JuryBots = api;
+})(typeof self !== 'undefined' ? self : this);
+</script>
 <script>(function () {
   'use strict';
   const E = window.JuryEngine;
+  const B = window.JuryBots;
   const DECK = window.JURY_CASES;
   const CASE = Object.fromEntries(DECK.map(c => [c.id, c]));
   const app = document.getElementById('app');
@@ -592,13 +1148,13 @@ details.story-fold[open] summary { margin-bottom: 6px; }
   // ---------------- Per-device storage ----------------
   const KEY = 'hungjury.v1';
   const Store = {
-    data: { roster: ['', '', '', '', ''], settings: { sound: true, voice: true, tone: 'mix', cases: null, timer: null }, used: [], game: null },
+    data: { roster: ['', '', '', '', ''], settings: { sound: true, voice: true, jurorVoices: true, tone: 'mix', cases: null, timer: null, bots: null }, used: [], game: null },
     load() {
       try {
         const s = localStorage.getItem(KEY);
         if (!s) return;
         const o = JSON.parse(s);
-        if (Array.isArray(o.roster) && o.roster.length >= 3) this.data.roster = o.roster.map(cleanName).slice(0, E.MAX_PLAYERS);
+        if (Array.isArray(o.roster) && o.roster.length >= 1) this.data.roster = o.roster.map(cleanName).slice(0, E.MAX_PLAYERS);
         if (o.settings && typeof o.settings === 'object') Object.assign(this.data.settings, o.settings);
         if (Array.isArray(o.used)) this.data.used = o.used.filter(id => CASE[id]).slice(-60);
         if (o.game && o.game.v === 1 && Array.isArray(o.game.caseIds) && o.game.caseIds.every(id => CASE[id])) this.data.game = o.game;
@@ -666,6 +1222,36 @@ details.story-fold[open] summary { margin-bottom: 6px; }
         speechSynthesis.speak(u);
       } catch (e) { /* no voice */ }
     },
+    // Computer jurors talk out loud, each with their own voice where the device has several.
+    busyUntil: 0,
+    canTalk() { return !!(S().jurorVoices && window.speechSynthesis && window.SpeechSynthesisUtterance); },
+    unlock() { if (!this.canTalk()) return; try { const u = new SpeechSynthesisUtterance(' '); u.volume = 0; speechSynthesis.speak(u); } catch (e) { /* ignore */ } },
+    voiceFor(k) {
+      const per = B.PERSONAS[k] || {};
+      const all = (speechSynthesis.getVoices() || []).filter(v => /^en(-|_)/i.test(v.lang));
+      if (!all.length) return null;
+      const F = /samantha|karen|moira|tessa|fiona|victoria|serena|kate|susan|zira|female|veena|allison|ava|nicky|catherine|martha|flo|sandy|shelley|grandma/i;
+      const M = /daniel|alex|fred|aaron|arthur|rishi|gordon|oliver|tom|david|mark|male|lee|reed|rocko|eddy|grandpa|ralph|junior|albert/i;
+      const pool = all.filter(v => per.voice === 'f' ? F.test(v.name) : M.test(v.name));
+      const use = pool.length ? pool : all;
+      return use[k % use.length];
+    },
+    talk(text, k, done) {
+      if (!this.canTalk()) { done && done(); return false; }
+      try {
+        const u = new SpeechSynthesisUtterance(text);
+        const v = this.voiceFor(k); if (v) u.voice = v;
+        const pitch = [1.2, 0.95, 0.8, 1.1, 1.05, 1.3, 1.0, 0.9, 1.15, 0.85, 0.7, 1.25];
+        const rate = [1.0, 1.15, 0.95, 1.05, 1.12, 0.95, 0.92, 1.08, 1.02, 1.14, 0.9, 0.95];
+        u.pitch = pitch[k % pitch.length]; u.rate = rate[k % rate.length]; u.volume = 1;
+        this.busyUntil = Date.now() + 2500 + text.length * 95;
+        const end = () => { this.busyUntil = 0; done && done(); };
+        u.onend = end; u.onerror = end;
+        speechSynthesis.speak(u);
+        return true;
+      } catch (e) { this.busyUntil = 0; done && done(); return false; }
+    },
+    hush() { this.busyUntil = 0; try { if (window.speechSynthesis) speechSynthesis.cancel(); } catch (e) { /* ignore */ } },
   };
 
   // Keep the screen awake during a trial, when the browser allows it.
@@ -680,16 +1266,36 @@ details.story-fold[open] summary { margin-bottom: 6px; }
   function save() { Store.data.game = G; Store.save(); }
 
   function seatOrder(start, n) { return [...Array(n).keys()].map(k => (start + k) % n); }
+  const isAI = i => !!(G && G.ai && G.ai[i]);
+  const humanSeats = () => G.players.map((p, i) => i).filter(i => !isAI(i));
+  const hasBots = () => !!(G && G.ai && G.ai.some(Boolean));
+  const solo = () => humanSeats().length === 1;
+  const firstStage = () => (solo() ? 'card' : 'pass');
+  // Computer seats for a table of h people: auto fills to five, or what was chosen in setup.
+  function botCount(h) {
+    const lo = Math.max(0, E.MIN_PLAYERS - h), hi = Math.max(0, E.MAX_PLAYERS - h);
+    const want = S().bots == null ? (h >= 3 ? 0 : 5 - h) : S().bots;
+    return Math.max(lo, Math.min(hi, want));
+  }
+  const autoTimer = (n, bots) => bots ? Math.min(E.deliberationSeconds(n), 240) : E.deliberationSeconds(n);
+  function botCtx() {
+    const cur = G.cur;
+    return { c: curCase(), roles: cur.roles, exhibits: cur.exhibits, fixers: cur.fixers, insider: cur.insider, ai: G.ai, persona: G.persona, names: G.players };
+  }
 
-  function newGame(names) {
-    const n = names.length;
+  function newGame(humans, bots) {
+    bots = bots || 0;
     const seed = (Date.now() ^ Math.floor(Math.random() * 1e9)) >>> 0;
     const rng = E.makeRng(seed);
+    const personas = bots ? B.pickPersonas(bots, humans, rng) : [];
+    const names = humans.concat(personas.map(k => B.PERSONAS[k].name));
+    const n = names.length;
     const count = S().cases || E.defaultCases(n);
     const picked = E.pickCases(DECK, count, S().tone, Store.data.used, rng);
     G = {
       v: 1, seed, players: names.slice(), caseIds: picked.map(c => c.id), k: 0,
-      timer: S().timer || E.deliberationSeconds(n),
+      ai: names.map((x, i) => i >= humans.length), persona: names.map((x, i) => i >= humans.length ? personas[i - humans.length] : -1),
+      timer: S().timer || autoTimer(n, bots),
       scores: new Array(n).fill(0),
       history: names.map(() => ({ insider: 0, fixer: 0 })),
       stats: names.map(() => ({ insiderWins: 0, fixerWins: 0, spotted: 0, wrongVotes: 0 })),
@@ -705,10 +1311,13 @@ details.story-fold[open] summary { margin-bottom: 6px; }
     const c = CASE[G.caseIds[G.k]];
     const deal = E.dealRoles(n, G.history, rng);
     const exhibits = E.dealExhibits(c, deal, rng);
-    const fore = G.k % n;
+    const hs = G.players.map((p, i) => i).filter(i => !isAI(i));
+    const fore = hs[G.k % hs.length];
+    const order = seatOrder(hs.indexOf(fore), hs.length).map(k => hs[k]);
     G.cur = {
       fore, roles: deal.roles, insider: deal.insider, fixers: deal.fixers, exhibits,
-      order: seatOrder(fore, n), i: 0, stage: 'pass', seen: false,
+      order, i: 0, stage: 'pass', seen: false,
+      room: hs.length < n ? B.newRoom(G.seed + G.k * 104729 + 7) : null, aiAppeal: null,
       ballots: new Array(n).fill(null), suspects: new Array(n).fill(null), firstBallots: null, firstCounts: null,
       round: 1, options: [0, 1, 2, 3], timeLeft: G.timer, endAt: null, timeUp: false,
       verdict: undefined, appealGuess: null, result: null, pick: { v: null, s: null },
@@ -724,8 +1333,13 @@ details.story-fold[open] summary { margin-bottom: 6px; }
   // ---------------- Timer ----------------
   let timerHandle = null, lastWhole = null;
   function timeLeft() { const c = G.cur; return c.endAt ? Math.max(0, (c.endAt - Date.now()) / 1000) : c.timeLeft; }
-  function startClock() { const c = G.cur; if (c.endAt || c.timeUp) return; c.endAt = Date.now() + c.timeLeft * 1000; save(); runTicker(); }
-  function pauseClock() { const c = G.cur; if (!c.endAt) return; c.timeLeft = timeLeft(); c.endAt = null; save(); }
+  function startClock() {
+    const c = G.cur; if (c.endAt || c.timeUp) return;
+    c.endAt = Date.now() + c.timeLeft * 1000;
+    if (c.room) { c.room.nextAt = Date.now() + 900; Sound.unlock(); }
+    save(); runTicker();
+  }
+  function pauseClock() { const c = G.cur; if (!c.endAt) return; c.timeLeft = timeLeft(); c.endAt = null; Sound.hush(); save(); }
   function addMinute() { const c = G.cur; if (c.endAt) c.endAt += 60000; else c.timeLeft += 60; c.timeUp = false; save(); runTicker(); }
   function runTicker() {
     if (timerHandle) return;
@@ -738,12 +1352,103 @@ details.story-fold[open] summary { margin-bottom: 6px; }
       const box = document.getElementById('clock');
       if (box) { box.classList.toggle('low', left <= 30 && left > 0); }
       if (c.endAt && whole !== lastWhole) { lastWhole = whole; if (whole <= 10 && whole > 0) Sound.tick(whole <= 3); }
+      if (c.endAt && c.room && left > 1 && Date.now() >= (c.room.nextAt || 0) && Date.now() >= Sound.busyUntil) botSpeaks();
       if (c.endAt && left <= 0) {
         c.endAt = null; c.timeLeft = 0; c.timeUp = true; save();
-        Sound.gavel(3); Sound.say("Time! Jury, to your ballots.");
+        Sound.hush(); Sound.gavel(3); Sound.say("Time! Jury, to your ballots.");
         render();
       }
     }, 200);
+  }
+
+  // ---------------- The jury room (computer jurors) ----------------
+  function botSpeaks() {
+    const c = G.cur, room = c.room;
+    const line = B.next(room, botCtx());
+    const gap = line ? Math.max(2200, Math.min(6500, 1400 + line.text.length * 24)) : 4000;
+    room.nextAt = Date.now() + gap;
+    save();
+    if (!line) return;
+    appendLine(line);
+    if (line.by >= 0 && isAI(line.by)) {
+      const talking = Sound.talk(line.text, G.persona[line.by], () => { if (G && G.cur && G.cur.room === room) room.nextAt = Date.now() + 500; markTalking(null); });
+      if (talking) { room.nextAt = Sound.busyUntil + 400; markTalking(line.by); }
+    }
+  }
+  function markTalking(p) {
+    app.querySelectorAll('.jbox .seat-av').forEach(el => el.classList.toggle('talking', p != null && +el.dataset.p === p));
+  }
+  const initials = nm => String(nm).split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+  const hue = i => isAI(i) ? (G.persona[i] * 47 + 18) % 360 : 150;
+  const aiTag = i => isAI(i) ? '<span class="ai-tag">AI</span>' : '';
+  const nameTag = i => esc(name(i)) + aiTag(i);
+  function lineHTML(l, fresh) {
+    if (l.by < 0) return `<p class="line sys">${esc(l.text)}</p>`;
+    const me = !isAI(l.by);
+    return `<div class="line ${me ? 'me' : 'ai'} k-${esc(l.kind)}${fresh ? ' pop' : ''}" style="--h:${hue(l.by)}">
+      <span class="av" aria-hidden="true">${esc(initials(name(l.by)))}</span>
+      <div class="bub"><span class="who-n">${nameTag(l.by)}</span> <span class="txt">${esc(l.text)}</span></div></div>`;
+  }
+  function appendLine(l) {
+    const box = document.getElementById('talk-lines');
+    if (!box) return;
+    const empty = box.querySelector('.talk-empty'); if (empty) empty.remove();
+    box.querySelectorAll('.pop').forEach(el => el.classList.remove('pop'));
+    box.insertAdjacentHTML('beforeend', lineHTML(l, true));
+    box.scrollTop = box.scrollHeight;
+  }
+  function talkPanel() {
+    const cur = G.cur, room = cur.room, c = curCase();
+    const hs = humanSeats();
+    if (ui.speaker == null || isAI(ui.speaker) || ui.speaker >= G.players.length) ui.speaker = hs.includes(cur.fore) ? cur.fore : hs[0];
+    const sp = ui.speaker;
+    const lines = room.log.length ? room.log.map(l => lineHTML(l, false)).join('')
+      : `<p class="talk-empty">Start the clock and the jury starts talking. Share your exhibit, bluff, or point a finger whenever you like.</p>`;
+    const jbox = G.players.map((nm, i) => `<span class="seat-av" data-p="${i}" style="--h:${hue(i)}" title="${esc(nm)}"><span class="av">${esc(initials(nm))}</span><span class="nm">${esc(nm)}</span></span>`).join('');
+    const opts = cur.round === 2 ? cur.options : [0, 1, 2, 3];
+    const letters = (act, extra) => opts.map(v => `<button class="pill" data-act="${act}" data-v="${v}" ${extra ? extra(v) : ''}>${L[v]}. ${esc(c.verdicts[v].label)}</button>`).join('');
+    let sub = '';
+    if (ui.act === 'claim') {
+      const kind = ui.claimKind || 'rules_out';
+      sub = `<div class="say-sub"><span class="muted">Say your exhibit…</span>
+        <div class="say-row"><button class="pill" data-act="say-kind" data-v="rules_out" aria-pressed="${kind === 'rules_out'}">rules out</button><button class="pill" data-act="say-kind" data-v="points_to" aria-pressed="${kind === 'points_to'}">points to</button></div>
+        <div class="say-row">${[0, 1, 2, 3].map(v => `<button class="pill" data-act="say-claim" data-v="${v}">${L[v]}. ${esc(c.verdicts[v].label)}</button>`).join('')}</div></div>`;
+    } else if (ui.act === 'lean') {
+      sub = `<div class="say-sub"><span class="muted">I think it's…</span><div class="say-row">${letters('say-lean')}</div></div>`;
+    } else if (ui.act === 'suspect') {
+      sub = `<div class="say-sub"><span class="muted">The Fixer is…</span><div class="say-row">${G.players.map((nm, i) => i === sp ? '' : `<button class="pill" data-act="say-suspect" data-v="${i}">${esc(nm)}</button>`).join('')}</div></div>`;
+    }
+    const speakers = hs.length > 1 ? `<div class="say-row" role="group" aria-label="Who is talking">${hs.map(i => `<button class="pill" data-act="speaker" data-v="${i}" aria-pressed="${i === sp}">${esc(name(i))}</button>`).join('')}</div>` : '';
+    const shared = !!room.shared[sp];
+    const voiceOk = !!window.speechSynthesis;
+    return `<section class="talk" aria-label="Jury room">
+      <div class="talk-head"><span class="field-label">The jury room</span>
+        ${voiceOk ? `<button class="pill" data-act="toggle" data-k="jurorVoices" aria-pressed="${!!S().jurorVoices}">${S().jurorVoices ? 'Voices on' : 'Voices off'}</button>` : ''}</div>
+      <div class="jbox" aria-hidden="true">${jbox}</div>
+      <div class="talk-lines" id="talk-lines">${lines}</div>
+      <div class="say">
+        ${speakers}
+        <div class="say-row">
+          <button class="btn brass small" data-act="say-share" ${shared ? 'disabled' : ''}>${shared ? 'Exhibit shared' : 'Share my exhibit'}</button>
+          <button class="btn wood small" data-act="say-mode" data-v="claim" aria-pressed="${ui.act === 'claim'}">Claim something else</button>
+        </div>
+        <div class="say-row">
+          <button class="btn wood small" data-act="say-mode" data-v="lean" aria-pressed="${ui.act === 'lean'}">I think it's…</button>
+          <button class="btn wood small" data-act="say-mode" data-v="suspect" aria-pressed="${ui.act === 'suspect'}">I suspect…</button>
+          <button class="btn wood small" data-act="say-poll">Poll the room</button>
+        </div>
+        ${sub}
+      </div>
+    </section>`;
+  }
+  function humanSays(act) {
+    const cur = G.cur;
+    if (!cur.room) return;
+    if (!cur.endAt && !cur.timeUp) startClock();
+    B.human(cur.room, botCtx(), ui.speaker, act);
+    cur.room.nextAt = Date.now() + 1300;
+    ui.act = null;
+    save(); render();
   }
 
   // ---------------- Pieces ----------------
@@ -828,36 +1533,50 @@ details.story-fold[open] summary { margin-bottom: 6px; }
         <button class="btn ${g ? 'wood' : 'brass'} block" data-act="setup">${g ? 'New trial' : 'Convene a jury'}</button>
         <button class="btn wood block" data-act="rules">How to play</button>
       </div>
-      <p class="note">3 to 10 players · one device passed around the table · adults only</p>
+      <p class="note">1 to 10 people · computer jurors fill the empty seats · one device · adults only</p>
     </div>`;
   }
 
+  function setupInfo() {
+    const names = Store.data.roster.map(cleanName).filter(Boolean);
+    const h = names.length;
+    const dup = new Set(names.map(x => x.toLowerCase())).size !== h;
+    const bots = h ? botCount(h) : 0;
+    const total = h + bots;
+    const valid = h >= 1 && total >= E.MIN_PLAYERS && total <= E.MAX_PLAYERS && !dup;
+    const rc = E.roleCounts(Math.max(3, total));
+    const msg = dup ? 'Two players share a name. Add an initial.' : h < 1 ? 'Type at least one name.' : total > E.MAX_PLAYERS ? 'Ten seats at most.'
+      : `${h} ${h === 1 ? 'person' : 'people'}${bots ? ` and ${bots} computer juror${bots > 1 ? 's' : ''}` : ''}: 1 Insider, ${rc.fixers} Fixer${rc.fixers > 1 ? 's' : ''}, ${rc.jurors} Juror${rc.jurors > 1 ? 's' : ''} each case.`;
+    return { names, h, bots, total, valid, msg, dup };
+  }
   function vSetup() {
     const r = Store.data.roster;
-    const names = r.map(cleanName).filter(Boolean);
-    const n = names.length;
-    const valid = n >= E.MIN_PLAYERS && n <= E.MAX_PLAYERS && new Set(names.map(x => x.toLowerCase())).size === n;
-    const nn = Math.max(3, Math.min(10, n || 5));
+    const info = setupInfo();
+    const valid = info.valid, dup = info.dup;
+    const nn = Math.max(3, Math.min(10, info.total || 5));
     const cases = S().cases || E.defaultCases(nn);
-    const secs = S().timer || E.deliberationSeconds(nn);
-    const dup = new Set(names.map(x => x.toLowerCase())).size !== n;
+    const secs = S().timer || autoTimer(nn, info.bots);
     const seats = r.map((v, i) => `<div class="seat">
         <span class="seat-no">${i + 1}</span>
         <input id="seat-${i}" data-seat="${i}" value="${esc(v)}" maxlength="16" autocomplete="off" autocapitalize="words" spellcheck="false" placeholder="${i === 0 ? 'Your name' : 'Next seat'}" aria-label="Player in seat ${i + 1}">
         <button class="mini" data-act="seat-up" data-i="${i}" ${i === 0 ? 'disabled' : ''} aria-label="Move up">&#8593;</button>
         <button class="mini" data-act="seat-down" data-i="${i}" ${i === r.length - 1 ? 'disabled' : ''} aria-label="Move down">&#8595;</button>
-        <button class="mini" data-act="seat-del" data-i="${i}" ${r.length <= 3 ? 'disabled' : ''} aria-label="Remove seat">&times;</button>
+        <button class="mini" data-act="seat-del" data-i="${i}" ${r.length <= 1 ? 'disabled' : ''} aria-label="Remove seat">&times;</button>
       </div>`).join('');
     const tone = S().tone;
     return `<div class="bench">
       <div class="topbar"><button class="icon-btn" data-act="home">&#8592; Back</button><span class="crumb">Empanel the jury</span></div>
       <div class="setup-grid">
         <section class="panel trim stack">
-          <span class="field-label">The jury, in seating order</span>
-          <p class="muted" style="font-size:var(--s-1)">The device travels around the table in this order.</p>
+          <span class="field-label">The people, in seating order</span>
+          <p class="muted" style="font-size:var(--s-1)">Playing alone? Just type your name. With more than one person, the device travels around the table in this order. Empty seats are skipped.</p>
           <div class="roster">${seats}</div>
           <button class="btn wood small" data-act="seat-add" ${r.length >= E.MAX_PLAYERS ? 'disabled' : ''}>Add a seat</button>
-          <p class="note" id="setup-msg">${dup ? 'Two players share a name. Add an initial.' : n < 3 ? 'At least 3 players.' : `${n} players: 1 Insider, ${E.roleCounts(n).fixers} Fixer${E.roleCounts(n).fixers > 1 ? 's' : ''}, ${E.roleCounts(n).jurors} Juror${E.roleCounts(n).jurors > 1 ? 's' : ''} each case.`}</p>
+          <span class="field-label">Computer jurors</span>
+          <div class="stepper"><button class="mini" data-act="bots" data-d="-1" aria-label="Fewer computer jurors">&minus;</button><span class="val" id="bots-val">${info.bots}</span><button class="mini" data-act="bots" data-d="1" aria-label="More computer jurors">+</button>
+            <span class="estimate">${S().bots == null ? 'auto' : '<button class="mini" style="width:auto;padding:0 10px" data-act="bots-auto">Auto</button>'}</span></div>
+          <p class="bots-line">They argue, bluff, accuse and vote like everyone else, and they can be the Insider or the Fixer too.</p>
+          <p class="note" id="setup-msg">${esc(info.msg)}</p>
         </section>
         <section class="panel trim stack">
           <span class="field-label">The docket</span>
@@ -871,7 +1590,7 @@ details.story-fold[open] summary { margin-bottom: 6px; }
             <span class="estimate">about ${E.estimateMinutes(nn, cases)} min${S().cases ? '' : ' (auto)'}</span></div>
           <span class="field-label">Deliberation clock</span>
           <div class="stepper"><button class="mini" data-act="timer" data-d="-15" aria-label="Less time">&minus;</button><span class="val">${mmss(secs)}</span><button class="mini" data-act="timer" data-d="15" aria-label="More time">+</button>
-            <span class="estimate">${S().timer ? '<button class="mini" style="width:auto;padding:0 10px" data-act="timer-auto">Auto</button>' : 'auto for ' + nn + ' players'}</span></div>
+            <span class="estimate">${S().timer ? '<button class="mini" style="width:auto;padding:0 10px" data-act="timer-auto">Auto</button>' : 'auto for ' + nn + ' seats'}</span></div>
           <button class="btn brass block" data-act="begin" ${valid ? '' : 'disabled'}>Call court to order</button>
         </section>
       </div>
@@ -883,13 +1602,13 @@ details.story-fold[open] summary { margin-bottom: 6px; }
     return `<div class="bench">
       ${topbar('Case ' + (G.k + 1) + ' of ' + G.caseIds.length)}
       <section class="panel trim center stack tight">
-        <p class="lead"><strong>${esc(name(G.cur.fore))}</strong> is the Foreperson for this case.</p>
-        <p class="muted">Foreperson: rap the gavel, then read the file aloud, starting with the charge.</p>
+        <p class="lead">${solo() ? 'You are' : `<strong>${esc(name(G.cur.fore))}</strong> is`} the Foreperson for this case.</p>
+        <p class="muted">${solo() ? 'Rap the gavel and read the file. The computer jurors have read it too.' : 'Foreperson: rap the gavel, then read the file aloud, starting with the charge.'}</p>
         <div class="row" style="justify-content:center"><button class="btn wood small" data-act="all-rise">&#9878; All rise</button></div>
       </section>
       ${caseFile(c, 'full')}
-      <button class="btn brass block" data-act="brief-start">Begin the secret briefing</button>
-      <p class="note">Next, the device goes to each player in turn, starting with ${esc(name(G.cur.fore))}.</p>
+      <button class="btn brass block" data-act="brief-start">${solo() ? 'Open my summons' : 'Begin the secret briefing'}</button>
+      <p class="note">${solo() ? 'Your secret role and exhibit are next.' : `Next, the device goes to each person in turn, starting with ${esc(name(G.cur.fore))}.`}</p>
     </div>`;
   }
 
@@ -918,7 +1637,7 @@ details.story-fold[open] summary { margin-bottom: 6px; }
       body = `<div class="role-name role-insider">Insider</div>${truth}
         <p>Steer the jury to the truth without looking like you know it.${E.appealAllowed(G.players.length) ? ' If the verdict is right, the Fixer gets one shot to name you on appeal and steal the win.' : ''}</p>${exhibit}`;
     } else if (role === 'fixer') {
-      const mates = cur.fixers.filter(f => f !== p).map(name);
+      const mates = cur.fixers.filter(f => f !== p).map(f => name(f) + (isAI(f) ? ' (computer)' : ''));
       body = `<div class="role-name role-fixer">Fixer</div>${truth}
         <p>Lead the jury anywhere else, or split it so it hangs. Quote your exhibit, twist it or bury it.</p>
         ${mates.length ? `<p><strong>Your fellow Fixer: ${esc(mates.join(', '))}.</strong></p>` : ''}${exhibit}`;
@@ -931,15 +1650,15 @@ details.story-fold[open] summary { margin-bottom: 6px; }
 
   function vBrief() {
     const cur = G.cur, n = G.players.length, p = cur.order[cur.i];
-    if (cur.stage === 'pass') return passScreen(p, cur.i, n, 'Secret briefing', 'Everyone else, look away. Only ' + esc(name(p)) + ' reads the next screen.');
+    if (cur.stage === 'pass') return passScreen(p, cur.i, cur.order.length, 'Secret briefing', 'Everyone else, look away. Only ' + esc(name(p)) + ' reads the next screen.');
     return `<div class="bench">
       ${topbar('Secret briefing · ' + name(p))}
       <div class="summons" id="summons" tabindex="0" role="button" aria-label="Press and hold to read your summons">
         <div class="cover"><div class="seal">HJ</div><div class="hold-hint">Press and hold to read your summons</div><p class="muted" style="color:#f0c9b8">Let go and it hides again.</p></div>
         <div class="face" aria-hidden="true">${roleCard(p)}</div>
       </div>
-      <button class="btn brass block" data-act="brief-done" ${cur.seen ? '' : 'disabled'}>Done, pass it on</button>
-      ${cur.seen ? '' : `<button class="btn wood small" data-act="brief-back">Not ${esc(name(p))}? Go back</button>`}
+      <button class="btn brass block" data-act="brief-done" ${cur.seen ? '' : 'disabled'}>${solo() ? 'Done, to the jury room' : 'Done, pass it on'}</button>
+      ${cur.seen || solo() ? '' : `<button class="btn wood small" data-act="brief-back">Not ${esc(name(p))}? Go back</button>`}
     </div>`;
   }
 
@@ -965,16 +1684,16 @@ details.story-fold[open] summary { margin-bottom: 6px; }
             <button class="btn wood" data-act="sfx" data-v="overruled">Overruled</button>
           </div>
           <button class="btn brass block" data-act="vote">${cur.timeUp ? 'To the ballots' : 'Call the vote'}</button>
-          <p class="note">${second ? 'Only the verdicts still standing are on this ballot.' : 'Argue out loud. Claim your exhibit, or claim something.'}</p>
+          <p class="note">${second ? 'Only the verdicts still standing are on this ballot.' : cur.room ? 'Call the vote whenever you have heard enough.' : 'Argue out loud. Claim your exhibit, or claim something.'}</p>
         </div>
-        ${caseFile(c, 'brief')}
+        ${cur.room ? `<div class="stack">${talkPanel()}${caseFile(c, 'brief')}</div>` : caseFile(c, 'brief')}
       </div>
     </div>`;
   }
 
   function vBallot() {
     const cur = G.cur, n = G.players.length, p = cur.order[cur.i], c = curCase();
-    if (cur.stage === 'pass') return passScreen(p, cur.i, n, cur.round === 2 ? 'Second ballot' : 'Secret ballot', 'Vote in secret. Nobody sees your ballot until the verdict is read.');
+    if (cur.stage === 'pass') return passScreen(p, cur.i, cur.order.length, cur.round === 2 ? 'Second ballot' : 'Secret ballot', 'Vote in secret. Nobody sees your ballot until the verdict is read.');
     const second = cur.round === 2;
     const choices = cur.options.map(i => `<button class="choice" data-act="pick-v" data-v="${i}" aria-pressed="${cur.pick.v === i}">
         <span class="vletter" aria-hidden="true">${L[i]}</span><span><span class="vlabel">${esc(c.verdicts[i].label)}</span><br><span class="vdetail">${esc(c.verdicts[i].detail)}</span></span></button>`).join('');
@@ -1039,6 +1758,17 @@ details.story-fold[open] summary { margin-bottom: 6px; }
     const cur = G.cur, n = G.players.length;
     const fx = cur.fixers.map(name);
     const two = fx.length > 1;
+    if (cur.aiAppeal != null) {
+      return `<div class="bench">${topbar('Motion to appeal')}
+      <section class="panel trim stack center">
+        <span class="big-stamp st-over" style="margin:6px auto">Objection!</span>
+        <p class="lead">The verdict is right, so the Fixer${two ? 's' : ''} move${two ? '' : 's'} to appeal.</p>
+        <p><strong>${esc(fx.join(' and '))}</strong> stand${two ? '' : 's'} up, unmasked.</p>
+        <p class="lead">"The Insider was <strong>${esc(name(cur.aiAppeal))}</strong>."</p>
+      </section>
+      <button class="btn brass block" data-act="file-appeal">Hear the ruling</button>
+    </div>`;
+    }
     const cands = [...Array(n).keys()].filter(i => !cur.fixers.includes(i)).map(i =>
       `<button class="chip" data-act="pick-appeal" data-v="${i}" aria-pressed="${cur.pick.s === i}">${esc(name(i))}</button>`).join('');
     return `<div class="bench">${topbar('Motion to appeal')}
@@ -1086,7 +1816,7 @@ details.story-fold[open] summary { margin-bottom: 6px; }
       const exTxt = ex.kind === 'none' ? 'no exhibit' : (ex.kind === 'planted' ? 'planted exhibit, ' : 'exhibit, ') + ex.tag.toLowerCase() + ' ' + L[ex.target];
       const why = r.lines[i].map(l => `+${l.p} ${l.why}`).join(', ');
       return `<div class="roll-row">
-        <span class="nm">${esc(name(i))}<span class="badge b-${role}">${role}</span></span>
+        <span class="nm">${nameTag(i)}<span class="badge b-${role}">${role}</span></span>
         <span class="pts">+${r.points[i]}</span>
         <span class="why">Voted ${L[final[i]]}${cur.suspects[i] != null ? ', named ' + esc(name(cur.suspects[i])) : ''} · ${exTxt}${why ? ' · ' + why : ''}</span>
       </div>`;
@@ -1107,13 +1837,14 @@ details.story-fold[open] summary { margin-bottom: 6px; }
     let rank = 0, prev = null;
     const rows = ranking().map((p, k) => {
       if (p.tot !== prev) { rank = k + 1; prev = p.tot; }
-      return `<div class="stand ${rank === 1 ? 'first' : ''}"><span class="rk">${rank}</span><span class="nm">${esc(p.nm)}</span><span class="delta">${delta[p.i] ? '+' + delta[p.i] : ''}</span><span class="tot">${p.tot}</span></div>`;
+      return `<div class="stand ${rank === 1 ? 'first' : ''}"><span class="rk">${rank}</span><span class="nm">${nameTag(p.i)}</span><span class="delta">${delta[p.i] ? '+' + delta[p.i] : ''}</span><span class="tot">${p.tot}</span></div>`;
     }).join('');
-    const nextFore = last ? null : name((G.k + 1) % G.players.length);
+    const hsNext = humanSeats();
+    const nextFore = last || hsNext.length < 2 ? null : name(hsNext[(G.k + 1) % hsNext.length]);
     return `<div class="bench">${topbar('After case ' + (G.k + 1) + ' of ' + G.caseIds.length)}
       <section class="panel trim stack"><h2>Standings</h2><div class="standings">${rows}</div></section>
       ${last ? `<button class="btn brass block" data-act="final">Sentencing</button>` :
-        `<button class="btn brass block" data-act="next-case">Next case</button><p class="note">${esc(nextFore)} will be the next Foreperson.</p>`}
+        `<button class="btn brass block" data-act="next-case">Next case</button>${nextFore ? `<p class="note">${esc(nextFore)} will be the next Foreperson.</p>` : ''}`}
     </div>`;
   }
 
@@ -1125,7 +1856,7 @@ details.story-fold[open] summary { margin-bottom: 6px; }
     let rank = 0, prev = null;
     const rows = rk.map((p, k) => {
       if (p.tot !== prev) { rank = k + 1; prev = p.tot; }
-      return `<div class="stand ${rank === 1 ? 'first' : ''}"><span class="rk">${rank}</span><span class="nm">${esc(p.nm)}</span><span class="delta"></span><span class="tot">${p.tot}</span></div>`;
+      return `<div class="stand ${rank === 1 ? 'first' : ''}"><span class="rk">${rank}</span><span class="nm">${nameTag(p.i)}</span><span class="delta"></span><span class="tot">${p.tot}</span></div>`;
     }).join('');
     return `<div class="bench">${topbar('Sentencing')}
       <section class="courtroom-moment" style="min-height:auto;padding-top:10px">
@@ -1162,6 +1893,8 @@ details.story-fold[open] summary { margin-bottom: 6px; }
         <li>A verdict needs more than half the votes. If nothing gets there, the jury is hung: 90 more seconds and a revote between the leaders. Hung again means a mistrial.</li>
         <li>With 5 or more players, a correct verdict can be appealed: the Fixers unmask and get one guess at the Insider. A correct guess overturns it.</li>
       </ul>
+      <h3>Computer jurors</h3>
+      <p>Short on people? Add computer jurors in setup, so one person can play alone or two can play with a full table. Each one has a personality, gets a secret role and exhibit like everyone else, and talks in the jury room while the clock runs. Use the buttons there to share your exhibit, claim something else (a bluff), say where you lean, or name a suspect. They react, accuse each other and vote. The computer Fixer lies.</p>
       <h3>Scoring</h3>
       <table class="score-table"><tbody>
         <tr><td>Right verdict stands: each Juror</td><td>+2</td></tr>
@@ -1184,6 +1917,7 @@ details.story-fold[open] summary { margin-bottom: 6px; }
       <div class="court">Chambers</div><h2>Settings</h2>
       ${sw('sound', 'Sound', 'Gavel, clock ticks and organ chords.')}
       ${sw('voice', 'Voice lines', 'The bailiff calls out "Objection!" and "Order!" when the device can speak.')}
+      ${sw('jurorVoices', 'Computer juror voices', 'Computer jurors read their lines out loud, each in a different voice when the device has several.')}
       <p class="small-print" style="margin-top:10px">${DECK.length} cases on the docket. This device remembers the names you enter and which cases you've played, so the next game deals new ones first.</p>
       <button class="btn brass block" style="margin-top:14px" data-act="close-overlay">Done</button>
     </article></div>`;
@@ -1216,6 +1950,8 @@ details.story-fold[open] summary { margin-bottom: 6px; }
     else if (ui.overlay === 'settings') html += oSettings();
     else if (ui.overlay === 'menu') html += oMenu();
     app.innerHTML = html;
+    const tl = document.getElementById('talk-lines'); if (tl) tl.scrollTop = tl.scrollHeight;
+    const fold = app.querySelector('.story-fold'); if (fold) { fold.open = !!ui.storyOpen; fold.addEventListener('toggle', () => { ui.storyOpen = fold.open; }); }
     bindSummons();
     if (ui.view === 'game' && G.phase === 'deliberate' && G.cur.endAt) runTicker();
   }
@@ -1259,6 +1995,15 @@ details.story-fold[open] summary { margin-bottom: 6px; }
 
   function tallyAndAdvance() {
     const cur = G.cur;
+    if (cur.room) {
+      const ctx = botCtx();
+      G.players.forEach((p, i) => {
+        if (!isAI(i)) return;
+        const b = B.ballot(cur.room, ctx, i, cur.options, cur.round);
+        cur.ballots[i] = b.v;
+        if (cur.round === 1) cur.suspects[i] = b.s;
+      });
+    }
     const t = E.tally(cur.ballots, cur.options);
     if (cur.round === 1) { cur.firstBallots = cur.ballots.slice(); cur.firstCounts = t.counts; }
     if (t.winner != null) { cur.verdict = t.winner; ui.verdictRead = false; go('verdict'); return; }
@@ -1295,54 +2040,73 @@ details.story-fold[open] summary { margin-bottom: 6px; }
     menu() { ui.overlay = 'menu'; ui.confirmQuit = false; render(); },
     'close-overlay'() { ui.overlay = null; render(); },
     'close-overlay-bg'(el, e) { if (e.target === el) { ui.overlay = null; render(); } },
-    toggle(el) { const k = el.dataset.k; S()[k] = !S()[k]; Store.save(); if (k === 'sound' && S().sound) Sound.gavel(1); render(); },
+    toggle(el) { const k = el.dataset.k; S()[k] = !S()[k]; Store.save(); if (k === 'sound' && S().sound) Sound.gavel(1); if (k === 'jurorVoices') { if (S().jurorVoices) Sound.unlock(); else Sound.hush(); } render(); },
     quit() { ui.confirmQuit = true; render(); },
     'quit-no'() { ui.confirmQuit = false; render(); },
-    'quit-yes'() { G = null; Store.data.game = null; Store.save(); ui.overlay = null; ui.view = 'home'; render(); },
+    'quit-yes'() { Sound.hush(); G = null; Store.data.game = null; Store.save(); ui.overlay = null; ui.view = 'home'; render(); },
 
     'seat-add'() { readRosterInputs(); if (Store.data.roster.length < E.MAX_PLAYERS) Store.data.roster.push(''); Store.save(); render(); const i = Store.data.roster.length - 1; const inp = document.getElementById('seat-' + i); if (inp) inp.focus(); },
-    'seat-del'(el) { readRosterInputs(); const r = Store.data.roster; if (r.length > 3) r.splice(+el.dataset.i, 1); Store.save(); render(); },
+    'seat-del'(el) { readRosterInputs(); const r = Store.data.roster; if (r.length > 1) r.splice(+el.dataset.i, 1); Store.save(); render(); },
+    bots(el) {
+      readRosterInputs();
+      const h = Store.data.roster.map(cleanName).filter(Boolean).length;
+      S().bots = Math.max(0, Math.min(E.MAX_PLAYERS - Math.max(1, h), botCount(Math.max(1, h)) + (+el.dataset.d)));
+      Store.save(); render();
+    },
+    'bots-auto'() { readRosterInputs(); S().bots = null; Store.save(); render(); },
     'seat-up'(el) { readRosterInputs(); const r = Store.data.roster, i = +el.dataset.i; if (i > 0) [r[i - 1], r[i]] = [r[i], r[i - 1]]; Store.save(); render(); },
     'seat-down'(el) { readRosterInputs(); const r = Store.data.roster, i = +el.dataset.i; if (i < r.length - 1) [r[i + 1], r[i]] = [r[i], r[i + 1]]; Store.save(); render(); },
     tone(el) { readRosterInputs(); S().tone = el.dataset.v; Store.save(); render(); },
     cases(el) {
       readRosterInputs();
-      const n = Math.max(3, Math.min(10, Store.data.roster.map(cleanName).filter(Boolean).length || 5));
+      const n = Math.max(3, Math.min(10, setupInfo().total || 5));
       const cur = S().cases || E.defaultCases(n);
       S().cases = Math.max(1, Math.min(8, cur + (+el.dataset.d))); Store.save(); render();
     },
     timer(el) {
       readRosterInputs();
-      const n = Math.max(3, Math.min(10, Store.data.roster.map(cleanName).filter(Boolean).length || 5));
-      const cur = S().timer || E.deliberationSeconds(n);
+      const info = setupInfo(), n = Math.max(3, Math.min(10, info.total || 5));
+      const cur = S().timer || autoTimer(n, info.bots);
       S().timer = Math.max(60, Math.min(900, cur + (+el.dataset.d))); Store.save(); render();
     },
     'timer-auto'() { readRosterInputs(); S().timer = null; Store.save(); render(); },
     begin() {
       readRosterInputs();
-      const names = Store.data.roster.map(cleanName).filter(Boolean);
-      if (names.length < 3 || new Set(names.map(x => x.toLowerCase())).size !== names.length) { render(); return; }
-      Store.data.roster = names.slice();
-      newGame(names);
+      const info = setupInfo();
+      if (!info.valid) { render(); return; }
+      Store.data.roster = info.names.slice();
+      newGame(info.names, info.bots);
       ui.view = 'game'; holdScreen();
       Sound.gavel(1);
       render(); window.scrollTo(0, 0);
     },
 
     'all-rise'() { Sound.gavel(3); Sound.say('All rise. Court is now in session.'); },
-    'brief-start'() { const cur = G.cur; cur.i = 0; cur.stage = 'pass'; cur.seen = false; go('brief'); },
+    'brief-start'() { const cur = G.cur; cur.i = 0; cur.stage = firstStage(); cur.seen = false; go('brief'); },
     iam() { G.cur.stage = 'card'; G.cur.seen = false; G.cur.pick = { v: null, s: null }; save(); render(); },
     'brief-back'() { G.cur.stage = 'pass'; save(); render(); },
     'brief-done'() {
       const cur = G.cur;
       if (!cur.seen) return;
-      cur.i++; cur.stage = 'pass'; cur.seen = false;
-      if (cur.i >= G.players.length) { cur.timeLeft = G.timer; cur.endAt = null; cur.timeUp = false; Sound.gavel(1); go('deliberate'); return; }
+      cur.i++; cur.stage = firstStage(); cur.seen = false;
+      if (cur.i >= cur.order.length) {
+        cur.timeLeft = G.timer; cur.endAt = null; cur.timeUp = false;
+        if (cur.room && !cur.room.planned) { B.plan(cur.room, botCtx(), 1); cur.room.planned = 1; }
+        Sound.gavel(1); go('deliberate'); return;
+      }
       save(); render();
     },
 
     start() { startClock(); Sound.gavel(1); render(); },
     pause() { pauseClock(); render(); },
+    'say-share'() { humanSays({ k: 'share' }); },
+    'say-mode'(el) { const v = el.dataset.v; ui.act = ui.act === v ? null : v; render(); },
+    'say-kind'(el) { ui.claimKind = el.dataset.v; render(); },
+    'say-claim'(el) { humanSays({ k: 'claim', kind: ui.claimKind || 'rules_out', target: +el.dataset.v }); },
+    'say-lean'(el) { humanSays({ k: 'lean', v: +el.dataset.v }); },
+    'say-suspect'(el) { humanSays({ k: 'suspect', who: +el.dataset.v }); },
+    'say-poll'() { humanSays({ k: 'poll' }); },
+    speaker(el) { ui.speaker = +el.dataset.v; ui.act = null; render(); },
     'add-min'() { addMinute(); render(); },
     sfx(el) {
       const v = el.dataset.v;
@@ -1353,8 +2117,10 @@ details.story-fold[open] summary { margin-bottom: 6px; }
     },
     vote() {
       pauseClock();
-      const cur = G.cur; cur.i = 0; cur.stage = 'pass'; cur.pick = { v: null, s: null };
+      Sound.hush();
+      const cur = G.cur; cur.i = 0; cur.stage = firstStage(); cur.pick = { v: null, s: null };
       cur.ballots = new Array(G.players.length).fill(null);
+      ui.act = null;
       go('ballot');
     },
     'pick-v'(el) { G.cur.pick.v = +el.dataset.v; save(); render(); },
@@ -1365,12 +2131,16 @@ details.story-fold[open] summary { margin-bottom: 6px; }
       cur.ballots[p] = cur.pick.v;
       if (cur.round === 1) cur.suspects[p] = cur.pick.s;
       cur.pick = { v: null, s: null };
-      cur.i++; cur.stage = 'pass';
+      cur.i++; cur.stage = firstStage();
       Sound.tick(false);
-      if (cur.i >= G.players.length) { tallyAndAdvance(); return; }
+      if (cur.i >= cur.order.length) { tallyAndAdvance(); return; }
       save(); render(); window.scrollTo(0, 0);
     },
-    redeliberate() { const cur = G.cur; cur.timeLeft = 90; cur.endAt = null; cur.timeUp = false; go('deliberate'); },
+    redeliberate() {
+      const cur = G.cur; cur.timeLeft = 90; cur.endAt = null; cur.timeUp = false;
+      if (cur.room && cur.room.planned !== 2) { cur.room.options = cur.options.slice(); B.plan(cur.room, botCtx(), 2); cur.room.planned = 2; }
+      go('deliberate');
+    },
     'read-verdict'() {
       ui.verdictRead = true;
       const cur = G.cur;
@@ -1381,9 +2151,19 @@ details.story-fold[open] summary { margin-bottom: 6px; }
         else Sound.chord('tense');
       }, 650);
     },
-    'to-appeal'() { G.cur.pick = { v: null, s: null }; Sound.say('Objection! The defense moves to appeal.'); go('appeal'); },
+    'to-appeal'() {
+      const cur = G.cur;
+      cur.pick = { v: null, s: null };
+      cur.aiAppeal = cur.room && cur.fixers.every(isAI) ? B.appealGuess(cur.room, botCtx()) : null;
+      Sound.say('Objection! The defense moves to appeal.'); go('appeal');
+    },
     'pick-appeal'(el) { G.cur.pick.s = +el.dataset.v; save(); render(); },
-    'file-appeal'() { const cur = G.cur; if (cur.pick.s == null) return; cur.appealGuess = cur.pick.s; handlers['to-truth'](); },
+    'file-appeal'() {
+      const cur = G.cur;
+      if (cur.aiAppeal != null) cur.appealGuess = cur.aiAppeal;
+      else { if (cur.pick.s == null) return; cur.appealGuess = cur.pick.s; }
+      handlers['to-truth']();
+    },
     'to-truth'() {
       settleCase();
       const o = G.cur.result.outcome;
@@ -1395,7 +2175,7 @@ details.story-fold[open] summary { margin-bottom: 6px; }
     standings() { go('standings'); },
     'next-case'() { G.k++; startCase(); render(); window.scrollTo(0, 0); },
     final() { Sound.gavel(3); setTimeout(() => Sound.chord('good'), 900); Sound.say('Court is adjourned.'); go('final'); },
-    rematch() { const names = G.players.slice(); newGame(names); render(); window.scrollTo(0, 0); },
+    rematch() { const hs = humanSeats().map(name); const bots = G.players.length - hs.length; newGame(hs, bots); render(); window.scrollTo(0, 0); },
     adjourn() { G = null; Store.data.game = null; Store.save(); ui.view = 'home'; render(); },
   };
 
@@ -1412,15 +2192,10 @@ details.story-fold[open] summary { margin-bottom: 6px; }
     Store.data.roster[+inp.dataset.seat] = inp.value;
     Store.save();
     // Refresh the Begin button and the note without re-rendering the field being typed in.
-    const names = Store.data.roster.map(cleanName).filter(Boolean);
-    const ok = names.length >= 3 && new Set(names.map(x => x.toLowerCase())).size === names.length;
-    const b = app.querySelector('[data-act="begin"]'); if (b) b.disabled = !ok;
-    const msg = document.getElementById('setup-msg');
-    if (msg) {
-      const n = names.length, rc = E.roleCounts(Math.max(3, n));
-      msg.textContent = new Set(names.map(x => x.toLowerCase())).size !== n ? 'Two players share a name. Add an initial.'
-        : n < 3 ? 'At least 3 players.' : `${n} players: 1 Insider, ${rc.fixers} Fixer${rc.fixers > 1 ? 's' : ''}, ${rc.jurors} Juror${rc.jurors > 1 ? 's' : ''} each case.`;
-    }
+    const info = setupInfo();
+    const b = app.querySelector('[data-act="begin"]'); if (b) b.disabled = !info.valid;
+    const msg = document.getElementById('setup-msg'); if (msg) msg.textContent = info.msg;
+    const bv = document.getElementById('bots-val'); if (bv) bv.textContent = info.bots;
   });
   app.addEventListener('keydown', e => {
     if (e.key === 'Enter' && e.target.matches('input[data-seat]')) {
@@ -1440,7 +2215,7 @@ details.story-fold[open] summary { margin-bottom: 6px; }
   try { if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ game: G, ui: { view: ui.view, verdictRead: ui.verdictRead } })); } catch (e) { /* ignore */ }
   if (window.claude && window.claude.hot && window.claude.hot.ready) window.claude.hot.ready(start);
   else start(window.claude && window.claude.hot && window.claude.hot.data || {});
-  window.__HJ = { handlers, get G() { return G; }, ui, Store, render };
+  window.__HJ = { handlers, get G() { return G; }, ui, Store, render, botSpeaks };
 })();
 </script>
 
