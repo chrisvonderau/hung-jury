@@ -370,6 +370,107 @@ details.story-fold[open] summary { margin-bottom: 6px; }
 .say-sub .muted { font-size: var(--s-1); }
 .bots-line { font-size: var(--s-1); color: var(--cream-dim); }
 
+/* ---------- Redesign: color-coded suspects, evidence cards, the evidence board ---------- */
+.va { --vc: #b8452f; --vc-soft: #f7ddd3; } .vb { --vc: #2f6f9f; --vc-soft: #d8e7f3; }
+.vc { --vc: #3f8a4f; --vc-soft: #dcefdc; } .vd { --vc: #a8781f; --vc-soft: #f5e8c8; }
+.vchip { display: inline-grid; place-items: center; width: 1.6em; height: 1.6em; border-radius: 50%; font-family: var(--f-display); font-weight: 900; font-size: .85em; color: #fff; background: var(--vc); vertical-align: middle; box-shadow: inset 0 0 0 2px rgba(255,255,255,.35); }
+.steps { list-style: none; margin: -6px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; counter-reset: st; }
+.steps li { counter-increment: st; text-align: center; font-family: var(--f-display); font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; color: var(--cream-dim); padding-top: 8px; border-top: 4px solid rgba(236,210,139,.18); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.steps li.done { border-top-color: var(--brass-700); color: var(--brass-500); }
+.steps li.now { border-top-color: var(--brass-300); color: var(--brass-300); font-weight: 700; }
+.file .caption { justify-content: space-between; }
+.charge { font-style: normal; font-weight: 700; font-size: var(--s1); display: flex; gap: 8px; align-items: flex-start; text-align: left; background: rgba(255,255,255,.35); border: 0; border-left: 4px solid var(--oxblood); border-radius: 4px; padding: 10px 12px; }
+.q-ic { flex: 0 0 auto; }
+.beats { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; counter-reset: bt; }
+.beats li { counter-increment: bt; position: relative; padding: 6px 10px 6px 38px; background: rgba(255,255,255,.28); border-radius: 6px; line-height: 1.45; }
+.beats li::before { content: counter(bt); position: absolute; left: 8px; top: 6px; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-family: var(--f-display); font-weight: 700; font-size: .72rem; color: var(--parchment); background: var(--ink-soft); }
+.sus-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+@media (min-width: 620px) { .file .sus-grid, .ballot .sus-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.sus { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; min-width: 0; padding: 0 10px 10px; border-radius: 10px; background: var(--vc-soft); color: var(--ink); border: 2px solid var(--vc); overflow: hidden; font: inherit; }
+.sus-top { display: flex; justify-content: space-between; align-items: center; align-self: stretch; margin: 0 -10px 6px; padding: 5px 10px; background: var(--vc); color: #fff; }
+.sus-l { font-family: var(--f-display); font-weight: 900; font-size: 1.15rem; line-height: 1; }
+.sus-ic { font-size: 1.15rem; line-height: 1; }
+.sus-nm { font-weight: 700; font-size: var(--s1); line-height: 1.2; overflow-wrap: anywhere; }
+.sus-sub { font-size: var(--s-1); color: var(--ink-soft); line-height: 1.25; }
+.sus-why { font-size: var(--s-1); color: var(--ink); opacity: .85; line-height: 1.3; margin-top: 4px; }
+button.sus { cursor: pointer; min-height: 92px; }
+button.sus[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--focus), 0 6px 14px rgba(0,0,0,.35); transform: translateY(-2px); }
+button.sus[aria-pressed="true"]::after { content: "✓"; position: absolute; right: 8px; bottom: 6px; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--vc); color: #fff; font-weight: 900; }
+.sus.big { align-items: center; text-align: center; max-width: 320px; margin: 0 auto; padding-bottom: 14px; }
+.sus.big .sus-top { justify-content: center; gap: 12px; padding: 8px; }
+.sus.big .sus-l, .sus.big .sus-ic { font-size: 1.8rem; }
+.sus.big .sus-nm { font-size: var(--s2); }
+.verdict-card { width: 100%; }
+.sus.truth { flex: 1 1 auto; }
+.ev-list { display: grid; gap: 8px; }
+.ev { display: grid; grid-template-columns: 40px 1fr; gap: 10px; align-items: start; padding: 10px; border-radius: 10px; background: #fffaf0; border: 1px solid rgba(90,60,30,.25); box-shadow: 0 2px 0 rgba(90,60,30,.15); color: var(--ink); text-align: left; }
+.ev-ic { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; font-size: 1.35rem; background: rgba(90,60,30,.1); }
+.ev-body { display: grid; gap: 2px; min-width: 0; }
+.ev-label { font-family: var(--f-display); font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+.ev-head { font-weight: 700; line-height: 1.25; }
+.ev-txt { line-height: 1.4; font-size: var(--s0); }
+.ev-stamp { justify-self: start; margin-top: 6px; display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 999px; font-family: var(--f-display); font-weight: 700; font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; color: #fff; background: var(--vc); }
+.ev-stamp.to { background: transparent; color: var(--vc); box-shadow: inset 0 0 0 2px var(--vc); }
+.ev-stamp-nm { text-transform: none; letter-spacing: 0; font-family: var(--f-body); font-weight: 700; }
+.secret-ex.planted .ev { background: #fdecec; border-color: rgba(142,43,31,.4); }
+.secret-ex.planted .ev-label { color: var(--oxblood); }
+.role-hero { display: flex; gap: 12px; align-items: center; padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid rgba(90,60,30,.25); }
+.role-ic { font-size: 2.6rem; line-height: 1; width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: rgba(90,60,30,.12); flex: 0 0 auto; }
+.r-insider .role-ic { background: #d8eee1; } .r-fixer .role-ic { background: #f6d6cf; }
+.role-hero .role-name { text-align: left; font-size: clamp(1.6rem, 7vw, 2.2rem); }
+.role-goal { font-size: var(--s0); margin-top: 2px; }
+.truth-row { display: grid; gap: 6px; margin-bottom: 10px; }
+.truth-lbl { font-family: var(--f-display); font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); }
+.mate { margin-bottom: 10px; }
+.secret-card { padding-top: 18px; }
+.secret-card.small { padding: 14px; }
+.secret-card.small .role-ic { width: 44px; height: 44px; font-size: 1.7rem; }
+.secret-card.small .role-name { font-size: 1.4rem; }
+.secret-card.small .file::after, .secret-card.small::after { display: none; }
+details.mine > summary, details.story-fold > summary { list-style: none; cursor: pointer; }
+details.mine > summary { font-family: var(--f-display); font-size: var(--s-1); letter-spacing: .16em; text-transform: uppercase; color: var(--brass-300); padding: 8px 12px; border-radius: 8px; background: rgba(20,11,6,.55); box-shadow: inset 0 0 0 1px rgba(236,210,139,.22); }
+details.mine > summary::after, details.story-fold > summary::after { content: " ▾"; }
+details.mine[open] > summary::after, details.story-fold[open] > summary::after { content: " ▴"; }
+details.mine[open] > summary { margin-bottom: 8px; }
+.clockbar { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: stretch; }
+.clockbar .clock { padding: 8px 14px; border-radius: 10px; min-width: 112px; }
+.clockbar .clock .time { font-size: 2.2rem; }
+.clockbar .clock .lbl { font-size: .62rem; }
+.clock-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.clock-btns .btn { min-height: 42px; padding: 6px 8px; }
+.clock-btns .btn:last-child { grid-column: 1 / -1; }
+.voice-tip { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: start; padding: 10px 12px; border-radius: 8px; background: #233a2d; color: #eaf6ee; font-size: var(--s-1); line-height: 1.45; box-shadow: inset 0 0 0 1px rgba(159,224,189,.35); }
+.vt-ic { font-size: 1.3rem; }
+.mini-x { width: 32px; height: 32px; border-radius: 50%; border: 0; background: rgba(255,255,255,.12); color: inherit; cursor: pointer; }
+.board-ev { background: rgba(20,11,6,.55); border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(236,210,139,.22); padding-bottom: 10px; }
+.board-ev .sus-grid { padding: 10px 12px 0; }
+.legend { font-size: .68rem; color: var(--cream-dim); text-align: right; }
+.sus.mini { padding-bottom: 8px; }
+.sus.mini .sus-top { margin-bottom: 4px; padding: 3px 8px; }
+.sus.mini .sus-nm { font-size: var(--s0); }
+.sus.doubted { filter: saturate(.55); opacity: .82; }
+.marks { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.mk { display: inline-flex; align-items: center; gap: 2px; padding: 2px 6px 2px 5px; border-radius: 999px; font-size: .72rem; font-weight: 700; background: rgba(255,255,255,.65); color: var(--ink); }
+.mk.out { color: #8e2b1f; } .mk.to { color: var(--vc); } .mk.lean { color: #2f5a3f; }
+.mk.none { font-weight: 400; color: var(--ink-soft); background: transparent; padding-left: 0; }
+.mini-av { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; font-family: var(--f-display); font-size: .55rem; font-weight: 700; color: #fff; background: hsl(var(--h, 30) 45% 34%); margin-left: -3px; box-shadow: 0 0 0 1.5px #fff; }
+.mk .mini-av:first-of-type { margin-left: 2px; }
+.board-foot { font-size: var(--s-1); color: var(--cream-dim); padding: 8px 12px 0; }
+.board-foot strong { color: var(--cream); }
+.ev.in-bub { margin-top: 6px; grid-template-columns: 30px 1fr; padding: 8px; gap: 8px; background: #fffdf6; }
+.ev.in-bub .ev-ic { width: 30px; height: 30px; font-size: 1rem; border-radius: 8px; }
+.ev.in-bub .ev-txt { font-size: .86rem; }
+.bub-stamp { margin-top: 4px; }
+.bub-stamp .ev-stamp { margin-top: 0; }
+.line.k-claim .txt { font-family: inherit; font-size: inherit; }
+.pill.vp { display: inline-flex; align-items: center; gap: 6px; padding-left: 6px; }
+.who-chip { display: inline-flex; align-items: center; gap: 6px; }
+.who-chip .mini-av { margin-left: 0; box-shadow: none; width: 26px; height: 26px; font-size: .62rem; }
+.sect-h { color: var(--ink-soft); font-size: var(--s-1); letter-spacing: .2em; margin-bottom: 8px; }
+.tally { display: flex; align-items: center; gap: 8px; box-shadow: inset 0 0 0 2px var(--vc); }
+.tally b { display: inline; }
+.talk-lines { height: clamp(260px, 46vh, 520px); }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0s !important; transition-duration: .01ms !important; }
   .gavel { transform: rotate(0deg); }
@@ -681,8 +782,8 @@ details.story-fold[open] summary { margin-bottom: 6px; }
   ];
 
   const T = {
-    claimOut: ['My exhibit: {X} So {L}, {V}, is out.', 'Here’s what I have. {X} That rules out {L}.', 'Sealed exhibit, word for word: {X} Cross off {L}.'],
-    claimPoint: ['Mine’s a doozy. {X} That points straight at {L}, {V}.', 'Read this: {X} If that isn’t {L}, I don’t know what is.'],
+    claimOut: ['Here’s my exhibit. It rules out {L}, {V}.', 'Take a look at mine. Cross off {L}, {V}.', 'My envelope says it can’t be {L}, {V}.'],
+    claimPoint: ['Mine’s a doozy. It points straight at {L}, {V}.', 'Look at this one. If that isn’t {L}, {V}, I don’t know what is.'],
     echo: ['Mine rules out {L}, {V}, same as what we just heard.', 'I have basically the same thing. {L} is out.'],
     none: ['Mine got tossed. Inadmissible. I have nothing but opinions.', 'Technicality. My envelope was empty, so I’m all ears.'],
     corroborate: ['Same here, {P}. Mine rules out {L} too. That’s two of us.', 'That matches my exhibit. {L} is done.'],
@@ -719,7 +820,7 @@ details.story-fold[open] summary { margin-bottom: 6px; }
       return m;
     });
   }
-  function say(room, ctx, by, pool, o, rng, kind) {
+  function say(room, ctx, by, pool, o, rng, kind, ev) {
     // avoid repeating a template the same speaker used
     const key = by + ':' + kind;
     const used = room.used[key] || [];
@@ -728,6 +829,7 @@ details.story-fold[open] summary { margin-bottom: 6px; }
     const idx = pick(choices, rng);
     room.used[key] = (room.used[key] || []).concat(idx);
     const line = { by, text: fill(pool[idx], ctx, o || {}), kind: kind || 'say' };
+    if (ev) line.ev = ev;
     room.log.push(line);
     return line;
   }
@@ -971,18 +1073,18 @@ details.story-fold[open] summary { margin-bottom: 6px; }
         if (room.strat[p] === 'quiet') return say(room, ctx, p, T.none, {}, rng, 'none');
         if (room.strat[p] === 'backup' && room.claims.some(cl => ctx.fixers.includes(cl.by) && cl.kind === 'rules_out' && cl.target === truth)) {
           room.claims.push({ by: p, kind: 'rules_out', target: truth, quoted: false });
-          return say(room, ctx, p, T.echo, { v: truth }, rng, 'claim');
+          return say(room, ctx, p, T.echo, { v: truth }, rng, 'claim', { text: null, kind: 'rules_out', v: truth });
         }
         if (room.strat[p] === 'echo' || room.strat[p] === 'backup') {
           const target = fixerTarget(room, ctx);
           const outs = room.claims.filter(cl => cl.kind === 'rules_out' && cl.target !== truth && cl.target !== target && !ctx.fixers.includes(cl.by)).map(cl => cl.target);
           const v = outs.length ? pick(outs, rng) : [0, 1, 2, 3].find(x => x !== truth && x !== target);
           room.claims.push({ by: p, kind: 'rules_out', target: v, quoted: false });
-          return say(room, ctx, p, T.echo, { v }, rng, 'claim');
+          return say(room, ctx, p, T.echo, { v }, rng, 'claim', { text: null, kind: 'rules_out', v });
         }
         if (ex.kind === 'none') return say(room, ctx, p, T.none, {}, rng, 'none');
         const cl = addClaim(room, ctx, p, ex, true);
-        const line = say(room, ctx, p, cl.kind === 'points_to' ? T.claimPoint : T.claimOut, { v: ex.target, x: ex.text }, rng, 'claim');
+        const line = say(room, ctx, p, cl.kind === 'points_to' ? T.claimPoint : T.claimOut, { v: ex.target }, rng, 'claim', { text: ex.text, kind: cl.kind, v: ex.target });
         room.queue.unshift({ k: 'react', claim: room.claims.length - 1 });
         return line;
       }
@@ -1096,14 +1198,14 @@ details.story-fold[open] summary { margin-bottom: 6px; }
       if (ex.kind === 'none') line = { by: p, text: 'My exhibit was thrown out. I’ve got nothing.', kind: 'none' };
       else {
         addClaim(room, ctx, p, ex, true);
-        line = { by: p, text: `My exhibit: ${ex.text} ${ex.tag === 'Points to' ? 'That points to' : 'That rules out'} ${L[ex.target]}.`, kind: 'claim' };
+        line = { by: p, text: `Here’s my exhibit. It ${ex.tag === 'Points to' ? 'points to' : 'rules out'} ${L[ex.target]}, ${ctx.c.verdicts[ex.target].label}.`, kind: 'claim', ev: { text: ex.text, kind: ex.tag === 'Points to' ? 'points_to' : 'rules_out', v: ex.target } };
         room.queue.unshift({ k: 'react', claim: room.claims.length - 1 });
       }
     } else if (act.k === 'claim') {
       room.shared[p] = true;
       const cl = { by: p, kind: act.kind, target: act.target, quoted: false };
       room.claims.push(cl);
-      line = { by: p, text: act.kind === 'points_to' ? `My exhibit points to ${L[act.target]}, ${ctx.c.verdicts[act.target].label}.` : `My exhibit rules out ${L[act.target]}, ${ctx.c.verdicts[act.target].label}.`, kind: 'claim' };
+      line = { by: p, text: act.kind === 'points_to' ? `My exhibit points to ${L[act.target]}, ${ctx.c.verdicts[act.target].label}.` : `My exhibit rules out ${L[act.target]}, ${ctx.c.verdicts[act.target].label}.`, kind: 'claim', ev: { text: null, kind: act.kind, v: act.target } };
       room.queue.unshift({ k: 'react', claim: room.claims.length - 1 });
     } else if (act.k === 'lean') {
       room.leans.push({ by: p, v: act.v });
@@ -1210,41 +1312,80 @@ details.story-fold[open] summary { margin-bottom: 6px; }
         o.connect(g).connect(c.destination); o.start(st); o.stop(st + dur + 0.05);
       });
     },
+    // Voices: only the device's natural voices (Premium, Enhanced, Siri-style or network voices first).
+    // Apple's novelty and retro voices (Eloquence: Eddy, Flo, Grandma, Reed, Rocko, Sandy, Shelley;
+    // old MacinTalk: Fred, Ralph, Junior, Kathy, Albert and friends) are never used.
+    NOVELTY: /\b(albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|deranged|hysterical|eddy|flo|grandma|grandpa|reed|rocko|sandy|shelley|fred|ralph|junior|kathy|princess|vicki|victoria|agnes|bruce|espeak)\b/i,
+    FEM: /\b(samantha|ava|allison|susan|zoe|joelle|noelle|nicky|karen|moira|tessa|fiona|kate|serena|martha|catherine|veena|isha|aria|jenny|zira|sonia|libby|emma|michelle|female|siri voice [24])\b/i,
+    MALE: /\b(daniel|alex|tom|evan|nathan|aaron|arthur|gordon|oliver|rishi|lee|guy|davis|david|mark|ryan|male|jamie|siri voice [13])\b/i,
+    score(v) {
+      const n = v.name + ' ' + (v.voiceURI || '');
+      let x = 0;
+      if (/premium/i.test(n)) x += 40;
+      if (/enhanced/i.test(n)) x += 28;
+      if (/neural|natural|siri/i.test(n)) x += 30;
+      if (/google/i.test(n)) x += 18;
+      if (/^alex$/i.test(v.name)) x += 10;
+      if (this.FEM.test(n) || this.MALE.test(n)) x += 6;
+      if (/en[-_]US/i.test(v.lang)) x += 3; else if (/en[-_](GB|AU|IE|CA|NZ)/i.test(v.lang)) x += 2;
+      return x;
+    },
+    voices() {
+      try {
+        const all = (window.speechSynthesis && speechSynthesis.getVoices()) || [];
+        return all.filter(v => /^en(-|_|$)/i.test(v.lang) && !this.NOVELTY.test(v.name)).sort((a, b) => this.score(b) - this.score(a));
+      } catch (e) { return []; }
+    },
+    gender(v) { const n = v.name + ' ' + (v.voiceURI || ''); return this.FEM.test(n) ? 'f' : this.MALE.test(n) ? 'm' : '?'; },
+    // 'great' when the device has Premium/Enhanced/natural voices, 'basic' when it has only standard ones.
+    quality() { const vs = this.voices(); if (!vs.length) return 'none'; return this.score(vs[0]) >= 28 ? 'great' : 'basic'; },
+    cast: null, castKey: '',
+    // Give every computer juror its own voice, best voices first, matching each persona's voice type.
+    castFor(seat) {
+      const vs = this.voices();
+      const key = vs.length + ':' + (G ? G.seed : 0);
+      if (!this.cast || this.castKey !== key) {
+        this.cast = {}; this.castKey = key;
+        const used = new Map();
+        (G ? G.players : []).forEach((nm, i) => {
+          if (!isAI(i)) return;
+          const want = (B.PERSONAS[G.persona[i]] || {}).voice;
+          const fits = vs.filter(v => this.gender(v) === want);
+          const pool = fits.length ? fits : vs.filter(v => this.gender(v) === '?').concat(vs);
+          let pick = pool.find(v => !used.has(v.name)) || pool[0];
+          const reuse = pick ? (used.get(pick.name) || 0) : 0;
+          if (pick) used.set(pick.name, reuse + 1);
+          // Small, natural differences only; a reused voice gets a slightly different pace and pitch.
+          const k = G.persona[i];
+          this.cast[i] = { voice: pick || null, pitch: 1 + [0, -0.04, 0.04, -0.07][reuse % 4] + ((k % 3) - 1) * 0.015, rate: 1 + [0, 0.05, -0.04, 0.08][reuse % 4] + ((k % 5) - 2) * 0.01 };
+        });
+      }
+      return this.cast[seat] || { voice: vs[0] || null, pitch: 1, rate: 1 };
+    },
     say(text) {
       if (!S().voice || !window.speechSynthesis) return;
       try {
         speechSynthesis.cancel();
         const u = new SpeechSynthesisUtterance(text);
-        const vs = speechSynthesis.getVoices().filter(v => /^en(-|_)/i.test(v.lang));
-        const pick = vs.find(v => /daniel|arthur|george|male|en-gb/i.test(v.name + ' ' + v.lang)) || vs[0];
-        if (pick) u.voice = pick;
-        u.rate = 0.92; u.pitch = 0.75; u.volume = 1;
+        const vs = this.voices();
+        const pick = vs.find(v => this.gender(v) === 'm') || vs[0];
+        if (pick) { u.voice = pick; u.lang = pick.lang; }
+        u.rate = 0.96; u.pitch = 0.92; u.volume = 1;
         speechSynthesis.speak(u);
       } catch (e) { /* no voice */ }
     },
-    // Computer jurors talk out loud, each with their own voice where the device has several.
+    // Computer jurors talk out loud, each with their own voice.
     busyUntil: 0,
-    canTalk() { return !!(S().jurorVoices && window.speechSynthesis && window.SpeechSynthesisUtterance); },
-    unlock() { if (!this.canTalk()) return; try { const u = new SpeechSynthesisUtterance(' '); u.volume = 0; speechSynthesis.speak(u); } catch (e) { /* ignore */ } },
-    voiceFor(k) {
-      const per = B.PERSONAS[k] || {};
-      const all = (speechSynthesis.getVoices() || []).filter(v => /^en(-|_)/i.test(v.lang));
-      if (!all.length) return null;
-      const F = /samantha|karen|moira|tessa|fiona|victoria|serena|kate|susan|zira|female|veena|allison|ava|nicky|catherine|martha|flo|sandy|shelley|grandma/i;
-      const M = /daniel|alex|fred|aaron|arthur|rishi|gordon|oliver|tom|david|mark|male|lee|reed|rocko|eddy|grandpa|ralph|junior|albert/i;
-      const pool = all.filter(v => per.voice === 'f' ? F.test(v.name) : M.test(v.name));
-      const use = pool.length ? pool : all;
-      return use[k % use.length];
-    },
-    talk(text, k, done) {
+    canTalk() { return !!(S().jurorVoices && window.speechSynthesis && window.SpeechSynthesisUtterance && this.voices().length); },
+    unlock() { if (!window.speechSynthesis || !S().jurorVoices) return; try { const u = new SpeechSynthesisUtterance(' '); u.volume = 0; speechSynthesis.speak(u); } catch (e) { /* ignore */ } },
+    talk(text, seat, done) {
       if (!this.canTalk()) { done && done(); return false; }
       try {
         const u = new SpeechSynthesisUtterance(text);
-        const v = this.voiceFor(k); if (v) u.voice = v;
-        const pitch = [1.2, 0.95, 0.8, 1.1, 1.05, 1.3, 1.0, 0.9, 1.15, 0.85, 0.7, 1.25];
-        const rate = [1.0, 1.15, 0.95, 1.05, 1.12, 0.95, 0.92, 1.08, 1.02, 1.14, 0.9, 0.95];
-        u.pitch = pitch[k % pitch.length]; u.rate = rate[k % rate.length]; u.volume = 1;
-        this.busyUntil = Date.now() + 2500 + text.length * 95;
+        const c = this.castFor(seat);
+        if (c.voice) { u.voice = c.voice; u.lang = c.voice.lang; }
+        u.pitch = c.pitch; u.rate = c.rate; u.volume = 1;
+        this.busyUntil = Date.now() + 2500 + text.length * 90;
         const end = () => { this.busyUntil = 0; done && done(); };
         u.onend = end; u.onerror = end;
         speechSynthesis.speak(u);
@@ -1253,6 +1394,8 @@ details.story-fold[open] summary { margin-bottom: 6px; }
     },
     hush() { this.busyUntil = 0; try { if (window.speechSynthesis) speechSynthesis.cancel(); } catch (e) { /* ignore */ } },
   };
+
+  try { if (window.speechSynthesis) speechSynthesis.addEventListener('voiceschanged', () => { Sound.cast = null; if (ui.view === 'game' && G && G.phase === 'deliberate') { const t = document.getElementById('voice-tip'); if (t && Sound.quality() === 'great') t.remove(); } }); } catch (e) { /* ignore */ }
 
   // Keep the screen awake during a trial, when the browser allows it.
   let wakeLock = null;
@@ -1370,8 +1513,9 @@ details.story-fold[open] summary { margin-bottom: 6px; }
     save();
     if (!line) return;
     appendLine(line);
+    refreshBoard();
     if (line.by >= 0 && isAI(line.by)) {
-      const talking = Sound.talk(line.text, G.persona[line.by], () => { if (G && G.cur && G.cur.room === room) room.nextAt = Date.now() + 500; markTalking(null); });
+      const talking = Sound.talk(line.text, line.by, () => { if (G && G.cur && G.cur.room === room) room.nextAt = Date.now() + 500; markTalking(null); });
       if (talking) { room.nextAt = Sound.busyUntil + 400; markTalking(line.by); }
     }
   }
@@ -1387,7 +1531,12 @@ details.story-fold[open] summary { margin-bottom: 6px; }
     const me = !isAI(l.by);
     return `<div class="line ${me ? 'me' : 'ai'} k-${esc(l.kind)}${fresh ? ' pop' : ''}" style="--h:${hue(l.by)}">
       <span class="av" aria-hidden="true">${esc(initials(name(l.by)))}</span>
-      <div class="bub"><span class="who-n">${nameTag(l.by)}</span> <span class="txt">${esc(l.text)}</span></div></div>`;
+      <div class="bub"><span class="who-n">${nameTag(l.by)}</span> <span class="txt">${esc(l.text)}</span>${evInBubble(l)}</div></div>`;
+  }
+  function evInBubble(l) {
+    if (!l.ev || l.ev.v == null) return '';
+    const c = curCase();
+    return l.ev.text ? evCard(c, l.ev.text, { stamp: l.ev, cls: 'in-bub' }) : `<div class="bub-stamp">${stampHTML(c, l.ev)}</div>`;
   }
   function appendLine(l) {
     const box = document.getElementById('talk-lines');
@@ -1403,20 +1552,21 @@ details.story-fold[open] summary { margin-bottom: 6px; }
     if (ui.speaker == null || isAI(ui.speaker) || ui.speaker >= G.players.length) ui.speaker = hs.includes(cur.fore) ? cur.fore : hs[0];
     const sp = ui.speaker;
     const lines = room.log.length ? room.log.map(l => lineHTML(l, false)).join('')
-      : `<p class="talk-empty">Start the clock and the jury starts talking. Share your exhibit, bluff, or point a finger whenever you like.</p>`;
+      : `<p class="talk-empty">Press Start and the jury starts talking. Jump in with the buttons below whenever you like.</p>`;
     const jbox = G.players.map((nm, i) => `<span class="seat-av" data-p="${i}" style="--h:${hue(i)}" title="${esc(nm)}"><span class="av">${esc(initials(nm))}</span><span class="nm">${esc(nm)}</span></span>`).join('');
     const opts = cur.round === 2 ? cur.options : [0, 1, 2, 3];
-    const letters = (act, extra) => opts.map(v => `<button class="pill" data-act="${act}" data-v="${v}" ${extra ? extra(v) : ''}>${L[v]}. ${esc(c.verdicts[v].label)}</button>`).join('');
+    const short = v => esc(splitName(c.verdicts[v].label)[0]);
+    const letters = (act, extra) => opts.map(v => `<button class="pill vp ${VC[v]}" data-act="${act}" data-v="${v}" ${extra ? extra(v) : ''}>${vChip(c, v)} ${short(v)}</button>`).join('');
     let sub = '';
     if (ui.act === 'claim') {
       const kind = ui.claimKind || 'rules_out';
-      sub = `<div class="say-sub"><span class="muted">Say your exhibit…</span>
-        <div class="say-row"><button class="pill" data-act="say-kind" data-v="rules_out" aria-pressed="${kind === 'rules_out'}">rules out</button><button class="pill" data-act="say-kind" data-v="points_to" aria-pressed="${kind === 'points_to'}">points to</button></div>
-        <div class="say-row">${[0, 1, 2, 3].map(v => `<button class="pill" data-act="say-claim" data-v="${v}">${L[v]}. ${esc(c.verdicts[v].label)}</button>`).join('')}</div></div>`;
+      sub = `<div class="say-sub"><span class="muted">Claim your exhibit says something it may not. Pick one, then a suspect.</span>
+        <div class="say-row"><button class="pill" data-act="say-kind" data-v="rules_out" aria-pressed="${kind === 'rules_out'}">✕ It rules out…</button><button class="pill" data-act="say-kind" data-v="points_to" aria-pressed="${kind === 'points_to'}">➜ It points to…</button></div>
+        <div class="say-row">${[0, 1, 2, 3].map(v => `<button class="pill vp ${VC[v]}" data-act="say-claim" data-v="${v}">${vChip(c, v)} ${short(v)}</button>`).join('')}</div></div>`;
     } else if (ui.act === 'lean') {
       sub = `<div class="say-sub"><span class="muted">I think it's…</span><div class="say-row">${letters('say-lean')}</div></div>`;
     } else if (ui.act === 'suspect') {
-      sub = `<div class="say-sub"><span class="muted">The Fixer is…</span><div class="say-row">${G.players.map((nm, i) => i === sp ? '' : `<button class="pill" data-act="say-suspect" data-v="${i}">${esc(nm)}</button>`).join('')}</div></div>`;
+      sub = `<div class="say-sub"><span class="muted">The Fixer is…</span><div class="say-row">${G.players.map((nm, i) => i === sp ? '' : `<button class="pill who-chip" data-act="say-suspect" data-v="${i}" style="--h:${hue(i)}"><span class="mini-av">${esc(initials(nm))}</span>${esc(nm)}</button>`).join('')}</div></div>`;
     }
     const speakers = hs.length > 1 ? `<div class="say-row" role="group" aria-label="Who is talking">${hs.map(i => `<button class="pill" data-act="speaker" data-v="${i}" aria-pressed="${i === sp}">${esc(name(i))}</button>`).join('')}</div>` : '';
     const shared = !!room.shared[sp];
@@ -1429,13 +1579,13 @@ details.story-fold[open] summary { margin-bottom: 6px; }
       <div class="say">
         ${speakers}
         <div class="say-row">
-          <button class="btn brass small" data-act="say-share" ${shared ? 'disabled' : ''}>${shared ? 'Exhibit shared' : 'Share my exhibit'}</button>
-          <button class="btn wood small" data-act="say-mode" data-v="claim" aria-pressed="${ui.act === 'claim'}">Claim something else</button>
+          <button class="btn brass small" data-act="say-share" ${shared ? 'disabled' : ''}>📄 ${shared ? 'Exhibit shared' : 'Show my exhibit'}</button>
+          <button class="btn wood small" data-act="say-mode" data-v="claim" aria-pressed="${ui.act === 'claim'}">🎭 Bluff</button>
         </div>
         <div class="say-row">
-          <button class="btn wood small" data-act="say-mode" data-v="lean" aria-pressed="${ui.act === 'lean'}">I think it's…</button>
-          <button class="btn wood small" data-act="say-mode" data-v="suspect" aria-pressed="${ui.act === 'suspect'}">I suspect…</button>
-          <button class="btn wood small" data-act="say-poll">Poll the room</button>
+          <button class="btn wood small" data-act="say-mode" data-v="lean" aria-pressed="${ui.act === 'lean'}">👍 I think it's…</button>
+          <button class="btn wood small" data-act="say-mode" data-v="suspect" aria-pressed="${ui.act === 'suspect'}">🕵️ Accuse</button>
+          <button class="btn wood small" data-act="say-poll">📊 Poll</button>
         </div>
         ${sub}
       </div>
@@ -1455,32 +1605,129 @@ details.story-fold[open] summary { margin-bottom: 6px; }
   const docketNo = () => '26-0' + String(1000 + ((G.seed % 8000) + G.k * 37) % 9000).slice(0, 4) + '-' + (curCase().tone === 'absurd' ? 'NON' : 'HJ');
   const courtName = c => c.tone === 'absurd' ? 'Court of Common Nonsense' : 'Superior Court of Hearsay County';
 
-  function verdictList(c, opts) {
-    return '<ol class="verdicts">' + c.verdicts.map((v, i) => (opts && !opts.includes(i)) ? '' :
-      `<li><span class="vletter" aria-hidden="true">${L[i]}</span><div><div class="vlabel"><span class="sr">${L[i]}. </span>${esc(v.label)}</div><div class="vdetail">${esc(v.detail)}</div></div></li>`).join('') + '</ol>';
+  // Every verdict has its own color, letter and picture, everywhere in the game.
+  const VC = ['va', 'vb', 'vc', 'vd'];
+  const SUSPECT_ICONS = [
+    [/\b(dog|beagle|labrador|parrot|ferret|gopher|cat|pigeons?)\b/i, '🐾'],
+    [/\b(accident|wiring|glitch|mix-up)\b/i, '⚡'], [/\bghost\b/i, '👻'], [/\bbot\b/i, '🤖'],
+    [/\b(scam|con artist|con coached|fraud|forged|hoax|rigged|staged|stuffed|cheats|palmed|bribed)\b/i, '🎭'],
+    [/\b(genuine|honest|innocent|fair and square|meant it|exactly as he says|ace|genius)\b/i, '🕊️'],
+  ];
+  const suspectIcon = label => { const hit = SUSPECT_ICONS.find(([re]) => re.test(label)); return hit ? hit[1] : '👤'; };
+  // "Marco the intern" -> Marco / the intern; "Lorraine, the bride's mother" -> Lorraine / the bride's mother.
+  function splitName(label) {
+    const s = String(label);
+    const comma = s.indexOf(', ');
+    if (comma > 0 && comma < 28) return [s.slice(0, comma), s.slice(comma + 2)];
+    const m = /^([A-Z][\w'.-]*(?: [A-Z][\w'.-]*)?) (the .+)$/.exec(s);
+    if (m) return [m[1], m[2]];
+    return [s, ''];
   }
-  function publicList(c) { return '<ul class="exhibits">' + c.public.map(p => `<li>${esc(p)}</li>`).join('') + '</ul>'; }
+  function vChip(c, v) { return `<span class="vchip ${VC[v]}">${L[v]}</span>`; }
+  function suspectCard(c, v, o) {
+    o = o || {};
+    const [nm, sub] = splitName(c.verdicts[v].label);
+    const tagName = o.button ? 'button' : 'div';
+    return `<${tagName} class="sus ${VC[v]} ${o.cls || ''}" ${o.attrs || ''}>
+      <span class="sus-top"><span class="sus-l" aria-hidden="true">${L[v]}</span><span class="sus-ic" aria-hidden="true">${suspectIcon(c.verdicts[v].label)}</span></span>
+      <span class="sus-nm"><span class="sr">${L[v]}. </span>${esc(nm)}</span>
+      ${sub ? `<span class="sus-sub">${esc(sub)}</span>` : ''}
+      ${o.detail ? `<span class="sus-why">${esc(c.verdicts[v].detail)}</span>` : ''}
+      ${o.extra || ''}
+    </${tagName}>`;
+  }
+  function suspectGrid(c, opts, o) {
+    return `<div class="sus-grid">${(opts || [0, 1, 2, 3]).map(v => suspectCard(c, v, typeof o === 'function' ? o(v) : o)).join('')}</div>`;
+  }
+
+  // Evidence: each piece is its own card with a picture, a short heading and a stamp.
+  const EV_ICONS = [
+    [/\b(camera|cam|photos?|video|footage|selfie|still|nanny-cam|doorbell)\b/i, '📷'],
+    [/\b(text|phone|group chat|search|lock screen|chat)\b/i, '📱'],
+    [/\b(flight|airline|boarding|cruise|passport|ride-share)\b/i, '✈️'],
+    [/\b(hospital|pharmacy|lab|vet|wristband|breath test|x-rays?|prescription|birth record|blood|discharge)\b/i, '🩺'],
+    [/\b(receipt|invoice|bank|slip|pawn|tab|wired?|check|folio|loan|paid|deposited|card audit|ticket)\b/i, '🧾'],
+    [/\b(gps|location|toll|gate log|badge log|collar)\b/i, '📍'],
+    [/\b(email|letter|memo|note|napkin|flyer|sticky)\b/i, '✉️'],
+    [/\b(key|lock|keycard|forced)\b/i, '🔑'],
+    [/\b(log|audit|records?|calendar|booking|minutes|timesheet|time clock|sign-in|report|background check|filings)\b/i, '📋'],
+    [/\b(sworn|statement|witness(es)?|overheard|said|says|saw)\b/i, '🗣️'],
+  ];
+  function splitEx(text) {
+    let s = String(text || '').replace(/^Exhibit [A-Z]:\s*/, '');
+    const k = s.indexOf(': ');
+    if (k >= 2 && k <= 52 && !/[.!?] |[!?]/.test(s.slice(0, k))) return { head: s.slice(0, k), body: s.slice(k + 2) };
+    return { head: '', body: s };
+  }
+  function evIcon(text) {
+    const { head, body } = splitEx(text);
+    for (const src of [head, body]) { if (!src) continue; const hit = EV_ICONS.find(([re]) => re.test(src)); if (hit) return hit[1]; }
+    return '📄';
+  }
+  function stampHTML(c, ev) {
+    const out = ev.kind !== 'points_to';
+    return `<span class="ev-stamp ${out ? 'out' : 'to'} ${VC[ev.v]}">${out ? '✕ Rules out' : '➜ Points to'} ${L[ev.v]}<span class="ev-stamp-nm"> · ${esc(splitName(c.verdicts[ev.v].label)[0])}</span></span>`;
+  }
+  function evCard(c, text, o) {
+    o = o || {};
+    const { head, body } = splitEx(text);
+    return `<div class="ev ${o.cls || ''}">
+      <span class="ev-ic" aria-hidden="true">${o.icon || evIcon(text)}</span>
+      <div class="ev-body">${o.label ? `<span class="ev-label">${esc(o.label)}</span>` : ''}${head ? `<span class="ev-head">${esc(head)}</span>` : ''}<span class="ev-txt">${esc(body)}</span>${o.stamp ? stampHTML(c, o.stamp) : ''}</div>
+    </div>`;
+  }
+  function publicCards(c) {
+    return `<div class="ev-list">${c.public.map((p, k) => evCard(c, p, { label: 'Known fact ' + (k + 1) })).join('')}</div>`;
+  }
+
+  // The story as a few short beats instead of one long paragraph (the suspects get their own cards).
+  const ABBR = /\b(a\.m|p\.m|Mr|Mrs|Ms|Dr|St|Jr|Sr|No|vs|etc|Lt|Sgt|Capt|U\.S)$/i;
+  function beats(c) {
+    const s = String(c.story), out = [];
+    let start = 0;
+    for (let k = 0; k < s.length; k++) {
+      const ch = s[k];
+      if ((ch === '.' || ch === '!' || ch === '?') && (k + 1 >= s.length || (s[k + 1] === ' ' && /[A-Z'"‘“0-9$]/.test(s[k + 2] || '')))) {
+        const piece = s.slice(start, k + 1).trim();
+        if (ch === '.' && ABBR.test(piece.slice(0, -1))) continue;
+        out.push(piece); start = k + 1;
+      }
+    }
+    const rest = s.slice(start).trim(); if (rest) out.push(rest);
+    return out.filter(b => !/^The suspects?:/i.test(b) && !/^(Suspects|The choices):/i.test(b));
+  }
 
   function caseFile(c, mode) {
     const full = mode === 'full';
     const r = E.roleCounts(G.players.length);
+    const opts = G.cur.round === 2 && !full ? G.cur.options : null;
+    const story = `<ol class="beats">${beats(c).map(b => `<li>${esc(b)}</li>`).join('')}</ol>`;
     return `<article class="file">
-      <div class="caption"><span>No. ${esc(docketNo())}</span><span>Case ${G.k + 1} of ${G.caseIds.length}</span></div>
+      <div class="caption"><span>${esc(courtName(c))}</span><span>Case ${G.k + 1} of ${G.caseIds.length}</span></div>
       <span class="stamp">${c.tone === 'absurd' ? 'Absurd' : 'Serious'}</span>
-      <div class="court">${esc(courtName(c))}</div>
       <h2>${esc(c.title)}</h2>
-      <p class="charge">${esc(c.charge)}</p>
-      ${full ? `<p class="story">${esc(c.story)}</p>` :
-        `<details class="story-fold"><summary>The story</summary><p class="story">${esc(c.story)}</p></details>`}
-      <section class="sect"><h3>Possible verdicts</h3>${verdictList(c, G.cur.round === 2 && !full ? G.cur.options : null)}</section>
-      <section class="sect"><h3>Public exhibits</h3>${publicList(c)}</section>
-      ${full ? `<p class="small-print sect">On this jury: 1 Insider, ${r.fixers} Fixer${r.fixers > 1 ? 's' : ''}, and ${r.jurors} Juror${r.jurors > 1 ? 's' : ''}.</p>` : ''}
+      <p class="charge"><span class="q-ic" aria-hidden="true">❓</span>${esc(c.charge)}</p>
+      ${full ? `<section class="sect"><h3>What happened</h3>${story}</section>` :
+        `<details class="story-fold"${ui.storyOpen ? ' open' : ''}><summary>What happened</summary>${story}</details>`}
+      <section class="sect"><h3>The suspects${opts ? ' still standing' : ''}</h3>${suspectGrid(c, opts, { detail: true })}</section>
+      <section class="sect"><h3>What everyone knows</h3>${publicCards(c)}</section>
+      ${full ? `<p class="small-print sect">At this table: 1 Insider, ${r.fixers} Fixer${r.fixers > 1 ? 's' : ''} and ${r.jurors} Juror${r.jurors > 1 ? 's' : ''}.</p>` : ''}
     </article>`;
+  }
+  function verdictList(c, opts) { return suspectGrid(c, opts, { detail: true }); }
+
+  // Where we are in the case.
+  const STEPS = [['The case', ['intro']], ['Your secret', ['brief']], ['Argue', ['deliberate', 'hung']], ['Vote', ['ballot']], ['Verdict', ['verdict', 'appeal', 'truth', 'unmask', 'standings']]];
+  function phaseStrip() {
+    if (!G || !G.cur) return '';
+    const at = STEPS.findIndex(s => s[1].includes(G.phase));
+    if (at < 0) return '';
+    return `<ol class="steps" aria-label="Where we are">${STEPS.map((s, k) => `<li class="${k < at ? 'done' : k === at ? 'now' : ''}"${k === at ? ' aria-current="step"' : ''}>${s[0]}</li>`).join('')}</ol>`;
   }
 
   function topbar(label) {
     return `<div class="topbar"><span class="crumb">${esc(label || '')}</span>
-      <button class="icon-btn" data-act="menu" aria-label="Menu">Menu</button></div>`;
+      <button class="icon-btn" data-act="menu" aria-label="Menu">Menu</button></div>${phaseStrip()}`;
   }
 
   function dots(total, done) {
@@ -1625,46 +1872,117 @@ details.story-fold[open] summary { margin-bottom: 6px; }
     </div>`;
   }
 
-  function roleCard(p) {
+  const ROLE_ART = { insider: ['🔑', 'Insider', 'You know the truth. Steer the jury to it without looking like you know.'],
+    fixer: ['🎭', 'Fixer', 'You know the truth. Get the jury to pick anything else, or to hang.'],
+    juror: ['⚖️', 'Juror', 'Find the truth. Somebody at this table is lying.'] };
+  function exhibitBlock(p) {
+    const c = curCase(), cur = G.cur, ex = E.describeExhibit(c, cur.exhibits[p]);
+    if (ex.kind === 'none') return `<div class="secret-ex none">${evCard(c, 'Thrown out on a technicality. You know nothing, so act like you know something.', { label: 'Your exhibit', icon: '🗑️' })}</div>`;
+    const stamp = { kind: ex.tag === 'Points to' ? 'points_to' : 'rules_out', v: ex.target };
+    return `<div class="secret-ex${ex.kind === 'planted' ? ' planted' : ''}">${evCard(c, ex.text, { label: ex.kind === 'planted' ? 'Your exhibit · planted, and false' : 'Your exhibit · true', stamp })}</div>`;
+  }
+  function roleCard(p, compact) {
     const c = curCase(), cur = G.cur, role = cur.roles[p];
-    const ex = E.describeExhibit(c, cur.exhibits[p]);
-    const truth = `<div class="truthbox">The truth: ${L[c.truth]}. ${esc(c.verdicts[c.truth].label)}</div>`;
-    const exhibit = ex.kind === 'none'
-      ? `<div class="exhibit-card"><strong>Exhibit: inadmissible.</strong><br>Thrown out on a technicality. You know nothing, so act like you know something.</div>`
-      : `<div class="exhibit-card"><strong>Sealed exhibit</strong>${ex.kind === 'planted' ? ' <span class="planted-note">(planted, and false)</span>' : ''}<br>${esc(ex.text)}<br><span class="tag">${ex.tag}: ${L[ex.target]}. ${esc(c.verdicts[ex.target].label)}</span></div>`;
-    let body = '';
-    if (role === 'insider') {
-      body = `<div class="role-name role-insider">Insider</div>${truth}
-        <p>Steer the jury to the truth without looking like you know it.${E.appealAllowed(G.players.length) ? ' If the verdict is right, the Fixer gets one shot to name you on appeal and steal the win.' : ''}</p>${exhibit}`;
-    } else if (role === 'fixer') {
-      const mates = cur.fixers.filter(f => f !== p).map(f => name(f) + (isAI(f) ? ' (computer)' : ''));
-      body = `<div class="role-name role-fixer">Fixer</div>${truth}
-        <p>Lead the jury anywhere else, or split it so it hangs. Quote your exhibit, twist it or bury it.</p>
-        ${mates.length ? `<p><strong>Your fellow Fixer: ${esc(mates.join(', '))}.</strong></p>` : ''}${exhibit}`;
-    } else {
-      body = `<div class="role-name role-juror">Juror</div>
-        <p>Find the truth. Quote your exhibit and test everyone else's. ${cur.fixers.length > 1 ? 'Two people at this table are lying to you.' : 'Somebody at this table is lying to you.'}</p>${exhibit}`;
-    }
-    return body;
+    const [ic, title, goal] = ROLE_ART[role];
+    let goalTxt = goal;
+    if (role === 'insider' && E.appealAllowed(G.players.length) && !compact) goalTxt += ' If the verdict is right, the Fixer gets one guess at who you are.';
+    if (role === 'juror' && cur.fixers.length > 1) goalTxt = 'Find the truth. Two people at this table are lying.';
+    const mates = role === 'fixer' ? cur.fixers.filter(f => f !== p).map(f => name(f) + (isAI(f) ? ' (computer)' : '')) : [];
+    const truth = role !== 'juror' ? `<div class="truth-row"><span class="truth-lbl">The truth</span>${suspectCard(c, c.truth, { cls: 'truth' })}<span class="sr">The truth: ${L[c.truth]}. ${esc(c.verdicts[c.truth].label)}</span></div>` : '';
+    return `<div class="role-hero r-${role}"><span class="role-ic" aria-hidden="true">${ic}</span><div><div class="role-name role-${role}">${title}</div><p class="role-goal">${esc(goalTxt)}</p></div></div>
+      ${truth}
+      ${mates.length ? `<p class="mate">Your fellow Fixer: <strong>${esc(mates.join(', '))}</strong></p>` : ''}
+      ${exhibitBlock(p)}`;
   }
 
   function vBrief() {
-    const cur = G.cur, n = G.players.length, p = cur.order[cur.i];
+    const cur = G.cur, p = cur.order[cur.i];
     if (cur.stage === 'pass') return passScreen(p, cur.i, cur.order.length, 'Secret briefing', 'Everyone else, look away. Only ' + esc(name(p)) + ' reads the next screen.');
+    if (solo()) {
+      return `<div class="bench">
+      ${topbar('Your secret')}
+      <article class="file secret-card">${roleCard(p)}</article>
+      <button class="btn brass block" data-act="brief-done">To the jury room</button>
+      <p class="note">This stays on your screen in the jury room, so you can check it any time.</p>
+    </div>`;
+    }
     return `<div class="bench">
       ${topbar('Secret briefing · ' + name(p))}
       <div class="summons" id="summons" tabindex="0" role="button" aria-label="Press and hold to read your summons">
-        <div class="cover"><div class="seal">HJ</div><div class="hold-hint">Press and hold to read your summons</div><p class="muted" style="color:#f0c9b8">Let go and it hides again.</p></div>
+        <div class="cover"><div class="seal">HJ</div><div class="hold-hint">Press and hold to see your secret</div><p class="muted" style="color:#f0c9b8">Let go and it hides again.</p></div>
         <div class="face" aria-hidden="true">${roleCard(p)}</div>
       </div>
-      <button class="btn brass block" data-act="brief-done" ${cur.seen ? '' : 'disabled'}>${solo() ? 'Done, to the jury room' : 'Done, pass it on'}</button>
-      ${cur.seen || solo() ? '' : `<button class="btn wood small" data-act="brief-back">Not ${esc(name(p))}? Go back</button>`}
+      <button class="btn brass block" data-act="brief-done" ${cur.seen ? '' : 'disabled'}>Done, pass it on</button>
+      ${cur.seen ? '' : `<button class="btn wood small" data-act="brief-back">Not ${esc(name(p))}? Go back</button>`}
+    </div>`;
+  }
+
+  // The tip that appears when the device only has its plain, built-in voices.
+  function voiceSteps() {
+    const mac = /Macintosh/.test(navigator.userAgent) && !('ontouchend' in document);
+    return mac
+      ? 'On a Mac: System Settings, then Accessibility, Spoken Content, System voice, Manage Voices. Under English, download a few Enhanced or Premium voices, such as Ava, Zoe, Evan and Nathan. Then reload this page.'
+      : 'On iPhone or iPad: Settings, then Accessibility, Spoken Content (called Read & Speak on newer iPhones), Voices, English. Download a few Enhanced voices, such as Ava, Zoe, Evan and Nathan. A mix of men and women gives each juror a different voice. Then reload this page.';
+  }
+  function voiceTip() {
+    if (!window.speechSynthesis || !S().jurorVoices || S().tipHidden) return '';
+    const q = Sound.quality();
+    if (q === 'great') return '';
+    return `<div class="voice-tip" id="voice-tip"><span class="vt-ic" aria-hidden="true">🎙️</span><div><strong>${q === 'none' ? 'This browser has no English voices yet.' : 'Your device is using its plain voices.'}</strong> For natural-sounding jurors: ${esc(voiceSteps())}</div><button class="mini-x" data-act="tip-x" aria-label="Hide this tip">✕</button></div>`;
+  }
+
+  // The evidence board: what the room has claimed about each suspect, filled in as people talk.
+  function boardHTML() {
+    const cur = G.cur, room = cur.room, c = curCase();
+    const opts = cur.round === 2 ? cur.options : [0, 1, 2, 3];
+    const latest = {}; room.leans.forEach(l => { latest[l.by] = l.v; });
+    const face = p => `<span class="mini-av" style="--h:${hue(p)}" title="${esc(name(p))}">${esc(initials(name(p)))}</span>`;
+    const uniq = a => a.filter((x, k) => a.indexOf(x) === k);
+    const marks = v => {
+      const cl = room.claims.filter(x => x.target === v);
+      const outs = uniq(cl.filter(x => x.kind === 'rules_out').map(x => x.by)), tos = uniq(cl.filter(x => x.kind === 'points_to').map(x => x.by));
+      const fans = Object.keys(latest).map(Number).filter(p => latest[p] === v);
+      return `<span class="marks">${outs.length ? `<span class="mk out" title="Says it rules this out">✕ ${outs.map(face).join('')}</span>` : ''}${tos.length ? `<span class="mk to" title="Says it points here">➜ ${tos.map(face).join('')}</span>` : ''}${fans.length ? `<span class="mk lean" title="Leaning this way">👍 ${fans.map(face).join('')}</span>` : ''}${!outs.length && !tos.length && !fans.length ? '<span class="mk none">Nothing yet</span>' : ''}</span>`;
+    };
+    const outCount = v => uniq(room.claims.filter(x => x.target === v && x.kind === 'rules_out').map(x => x.by)).length;
+    const acc = {}; room.accuse.forEach(a => { acc[a.who] = (acc[a.who] || 0) + 1; });
+    const accList = Object.keys(acc).map(Number).sort((a, b) => acc[b] - acc[a]).slice(0, 4);
+    return `<section class="board-ev" id="board" aria-label="Evidence board">
+      <div class="talk-head"><span class="field-label">Evidence board</span><span class="legend">✕ ruled out · ➜ points to · 👍 leaning</span></div>
+      ${suspectGrid(c, opts, v => ({ cls: 'mini' + (outCount(v) >= 2 ? ' doubted' : ''), extra: marks(v) }))}
+      <p class="board-foot">${accList.length ? `🕵️ Suspected Fixer: ${accList.map(p => `<strong>${esc(name(p))}</strong> ×${acc[p]}`).join(', ')}. ` : ''}Anyone could be lying, including the claims above.</p>
+    </section>`;
+  }
+  function refreshBoard() { const b = document.getElementById('board'); if (b && G.cur.room) b.outerHTML = boardHTML(); }
+
+  function clockBar() {
+    const cur = G.cur, left = timeLeft(), running = !!cur.endAt, second = cur.round === 2;
+    const fresh = left >= (second ? 90 : G.timer);
+    return `<div class="clockbar">
+      <div class="clock ${cur.timeUp ? 'done' : left <= 30 ? 'low' : ''}" id="clock"><span class="lbl">${cur.timeUp ? 'Time is up' : running ? 'Arguing' : fresh ? 'Ready' : 'Paused'}</span><span class="time" id="clock-time">${mmss(left)}</span></div>
+      <div class="clock-btns">
+        ${cur.timeUp ? '' : `<button class="btn ${running ? 'wood' : 'brass'} small" data-act="${running ? 'pause' : 'start'}">${running ? 'Pause' : fresh ? '▶ Start' : '▶ Resume'}</button>`}
+        <button class="btn wood small" data-act="add-min">+1 min</button>
+        <button class="btn ${cur.timeUp ? 'brass' : 'wood'} small" data-act="vote">${cur.timeUp ? 'To the ballots' : 'Vote now'}</button>
+      </div>
     </div>`;
   }
 
   function vDeliberate() {
     const c = curCase(), cur = G.cur, left = timeLeft(), running = !!cur.endAt;
     const second = cur.round === 2;
+    if (cur.room) {
+      const me = humanSeats()[0];
+      const mine = solo() ? `<details class="mine"${ui.mineOpen === false ? '' : ' open'}><summary>Your secret</summary><div class="file secret-card small">${roleCard(me, true)}</div></details>` : '';
+      return `<div class="bench wide">
+        ${topbar(second ? 'Second deliberation' : 'Deliberation')}
+        ${second ? '<p class="note">Second try: only the suspects still standing are on the ballot.</p>' : ''}
+        <div class="delib">
+          <div class="side stack">${clockBar()}${voiceTip()}${mine}${boardHTML()}</div>
+          <div class="stack">${talkPanel()}${caseFile(c, 'brief')}</div>
+        </div>
+      </div>`;
+    }
     return `<div class="bench wide">
       ${topbar(second ? 'Second deliberation' : 'Deliberation')}
       <div class="delib">
@@ -1684,9 +2002,9 @@ details.story-fold[open] summary { margin-bottom: 6px; }
             <button class="btn wood" data-act="sfx" data-v="overruled">Overruled</button>
           </div>
           <button class="btn brass block" data-act="vote">${cur.timeUp ? 'To the ballots' : 'Call the vote'}</button>
-          <p class="note">${second ? 'Only the verdicts still standing are on this ballot.' : cur.room ? 'Call the vote whenever you have heard enough.' : 'Argue out loud. Claim your exhibit, or claim something.'}</p>
+          <p class="note">${second ? 'Only the suspects still standing are on this ballot.' : 'Argue out loud. Claim your exhibit, or claim something.'}</p>
         </div>
-        ${cur.room ? `<div class="stack">${talkPanel()}${caseFile(c, 'brief')}</div>` : caseFile(c, 'brief')}
+        ${caseFile(c, 'brief')}
       </div>
     </div>`;
   }
@@ -1695,24 +2013,23 @@ details.story-fold[open] summary { margin-bottom: 6px; }
     const cur = G.cur, n = G.players.length, p = cur.order[cur.i], c = curCase();
     if (cur.stage === 'pass') return passScreen(p, cur.i, cur.order.length, cur.round === 2 ? 'Second ballot' : 'Secret ballot', 'Vote in secret. Nobody sees your ballot until the verdict is read.');
     const second = cur.round === 2;
-    const choices = cur.options.map(i => `<button class="choice" data-act="pick-v" data-v="${i}" aria-pressed="${cur.pick.v === i}">
-        <span class="vletter" aria-hidden="true">${L[i]}</span><span><span class="vlabel">${esc(c.verdicts[i].label)}</span><br><span class="vdetail">${esc(c.verdicts[i].detail)}</span></span></button>`).join('');
-    const others = [...Array(n).keys()].filter(i => i !== p).map(i => `<button class="chip" data-act="pick-s" data-v="${i}" aria-pressed="${cur.pick.s === i}">${esc(name(i))}</button>`).join('');
+    const choices = `<div class="sus-grid">${cur.options.map(i => suspectCard(c, i, { button: true, cls: 'pick', attrs: `data-act="pick-v" data-v="${i}" aria-pressed="${cur.pick.v === i}"` })).join('')}</div>`;
+    const others = [...Array(n).keys()].filter(i => i !== p).map(i => `<button class="chip who-chip" data-act="pick-s" data-v="${i}" aria-pressed="${cur.pick.s === i}" style="--h:${hue(i)}"><span class="mini-av">${esc(initials(name(i)))}</span>${esc(name(i))}</button>`).join('');
     const ready = cur.pick.v != null && (second || cur.pick.s != null);
     return `<div class="bench">
       ${topbar((second ? 'Second ballot · ' : 'Secret ballot · ') + name(p))}
       <article class="file ballot stack">
         <h2 style="margin:0">${esc(c.title)}</h2>
-        <section><h3 class="sect" style="margin-top:0;color:var(--ink-soft);font-size:var(--s-1);letter-spacing:.2em">Your verdict</h3><div class="choice-list">${choices}</div></section>
-        ${second ? '' : `<section><h3 style="color:var(--ink-soft);font-size:var(--s-1);letter-spacing:.2em;margin-bottom:8px">Who is ${cur.fixers.length > 1 ? 'a' : 'the'} Fixer?</h3><div class="chips">${others}</div>
-          <p class="small-print" style="margin-top:6px">A Juror or the Insider who names a Fixer scores a point.</p></section>`}
+        <section><h3 class="sect-h">1. Who did it?</h3>${choices}</section>
+        ${second ? '' : `<section><h3 class="sect-h">2. Who is ${cur.fixers.length > 1 ? 'a' : 'the'} Fixer?</h3><div class="chips">${others}</div>
+          <p class="small-print" style="margin-top:6px">Name a Fixer correctly and you score a point.</p></section>`}
       </article>
       <button class="btn brass block" data-act="seal" ${ready ? '' : 'disabled'}>Seal my ballot</button>
     </div>`;
   }
 
   function tallyBoxes(counts, opts) {
-    return '<div class="tallies">' + opts.map(i => `<div class="tally">${L[i]}<b>${counts[i]}</b></div>`).join('') + '</div>';
+    return '<div class="tallies">' + opts.map(i => `<div class="tally ${VC[i]}"><span class="vchip ${VC[i]}">${L[i]}</span><b>${counts[i]}</b></div>`).join('') + '</div>';
   }
 
   function vHung() {
@@ -1723,8 +2040,8 @@ details.story-fold[open] summary { margin-bottom: 6px; }
         <span class="big-stamp st-hung">Hung jury</span>
         <p class="lead">No verdict won a majority of ${G.players.length} votes.</p>
         ${tallyBoxes(cur.firstCounts, [0, 1, 2, 3])}
-        <p class="muted">One more try. Ninety seconds, and only these verdicts stay on the ballot:</p>
-        <div class="file" style="text-align:left;width:100%">${verdictList(c, cur.options)}</div>
+        <p class="muted">One more try. Ninety seconds, and only these suspects stay on the ballot:</p>
+        <div style="width:100%">${suspectGrid(c, cur.options, { detail: true })}</div>
         <p class="note">Deadlock again and it's a mistrial, which pays the Fixer${cur.fixers.length > 1 ? 's' : ''}.</p>
         <button class="btn brass block" data-act="redeliberate">Back to the jury room</button>
       </section>
@@ -1748,7 +2065,7 @@ details.story-fold[open] summary { margin-bottom: 6px; }
       <section class="courtroom-moment ${reduceMotion ? '' : 'shake'}">
         <div class="gavel-wrap slam">${GAVEL}</div>
         ${mistrial ? `<span class="big-stamp st-hung">Mistrial</span><p class="lead fade-in">Deadlocked twice. The court declares a mistrial.</p>` :
-          `<p class="verdict-line">We, the jury, find</p><div class="verdict-big fade-in">${L[cur.verdict]}. ${esc(c.verdicts[cur.verdict].label)}</div>`}
+          `<p class="verdict-line">We, the jury, find</p><div class="fade-in verdict-card">${suspectCard(c, cur.verdict, { cls: 'big' })}</div><span class="sr">${L[cur.verdict]}. ${esc(c.verdicts[cur.verdict].label)}</span>`}
         <div class="fade-in">${tallyBoxes(counts, cur.options)}</div>
         <button class="btn brass fade-in" data-act="${next === 'appeal' ? 'to-appeal' : 'to-truth'}">${next === 'appeal' ? 'Hear the appeal' : 'Reveal the truth'}</button>
       </section></div>`;
@@ -1800,8 +2117,8 @@ details.story-fold[open] summary { margin-bottom: 6px; }
       <section class="center stack" style="padding-top:8px"><span class="big-stamp ${cls}" style="margin:0 auto">${label}</span>${appealLine}</section>
       <article class="file">
         <div class="court">What really happened</div>
-        <h2>${L[c.truth]}. ${esc(c.verdicts[c.truth].label)}</h2>
-        <p class="story">${esc(c.ruling)}</p>
+        <div class="verdict-card">${suspectCard(c, c.truth, { cls: 'big' })}</div>
+        <p class="story" style="margin-top:12px">${esc(c.ruling)}</p>
       </article>
       <button class="btn brass block" data-act="unmask">Unmask the jury</button>
     </div>`;
@@ -1918,6 +2235,7 @@ details.story-fold[open] summary { margin-bottom: 6px; }
       ${sw('sound', 'Sound', 'Gavel, clock ticks and organ chords.')}
       ${sw('voice', 'Voice lines', 'The bailiff calls out "Objection!" and "Order!" when the device can speak.')}
       ${sw('jurorVoices', 'Computer juror voices', 'Computer jurors read their lines out loud, each in a different voice when the device has several.')}
+      ${window.speechSynthesis ? `<p class="small-print" style="margin-top:8px">${Sound.quality() === 'great' ? 'This device has natural voices installed, and the jurors use them.' : esc((Sound.quality() === 'none' ? 'No English voices found yet. ' : 'This device only has its plain voices right now. ') + voiceSteps())}</p>` : ''}
       <p class="small-print" style="margin-top:10px">${DECK.length} cases on the docket. This device remembers the names you enter and which cases you've played, so the next game deals new ones first.</p>
       <button class="btn brass block" style="margin-top:14px" data-act="close-overlay">Done</button>
     </article></div>`;
@@ -1951,6 +2269,7 @@ details.story-fold[open] summary { margin-bottom: 6px; }
     else if (ui.overlay === 'menu') html += oMenu();
     app.innerHTML = html;
     const tl = document.getElementById('talk-lines'); if (tl) tl.scrollTop = tl.scrollHeight;
+    const mine = app.querySelector('details.mine'); if (mine) mine.addEventListener('toggle', () => { ui.mineOpen = mine.open; });
     const fold = app.querySelector('.story-fold'); if (fold) { fold.open = !!ui.storyOpen; fold.addEventListener('toggle', () => { ui.storyOpen = fold.open; }); }
     bindSummons();
     if (ui.view === 'game' && G.phase === 'deliberate' && G.cur.endAt) runTicker();
@@ -2087,7 +2406,7 @@ details.story-fold[open] summary { margin-bottom: 6px; }
     'brief-back'() { G.cur.stage = 'pass'; save(); render(); },
     'brief-done'() {
       const cur = G.cur;
-      if (!cur.seen) return;
+      if (!cur.seen && !solo()) return;
       cur.i++; cur.stage = firstStage(); cur.seen = false;
       if (cur.i >= cur.order.length) {
         cur.timeLeft = G.timer; cur.endAt = null; cur.timeUp = false;
@@ -2106,6 +2425,7 @@ details.story-fold[open] summary { margin-bottom: 6px; }
     'say-lean'(el) { humanSays({ k: 'lean', v: +el.dataset.v }); },
     'say-suspect'(el) { humanSays({ k: 'suspect', who: +el.dataset.v }); },
     'say-poll'() { humanSays({ k: 'poll' }); },
+    'tip-x'() { S().tipHidden = true; Store.save(); const t = document.getElementById('voice-tip'); if (t) t.remove(); },
     speaker(el) { ui.speaker = +el.dataset.v; ui.act = null; render(); },
     'add-min'() { addMinute(); render(); },
     sfx(el) {
